@@ -35,8 +35,8 @@ dependencies {
     api(platform(libs.compose.bom))
     api(libs.bundles.compose.ui)
 
-    androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.compose.ui.test.junit4)
-    debugImplementation(libs.compose.ui.tooling)
-    debugImplementation(libs.compose.ui.test.manifest)
+    androidTestApi(platform(libs.compose.bom))
+    androidTestApi(libs.compose.ui.test.junit4)
+    debugApi(libs.compose.ui.tooling)
+    debugApi(libs.compose.ui.test.manifest)
 }

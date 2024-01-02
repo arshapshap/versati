@@ -2,6 +2,7 @@ package com.arshapshap.versati
 
 import android.app.Application
 import com.arshapshap.versati.core.network.di.networkModule
+import com.arshapshap.versati.feature.qrcodes.di.qrCodesFeatureModule
 import org.koin.core.context.GlobalContext.startKoin
 
 class MainApplication : Application() {
@@ -10,7 +11,10 @@ class MainApplication : Application() {
         super.onCreate()
 
         startKoin {
-            modules(networkModule)
+            modules(
+                qrCodesFeatureModule,
+                networkModule
+            )
         }
     }
 }

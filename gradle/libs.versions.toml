@@ -12,15 +12,18 @@ compose-bom = "2023.10.01"
 core-ktx = "1.12.0"
 espresso-core = "3.5.1"
 junit = "4.13.2"
+junit-jupiter = "5.8.2"
 koin = "3.4.0"
 kotlinx-coroutines = "1.7.3"
 kotlinx-serialization-json = "1.5.1"
 lifecycle-runtime-ktx = "2.6.2"
 material = "1.11.0"
+mockk = "1.13.5"
 okhttp = "4.11.0"
 org-jetbrains-kotlin-android = "1.9.10"
 retrofit-core = "2.9.0"
 retrofit-kotlinx-serialization-converter = "1.0.0"
+voyager = "1.0.0-rc07"
 
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
@@ -37,6 +40,7 @@ compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit-jupiter" }
 koin = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx—coroutines-android", version.ref = "kotlinx-coroutines" }
@@ -44,10 +48,17 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit-core" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-kotlinx-serialization-converter" }
+voyager-androidx = { group = "cafe.adriel.voyager", name = "voyager-androidx", version.ref = "voyager" }
+voyager-bs = { group = "cafe.adriel.voyager", name = "voyager-bottom-sheet-navigator", version.ref = "voyager" }
+voyager-core = { group = "cafe.adriel.voyager", name = "voyager-navigator", version.ref = "voyager" }
+voyager-koin = { group = "cafe.adriel.voyager", name = "voyager-koin", version.ref = "voyager" }
+voyager-tab = { group = "cafe.adriel.voyager", name = "voyager-tab-navigator", version.ref = "voyager" }
+voyager-transitions = { group = "cafe.adriel.voyager", name = "voyager-transitions", version.ref = "voyager" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
@@ -56,3 +67,5 @@ org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.re
 
 [bundles]
 compose-ui = ["compose-material3", "compose-ui", "compose-ui-graphics", "compose-ui-tooling-preview"]
+test = ["junit", "junit-jupiter", "mockk"]
+voyager = ["voyager-core", "voyager-bs", "voyager-tab", "voyager-koin", "voyager-androidx", "voyager-transitions"]
