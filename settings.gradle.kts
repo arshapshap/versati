@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Versati"
 include(":app")
- 
+include(":core:network")

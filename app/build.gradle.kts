@@ -51,6 +51,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:network"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
