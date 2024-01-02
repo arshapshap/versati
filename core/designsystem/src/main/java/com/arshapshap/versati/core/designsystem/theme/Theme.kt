@@ -1,4 +1,4 @@
-package com.arshapshap.versati.ui.theme
+package com.arshapshap.versati.core.designsystem.theme
 
 import android.app.Activity
 import android.os.Build
