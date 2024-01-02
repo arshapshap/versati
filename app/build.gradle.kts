@@ -54,9 +54,11 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:designsystem"))
 
-    implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
+    implementation(libs.core.ktx)
+    implementation(libs.koin)
+    implementation(libs.koin.compose)
+    implementation(libs.lifecycle.runtime.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
