@@ -34,8 +34,4 @@ internal class ImageParsingRepositoryImpl(
     override suspend fun getParsingHistory(): List<ParsingResult> {
         return dao.getAll().map(mapper::mapFromLocal)
     }
-
-    override suspend fun getParsingInfoById(id: Long): ParsingResult {
-        TODO("Not yet implemented")
-    }
 }
