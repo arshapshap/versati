@@ -8,7 +8,11 @@ internal class QRCodesRepositoryImpl(
     private val mapper: QRCodesMapper
 ) : QRCodesRepository {
 
-    override suspend fun getQRCodeImageUrl(options: QRCodeOptions): String {
+    override suspend fun createQRCodeImageUrl(options: QRCodeOptions): String {
         return mapper.createImageUrl(options)
+    }
+
+    override suspend fun getRequestHistory(): List<QRCodeOptions> {
+        TODO("Not yet implemented")
     }
 }

@@ -4,5 +4,7 @@ import com.arshapshap.versati.feature.qrcodes.domain.model.QRCodeOptions
 
 internal interface QRCodesRepository {
 
-    suspend fun getQRCodeImageUrl(options: QRCodeOptions): String
+    suspend fun createQRCodeImageUrl(options: QRCodeOptions): String
+
+    suspend fun getRequestHistory(): List<QRCodeOptions>
 }

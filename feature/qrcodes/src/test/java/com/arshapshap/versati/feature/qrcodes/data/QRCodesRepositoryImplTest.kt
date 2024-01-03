@@ -35,7 +35,7 @@ internal class QRCodesRepositoryImplTest {
         )
 
         // Act
-        val result = repository.getQRCodeImageUrl(options)
+        val result = repository.createQRCodeImageUrl(options)
 
         // Assert
         assert(result == expectedUrl)

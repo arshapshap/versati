@@ -8,12 +8,3 @@ internal data class QRCodeOptions(
     val quietZone: Int,
     val format: ImageFormat
 )
-
-internal enum class ImageFormat {
-    PNG,
-    GIF,
-    JPEG,
-    JPG,
-    SVG,
-    EPS
-}
