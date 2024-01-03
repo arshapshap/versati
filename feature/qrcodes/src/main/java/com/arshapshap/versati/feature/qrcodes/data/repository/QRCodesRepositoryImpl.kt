@@ -7,8 +7,8 @@ import com.arshapshap.versati.feature.qrcodes.domain.repository.QRCodesRepositor
 
 private const val MAX_HISTORY_SIZE = 20
 internal class QRCodesRepositoryImpl(
+    private val dao: QRCodeRequestDao,
     private val mapper: QRCodesMapper,
-    private val dao: QRCodeRequestDao
 ) : QRCodesRepository {
 
     override suspend fun createQRCodeImageUrl(options: QRCodeOptions): String {
