@@ -4,9 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class ImageParsingResponse(
+internal data class ImageParsingRemote(
     @SerialName("ParsedResults")
-    val parsedResults: List<ParsedImageResponse>,
+    val parsedResults: List<ParsedImageRemote>,
     @SerialName("OCRExitCode")
     val ocrExitCode: Int,
     @SerialName("IsErroredOnProcessing")

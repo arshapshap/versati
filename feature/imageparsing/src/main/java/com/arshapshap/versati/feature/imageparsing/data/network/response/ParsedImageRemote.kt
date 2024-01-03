@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class ParsedImageResponse(
+internal data class ParsedImageRemote(
     @SerialName("FileParseExitCode")
     val fileParseExitCode: Int,
     @SerialName("ParsedText")

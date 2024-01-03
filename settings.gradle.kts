@@ -16,7 +16,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "Versati"
 include(":app")
-include(":core:network")
+include(":core:database")
 include(":core:designsystem")
-include(":feature:qrcodes")
+include(":core:network")
 include(":feature:imageparsing")
+include(":feature:qrcodes")

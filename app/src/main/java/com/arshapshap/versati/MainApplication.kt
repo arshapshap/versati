@@ -1,6 +1,7 @@
 package com.arshapshap.versati
 
 import android.app.Application
+import com.arshapshap.versati.core.database.di.databaseModule
 import com.arshapshap.versati.core.network.di.networkModule
 import com.arshapshap.versati.feature.imageparsing.di.imageParsingFeatureModule
 import com.arshapshap.versati.feature.qrcodes.di.qrCodesFeatureModule
@@ -13,9 +14,10 @@ class MainApplication : Application() {
 
         startKoin {
             modules(
-                qrCodesFeatureModule,
+                databaseModule,
+                networkModule,
                 imageParsingFeatureModule,
-                networkModule
+                qrCodesFeatureModule,
             )
         }
     }

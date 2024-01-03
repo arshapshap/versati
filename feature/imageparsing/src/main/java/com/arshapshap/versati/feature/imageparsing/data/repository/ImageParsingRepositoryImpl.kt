@@ -1,37 +1,38 @@
 package com.arshapshap.versati.feature.imageparsing.data.repository
 
 import android.graphics.Bitmap
-import com.arshapshap.versati.feature.imageparsing.data.database.ImageParsingDao
+import com.arshapshap.versati.core.database.dao.imageparsingfeature.ParsingResultDao
 import com.arshapshap.versati.feature.imageparsing.data.mapper.ImageParsingMapper
 import com.arshapshap.versati.feature.imageparsing.data.network.OCRApi
-import com.arshapshap.versati.feature.imageparsing.domain.model.ImageParsingResult
+import com.arshapshap.versati.feature.imageparsing.domain.model.ParsingResult
 import com.arshapshap.versati.feature.imageparsing.domain.model.Language
 import com.arshapshap.versati.feature.imageparsing.domain.repository.ImageParsingRepository
 
 internal class ImageParsingRepositoryImpl(
     private val api: OCRApi,
-    private val local: ImageParsingDao,
+    private val dao: ParsingResultDao,
     private val mapper: ImageParsingMapper
 ) : ImageParsingRepository {
 
-    override suspend fun parseImageByUrl(url: String, language: Language): ImageParsingResult {
+    override suspend fun parseImageByUrl(url: String, language: Language): ParsingResult {
         val requestBody = mapper.mapToRequestBody(url, language)
         val response = api.parseImageByUrl(requestBody)
 
-        val mapped = mapper.mapToImageParsingResult(response, 0)
-        val id = local.saveParsingResult(mapped)
-        return mapped.copy(id = id)
+        val parsingResult = mapper.mapFromRemote(response, 0)
+        val local = mapper.mapToLocal(parsingResult)
+        val id = dao.saveParsingResult(local)
+        return parsingResult.copy(id = id)
     }
 
-    override suspend fun parseImageBitmap(image: Bitmap, language: Language): ImageParsingResult {
+    override suspend fun parseImageBitmap(image: Bitmap, language: Language): ParsingResult {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getParsingHistory(): List<ImageParsingResult> {
-        return local.getParsingHistory()
+    override suspend fun getParsingHistory(): List<ParsingResult> {
+        return dao.getParsingHistory().map(mapper::mapFromLocal)
     }
 
-    override suspend fun getParsingInfoById(id: Long): ImageParsingResult {
+    override suspend fun getParsingInfoById(id: Long): ParsingResult {
         TODO("Not yet implemented")
     }
 }

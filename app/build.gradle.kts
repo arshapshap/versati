@@ -51,10 +51,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:database"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:network"))
-    implementation(project(":feature:qrcodes"))
     implementation(project(":feature:imageparsing"))
+    implementation(project(":feature:qrcodes"))
 
     implementation(libs.activity.compose)
     implementation(libs.core.ktx)
