@@ -1,24 +1,21 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.com.android.application)
+    alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.serialization)
 }
 
 android {
-    namespace = "com.arshapshap.versati"
+    namespace = "com.arshapshap.versati.feature.imageparsing"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.arshapshap.versati"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+
+        buildConfigField("String", "OCR_BASE_URL", "\"https://api.ocr.space/parse/\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -38,27 +35,22 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeKotlinCompiler.get()
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
     }
 }
 
 dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:network"))
-    implementation(project(":feature:qrcodes"))
-    implementation(project(":feature:imageparsing"))
 
-    implementation(libs.activity.compose)
+    implementation(libs.appcompat)
     implementation(libs.core.ktx)
     implementation(libs.koin)
     implementation(libs.koin.compose)
-    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.bundles.voyager)
+    testImplementation(libs.bundles.test)
 }
