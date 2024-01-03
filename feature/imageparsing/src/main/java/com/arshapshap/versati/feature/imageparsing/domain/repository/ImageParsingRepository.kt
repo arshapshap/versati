@@ -9,4 +9,8 @@ internal interface ImageParsingRepository {
     suspend fun parseImageByUrl(url: String, language: Language): ImageParsingResult
 
     suspend fun parseImageBitmap(image: Bitmap, language: Language): ImageParsingResult
+
+    suspend fun getParsingHistory(): List<ImageParsingResult>
+
+    suspend fun getParsingInfoById(id: Long): ImageParsingResult
 }
