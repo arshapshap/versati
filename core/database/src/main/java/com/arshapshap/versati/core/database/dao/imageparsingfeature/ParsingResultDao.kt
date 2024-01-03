@@ -1,7 +1,6 @@
 package com.arshapshap.versati.core.database.dao.imageparsingfeature
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.arshapshap.versati.core.database.model.imageparsingfeature.ParsingResultLocal
@@ -10,11 +9,14 @@ import com.arshapshap.versati.core.database.model.imageparsingfeature.ParsingRes
 abstract class ParsingResultDao {
 
     @Insert
-    abstract suspend fun saveParsingResult(parsingResult: ParsingResultLocal): Long
+    abstract suspend fun add(parsingResult: ParsingResultLocal): Long
 
-    @Query("DELETE FROM ParsingResult WHERE parsing_result_id = :id")
-    abstract suspend fun deleteParsingResult(id: Long)
+    @Query("DELETE FROM ParsingResult WHERE id IN (SELECT id FROM ParsingResult ORDER BY id ASC LIMIT 1)")
+    abstract suspend fun deleteOldest()
 
     @Query("SELECT * FROM ParsingResult")
-    abstract suspend fun getParsingHistory(): List<ParsingResultLocal>
+    abstract suspend fun getAll(): List<ParsingResultLocal>
+
+    @Query("SELECT COUNT(id) FROM PARSINGRESULT")
+    abstract suspend fun getCount(): Int
 }

@@ -8,6 +8,7 @@ import com.arshapshap.versati.feature.imageparsing.domain.model.ParsingResult
 import com.arshapshap.versati.feature.imageparsing.domain.model.Language
 import com.arshapshap.versati.feature.imageparsing.domain.repository.ImageParsingRepository
 
+private const val MAX_HISTORY_SIZE = 20
 internal class ImageParsingRepositoryImpl(
     private val api: OCRApi,
     private val dao: ParsingResultDao,
@@ -17,10 +18,12 @@ internal class ImageParsingRepositoryImpl(
     override suspend fun parseImageByUrl(url: String, language: Language): ParsingResult {
         val requestBody = mapper.mapToRequestBody(url, language)
         val response = api.parseImageByUrl(requestBody)
-
         val parsingResult = mapper.mapFromRemote(response, 0)
-        val local = mapper.mapToLocal(parsingResult)
-        val id = dao.saveParsingResult(local)
+
+        val id = dao.add(mapper.mapToLocal(parsingResult))
+        if (dao.getCount() > MAX_HISTORY_SIZE)
+            dao.deleteOldest()
+
         return parsingResult.copy(id = id)
     }
 
@@ -29,7 +32,7 @@ internal class ImageParsingRepositoryImpl(
     }
 
     override suspend fun getParsingHistory(): List<ParsingResult> {
-        return dao.getParsingHistory().map(mapper::mapFromLocal)
+        return dao.getAll().map(mapper::mapFromLocal)
     }
 
     override suspend fun getParsingInfoById(id: Long): ParsingResult {

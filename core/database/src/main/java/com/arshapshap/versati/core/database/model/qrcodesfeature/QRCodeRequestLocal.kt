@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "QRCodeRequest")
 data class QRCodeRequestLocal(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "qr_code_request_id") val id: Long,
+    @ColumnInfo(name = "id") val id: Long,
     @ColumnInfo(name = "data") val data: String,
     @ColumnInfo(name = "size") val size: Int,
     @ColumnInfo(name = "color") val color: Long,
