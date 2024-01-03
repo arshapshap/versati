@@ -3,7 +3,7 @@ package com.arshapshap.versati.feature.imageparsing.domain.usecase
 import com.arshapshap.versati.feature.imageparsing.domain.model.ImageParsingResult
 import com.arshapshap.versati.feature.imageparsing.domain.repository.ImageParsingRepository
 
-internal class GetParsingInfoByIdUseCase(
+internal class GetParsingResultByIdUseCase(
     private val repository: ImageParsingRepository
 ) {
 

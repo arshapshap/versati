@@ -5,8 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class ParsedImageResponse(
-    @SerialName("TextOrientation")
-    val textOrientation: String,
     @SerialName("FileParseExitCode")
     val fileParseExitCode: Int,
     @SerialName("ParsedText")
