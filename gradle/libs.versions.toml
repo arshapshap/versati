@@ -64,6 +64,7 @@ voyager-transitions = { group = "cafe.adriel.voyager", name = "voyager-transitio
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+org-jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "org-jetbrains-kotlin-android" }
 
 [bundles]
 compose-ui = ["compose-material3", "compose-ui", "compose-ui-graphics", "compose-ui-tooling-preview"]
