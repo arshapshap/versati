@@ -1,25 +1,18 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.com.android.application)
-    alias(libs.plugins.com.google.gms.google.services)
+    alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
 }
 
 android {
-    namespace = "com.arshapshap.versati"
+    namespace = "com.arshapshap.versati.feature.auth.impl"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.arshapshap.versati"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -44,11 +37,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeKotlinCompiler.get()
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
@@ -56,16 +44,15 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:network"))
     implementation(project(":feature:auth:api"))
-    implementation(project(":feature:auth:impl"))
-    implementation(project(":feature:imageparsing"))
-    implementation(project(":feature:qrcodes"))
 
-    implementation(libs.activity.compose)
+    implementation(libs.appcompat)
     implementation(libs.core.ktx)
-    implementation(libs.firebase.analytics)
-    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
     implementation(libs.koin)
     implementation(libs.koin.compose)
-    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.orbit.compose)
+    implementation(libs.orbit.core)
     implementation(libs.bundles.voyager)
+    testImplementation(libs.bundles.test)
 }

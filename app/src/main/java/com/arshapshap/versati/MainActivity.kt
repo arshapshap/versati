@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.arshapshap.versati.core.designsystem.theme.VersatiTheme
-import com.arshapshap.versati.feature.auth.presentation.register.RegisterScreen
+import com.arshapshap.versati.feature.auth.impl.presentation.register.RegisterScreen
 
 class MainActivity : ComponentActivity() {
 
