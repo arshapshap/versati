@@ -43,6 +43,10 @@ internal class SignInScreenModel(
         }
     }
 
+    fun goToRegistration() = intent {
+        //TODO("Перейти к регистрации")
+    }
+
     @OptIn(OrbitExperimental::class)
     fun updateEmail(email: String) = blockingIntent {
         reduce {

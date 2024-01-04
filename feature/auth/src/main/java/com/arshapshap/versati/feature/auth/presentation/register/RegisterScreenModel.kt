@@ -37,10 +37,14 @@ internal class RegisterScreenModel(
 
         if (result.isSuccessful) {
             reduce { state.copy(success = true) }
-            //TODO("Уйти с экрана авторизации через несколько секунд")
+            //TODO("Уйти с экрана регистрации через несколько секунд")
         } else {
             handleRegisterError(result.error!!)
         }
+    }
+
+    fun goToSignIn() = intent {
+        //TODO("Перейти к авторизации")
     }
 
     @OptIn(OrbitExperimental::class)

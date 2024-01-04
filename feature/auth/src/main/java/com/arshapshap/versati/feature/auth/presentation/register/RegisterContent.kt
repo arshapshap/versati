@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
@@ -18,11 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.arshapshap.versati.feature.auth.R
 import com.arshapshap.versati.feature.auth.presentation.common.contract.PasswordFieldError
 import com.arshapshap.versati.feature.auth.presentation.common.ui.EmailTextField
@@ -35,7 +38,8 @@ internal fun RegisterContent(state: RegisterState, screenModel: RegisterScreenMo
         state = state,
         onUpdateEmail = screenModel::updateEmail,
         onUpdatePassword = screenModel::updatePassword,
-        onRegister = screenModel::register
+        onRegister = screenModel::register,
+        onSwitchToSignIn = screenModel::goToSignIn
     )
 }
 
@@ -44,7 +48,8 @@ private fun RegisterContent(
     state: RegisterState,
     onUpdateEmail: (String) -> Unit,
     onUpdatePassword: (String) -> Unit,
-    onRegister: () -> Unit
+    onRegister: () -> Unit,
+    onSwitchToSignIn: () -> Unit
 ) {
     if (state.loading)
         Box(modifier = Modifier.fillMaxSize()) {
@@ -69,7 +74,7 @@ private fun RegisterContent(
     ) {
         Text(
             text = stringResource(R.string.registration_label),
-            fontSize = 50.sp,
+            style = MaterialTheme.typography.displayLarge,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Black
@@ -79,7 +84,8 @@ private fun RegisterContent(
             state = state,
             onUpdateEmail = onUpdateEmail,
             onUpdatePassword = onUpdatePassword,
-            onSignIn = onRegister,
+            onRegister = onRegister,
+            onSwitchToSignIn = onSwitchToSignIn
         )
     }
 }
@@ -90,7 +96,8 @@ private fun Form(
     state: RegisterState,
     onUpdateEmail: (String) -> Unit,
     onUpdatePassword: (String) -> Unit,
-    onSignIn: () -> Unit,
+    onRegister: () -> Unit,
+    onSwitchToSignIn: () -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -115,16 +122,55 @@ private fun Form(
             onValueChange = onUpdatePassword,
             enabled = !state.loading && !state.success
         )
-
         Button(
-            onClick = onSignIn,
+            onClick = onRegister,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
             enabled = !state.loading && !state.success
         ) {
-            Text(stringResource(R.string.register), fontSize = 25.sp)
+            Text(
+                text = stringResource(R.string.register),
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold
+            )
         }
+        HintToSignIn(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = onSwitchToSignIn
+        )
+    }
+}
+
+@Composable
+fun HintToSignIn(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    val text = buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        ) {
+            append(stringResource(R.string.already_have_an_account))
+        }
+        append(" ")
+        withStyle(
+            style = SpanStyle(
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+        ) {
+            append(stringResource(R.string.sign_in))
+        }
+    }
+    Column(modifier = modifier) {
+        ClickableText(
+            text = text,
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            onClick = { onClick() }
+        )
     }
 }
 
@@ -140,6 +186,7 @@ private fun SignInContentPreview() {
         state = state,
         onUpdateEmail = { },
         onUpdatePassword = { },
-        onRegister = { }
+        onRegister = { },
+        onSwitchToSignIn = { }
     )
 }
