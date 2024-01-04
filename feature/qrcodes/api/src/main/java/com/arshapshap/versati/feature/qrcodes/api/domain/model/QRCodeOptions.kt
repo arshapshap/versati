@@ -1,0 +1,11 @@
+package com.arshapshap.versati.feature.qrcodes.api.domain.model
+
+data class QRCodeOptions(
+    val id: Long,
+    val data: String,
+    val size: Int,
+    val color: Long,
+    val backgroundColor: Long,
+    val quietZone: Int,
+    val format: ImageFormat
+)
