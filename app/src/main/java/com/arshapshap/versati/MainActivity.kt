@@ -3,14 +3,18 @@ package com.arshapshap.versati
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import cafe.adriel.voyager.navigator.CurrentScreen
+import cafe.adriel.voyager.navigator.Navigator
 import com.arshapshap.versati.core.designsystem.theme.VersatiTheme
+import com.arshapshap.versati.feature.auth.presentation.signin.SignInScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -23,25 +27,32 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Navigator(screen = SignInScreen()) {
+                        Scaffold(
+                            topBar = { TopBar() },
+                            content = {
+                                Box(
+                                    modifier = Modifier
+                                        .padding(it)
+                                ) {
+                                    CurrentScreen()
+                                }
+                            },
+                            bottomBar = { BottomBar() }
+                        )
+                    }
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    @Composable
+    private fun TopBar() {
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    VersatiTheme {
-        Greeting("Android")
+    }
+
+    @Composable
+    private fun BottomBar() {
+
     }
 }

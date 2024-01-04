@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Sign In -->
+    <string name="authorization_label">Authorization</string>
+    <string name="enter_email">Enter your email address</string>
+    <string name="invalid_email">Enter a valid email address</string>
+    <string name="enter_password">Enter your password</string>
+    <string name="incorrect_email_or_password">The email or password is wrong</string>
+    <string name="user_disabled">The user with this email is disabled</string>
+    <string name="user_not_found">The user with this email was not found</string>
+    <string name="unknown_error">An unexpected error has occurred</string>
+    <string name="sign_in">Sign in</string>
+</resources>

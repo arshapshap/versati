@@ -66,4 +66,5 @@ dependencies {
     implementation(libs.koin)
     implementation(libs.koin.compose)
     implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.bundles.voyager)
 }
