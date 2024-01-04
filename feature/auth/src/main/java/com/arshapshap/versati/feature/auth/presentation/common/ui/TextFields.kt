@@ -1,4 +1,4 @@
-package com.arshapshap.versati.feature.auth.presentation.common
+package com.arshapshap.versati.feature.auth.presentation.common.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions

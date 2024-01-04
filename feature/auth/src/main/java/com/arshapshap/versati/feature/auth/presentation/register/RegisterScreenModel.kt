@@ -1,15 +1,15 @@
-package com.arshapshap.versati.feature.auth.presentation.signin
+package com.arshapshap.versati.feature.auth.presentation.register
 
 import android.text.TextUtils
 import android.util.Patterns
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.coroutineScope
-import com.arshapshap.versati.feature.auth.domain.model.SignInError
-import com.arshapshap.versati.feature.auth.domain.usecase.SignInUseCase
+import com.arshapshap.versati.feature.auth.domain.model.RegisterError
+import com.arshapshap.versati.feature.auth.domain.usecase.RegisterUseCase
 import com.arshapshap.versati.feature.auth.presentation.common.contract.EmailFieldError
 import com.arshapshap.versati.feature.auth.presentation.common.contract.PasswordFieldError
-import com.arshapshap.versati.feature.auth.presentation.signin.contract.SignInErrorWithMessage
-import com.arshapshap.versati.feature.auth.presentation.signin.contract.SignInState
+import com.arshapshap.versati.feature.auth.presentation.register.contract.RegisterErrorWithMessage
+import com.arshapshap.versati.feature.auth.presentation.register.contract.RegisterState
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.annotation.OrbitExperimental
 import org.orbitmvi.orbit.container
@@ -19,34 +19,34 @@ import org.orbitmvi.orbit.syntax.simple.blockingIntent
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 
-private typealias IntentContext = SimpleSyntax<SignInState, Nothing>
-private typealias ReduceContext = SimpleContext<SignInState>
+private typealias IntentContext = SimpleSyntax<RegisterState, Nothing>
+private typealias ReduceContext = SimpleContext<RegisterState>
 
-internal class SignInScreenModel(
-    private val signInUseCase: SignInUseCase
-) : ContainerHost<SignInState, Nothing>, ScreenModel {
+internal class RegisterScreenModel(
+    private val registerUseCase: RegisterUseCase
+) : ContainerHost<RegisterState, Nothing>, ScreenModel {
 
-    override val container = coroutineScope.container<SignInState, Nothing>(SignInState())
+    override val container = coroutineScope.container<RegisterState, Nothing>(RegisterState())
 
-    fun signIn() = intent {
+    fun register() = intent {
         if (!checkIfEmailAndPasswordValid()) return@intent
 
         reduce { state.copy(loading = true) }
-        val result = signInUseCase(state.email, state.password)
+        val result = registerUseCase(state.email, state.password)
         reduce { state.copy(loading = false) }
 
         if (result.isSuccessful) {
             reduce { state.copy(success = true) }
             //TODO("Уйти с экрана авторизации через несколько секунд")
         } else {
-            handleSignInError(result.error!!)
+            handleRegisterError(result.error!!)
         }
     }
 
     @OptIn(OrbitExperimental::class)
     fun updateEmail(email: String) = blockingIntent {
         reduce {
-            if (state.signInError == null)
+            if (state.registerError == null)
                 state.copy(
                     email = email,
                     showEmailFieldError = false,
@@ -61,7 +61,7 @@ internal class SignInScreenModel(
     @OptIn(OrbitExperimental::class)
     fun updatePassword(password: String) = blockingIntent {
         reduce {
-            if (state.signInError == null)
+            if (state.registerError == null)
                 state.copy(
                     password = password,
                     showPasswordFieldError = false,
@@ -89,15 +89,14 @@ internal class SignInScreenModel(
         return emailFieldError == null && passwordFieldError == null
     }
 
-    private suspend fun IntentContext.handleSignInError(error: SignInError) {
+    private suspend fun IntentContext.handleRegisterError(error: RegisterError) {
         when (error) {
-            SignInError.WrongPassword -> reduce { getStateWithError(SignInErrorWithMessage.WrongEmailOrPassword) }
-            SignInError.InvalidEmail -> reduce { getStateWithEmailError(EmailFieldError.InvalidEmail) }
-            SignInError.UserDisabled -> reduce { getStateWithError(SignInErrorWithMessage.UserDisabled) }
-            SignInError.UserNotFound -> reduce { getStateWithError(SignInErrorWithMessage.UserNotFound) }
-            SignInError.UnknownError -> reduce {
+            RegisterError.EmailAlreadyInUse -> reduce { getStateWithError(RegisterErrorWithMessage.EmailAlreadyInUse) }
+            RegisterError.InvalidEmail -> reduce { getStateWithEmailError(EmailFieldError.InvalidEmail) }
+            RegisterError.WeakPassword -> reduce { getStateWithPasswordError(PasswordFieldError.WeakPassword) }
+            RegisterError.UnknownError -> reduce {
                 getStateWithError(
-                    SignInErrorWithMessage.UnknownError,
+                    RegisterErrorWithMessage.UnknownError,
                     highlightError = false
                 )
             }
@@ -105,14 +104,14 @@ internal class SignInScreenModel(
     }
 
     private fun ReduceContext.getStateWithError(
-        signInError: SignInErrorWithMessage,
+        registerError: RegisterErrorWithMessage,
         highlightError: Boolean = true
     ) = state.copy(
         showEmailFieldError = highlightError,
         showPasswordFieldError = highlightError,
         emailFieldError = null,
         passwordFieldError = null,
-        signInError = signInError
+        registerError = registerError
     )
 
     private fun ReduceContext.getStateWithEmailError(
@@ -122,12 +121,19 @@ internal class SignInScreenModel(
         emailFieldError = emailFieldError
     )
 
+    private fun ReduceContext.getStateWithPasswordError(
+        passwordFieldError: PasswordFieldError
+    ) = state.copy(
+        showPasswordFieldError = true,
+        passwordFieldError = passwordFieldError
+    )
+
     private fun ReduceContext.getStateWithNoErrors() = state.copy(
         showEmailFieldError = false,
         showPasswordFieldError = false,
         emailFieldError = null,
         passwordFieldError = null,
-        signInError = null
+        registerError = null
     )
 
     private fun String.checkEmail(): EmailFieldError? {
@@ -141,6 +147,8 @@ internal class SignInScreenModel(
     private fun String.checkPassword(): PasswordFieldError? {
         if (TextUtils.isEmpty(this))
             return PasswordFieldError.EmptyPassword
+        if (this.length < 6)
+            return PasswordFieldError.WeakPassword
         return null
     }
 }

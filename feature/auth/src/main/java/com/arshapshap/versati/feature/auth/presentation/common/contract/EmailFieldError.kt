@@ -1,4 +1,4 @@
-package com.arshapshap.versati.feature.auth.presentation.signin.contract
+package com.arshapshap.versati.feature.auth.presentation.common.contract
 
 import androidx.annotation.StringRes
 import com.arshapshap.versati.feature.auth.R

@@ -1,4 +1,4 @@
-package com.arshapshap.versati.feature.auth.presentation.signin
+package com.arshapshap.versati.feature.auth.presentation.register
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,26 +24,27 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arshapshap.versati.feature.auth.R
+import com.arshapshap.versati.feature.auth.presentation.common.contract.PasswordFieldError
 import com.arshapshap.versati.feature.auth.presentation.common.ui.EmailTextField
 import com.arshapshap.versati.feature.auth.presentation.common.ui.PasswordTextField
-import com.arshapshap.versati.feature.auth.presentation.signin.contract.SignInState
+import com.arshapshap.versati.feature.auth.presentation.register.contract.RegisterState
 
 @Composable
-internal fun SignInContent(state: SignInState, screenModel: SignInScreenModel) {
-    SignInContent(
+internal fun RegisterContent(state: RegisterState, screenModel: RegisterScreenModel) {
+    RegisterContent(
         state = state,
         onUpdateEmail = screenModel::updateEmail,
         onUpdatePassword = screenModel::updatePassword,
-        onSignIn = screenModel::signIn
+        onRegister = screenModel::register
     )
 }
 
 @Composable
-private fun SignInContent(
-    state: SignInState,
+private fun RegisterContent(
+    state: RegisterState,
     onUpdateEmail: (String) -> Unit,
     onUpdatePassword: (String) -> Unit,
-    onSignIn: () -> Unit
+    onRegister: () -> Unit
 ) {
     if (state.loading)
         Box(modifier = Modifier.fillMaxSize()) {
@@ -67,7 +68,7 @@ private fun SignInContent(
             .alpha(if (state.loading || state.success) 0.5f else 1f)
     ) {
         Text(
-            text = stringResource(R.string.authorization_label),
+            text = stringResource(R.string.registration_label),
             fontSize = 50.sp,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
@@ -78,7 +79,7 @@ private fun SignInContent(
             state = state,
             onUpdateEmail = onUpdateEmail,
             onUpdatePassword = onUpdatePassword,
-            onSignIn = onSignIn,
+            onSignIn = onRegister,
         )
     }
 }
@@ -86,7 +87,7 @@ private fun SignInContent(
 @Composable
 private fun Form(
     modifier: Modifier = Modifier,
-    state: SignInState,
+    state: RegisterState,
     onUpdateEmail: (String) -> Unit,
     onUpdatePassword: (String) -> Unit,
     onSignIn: () -> Unit,
@@ -106,7 +107,7 @@ private fun Form(
         )
         PasswordTextField(text = state.password,
             isError = state.showPasswordFieldError,
-            errorText = state.signInError?.res?.let { stringResource(id = it) }
+            errorText = state.registerError?.res?.let { stringResource(id = it) }
                 ?: state.passwordFieldError?.res?.let { stringResource(id = it) }
                 ?: "",
             modifier = Modifier
@@ -122,7 +123,7 @@ private fun Form(
                 .padding(vertical = 8.dp),
             enabled = !state.loading && !state.success
         ) {
-            Text(stringResource(R.string.sign_in), fontSize = 25.sp)
+            Text(stringResource(R.string.register), fontSize = 25.sp)
         }
     }
 }
@@ -130,13 +131,15 @@ private fun Form(
 @Preview(showBackground = true)
 @Composable
 private fun SignInContentPreview() {
-    val state = SignInState(
-        success = true
+    val state = RegisterState(
+        showEmailFieldError = true,
+        showPasswordFieldError = true,
+        passwordFieldError = PasswordFieldError.EmptyPassword
     )
-    SignInContent(
+    RegisterContent(
         state = state,
         onUpdateEmail = { },
         onUpdatePassword = { },
-        onSignIn = { }
+        onRegister = { }
     )
 }

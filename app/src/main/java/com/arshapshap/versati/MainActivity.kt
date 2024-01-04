@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.arshapshap.versati.core.designsystem.theme.VersatiTheme
-import com.arshapshap.versati.feature.auth.presentation.signin.SignInScreen
+import com.arshapshap.versati.feature.auth.presentation.register.RegisterScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Navigator(screen = SignInScreen()) {
+                    Navigator(screen = RegisterScreen()) {
                         Scaffold(
                             topBar = { TopBar() },
                             content = {

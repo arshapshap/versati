@@ -5,6 +5,7 @@ import com.arshapshap.versati.feature.auth.domain.repository.AuthRepository
 import com.arshapshap.versati.feature.auth.domain.usecase.LogOutUseCase
 import com.arshapshap.versati.feature.auth.domain.usecase.RegisterUseCase
 import com.arshapshap.versati.feature.auth.domain.usecase.SignInUseCase
+import com.arshapshap.versati.feature.auth.presentation.register.RegisterScreenModel
 import com.arshapshap.versati.feature.auth.presentation.signin.SignInScreenModel
 import org.koin.dsl.module
 
@@ -19,4 +20,5 @@ val authFeatureModule = module {
 
     // Presentation
     factory<SignInScreenModel> { SignInScreenModel(get<SignInUseCase>()) }
+    factory<RegisterScreenModel> { RegisterScreenModel(get<RegisterUseCase>()) }
 }

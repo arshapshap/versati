@@ -1,9 +1,9 @@
-package com.arshapshap.versati.feature.auth.presentation.signin.contract
+package com.arshapshap.versati.feature.auth.presentation.register.contract
 
 import com.arshapshap.versati.feature.auth.presentation.common.contract.EmailFieldError
 import com.arshapshap.versati.feature.auth.presentation.common.contract.PasswordFieldError
 
-internal data class SignInState(
+internal data class RegisterState(
     val email: String = "",
     val password: String = "",
     val loading: Boolean = false,
@@ -12,5 +12,5 @@ internal data class SignInState(
     val showPasswordFieldError: Boolean = false,
     val emailFieldError: EmailFieldError? = null,
     val passwordFieldError: PasswordFieldError? = null,
-    val signInError: SignInErrorWithMessage? = null,
+    val registerError: RegisterErrorWithMessage? = null,
 )

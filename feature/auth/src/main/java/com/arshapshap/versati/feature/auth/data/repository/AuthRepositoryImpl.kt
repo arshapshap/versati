@@ -51,19 +51,19 @@ internal class AuthRepositoryImpl : AuthRepository {
         when ((exception as? FirebaseAuthException)?.errorCode) {
             null -> null
             "ERROR_INVALID_CREDENTIAL" -> SignInError.WrongPassword
-            "wrong-password" -> SignInError.WrongPassword
-            "invalid-email" -> SignInError.InvalidEmail
-            "user-disabled" -> SignInError.UserDisabled
-            "user-not-found" -> SignInError.UserNotFound
+            "ERROR_WRONG_PASSWORD" -> SignInError.WrongPassword
+            "ERROR_INVALID_EMAIL" -> SignInError.InvalidEmail
+            "ERROR_USER_DISABLED" -> SignInError.UserDisabled
+            "ERROR_USER_NOT_FOUND" -> SignInError.UserNotFound
             else -> SignInError.UnknownError
         }
 
     private fun detectRegisterError(exception: Exception?): RegisterError? =
         when ((exception as? FirebaseAuthException)?.errorCode) {
             null -> null
-            "email-already-in-use" -> RegisterError.EmailAlreadyInUse
-            "invalid-email" -> RegisterError.InvalidEmail
-            "weak-password" -> RegisterError.WeakPassword
+            "ERROR_EMAIL_ALREADY_IN_USE" -> RegisterError.EmailAlreadyInUse
+            "ERROR_INVALID_EMAIL" -> RegisterError.InvalidEmail
+            "ERROR_WEAK_PASSWORD" -> RegisterError.WeakPassword
             else -> RegisterError.UnknownError
         }
 }
