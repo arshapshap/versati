@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.arshapshap.versati.feature.auth.api"
+    namespace = "com.arshapshap.versati.feature.imageparsing.api"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
