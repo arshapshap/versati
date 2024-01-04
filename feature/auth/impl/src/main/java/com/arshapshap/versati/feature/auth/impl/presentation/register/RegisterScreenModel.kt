@@ -9,6 +9,7 @@ import com.arshapshap.versati.feature.auth.api.domain.usecase.RegisterUseCase
 import com.arshapshap.versati.feature.auth.impl.presentation.common.contract.EmailFieldError
 import com.arshapshap.versati.feature.auth.impl.presentation.common.contract.PasswordFieldError
 import com.arshapshap.versati.feature.auth.impl.presentation.register.contract.RegisterErrorWithMessage
+import com.arshapshap.versati.feature.auth.impl.presentation.register.contract.RegisterSideEffect
 import com.arshapshap.versati.feature.auth.impl.presentation.register.contract.RegisterState
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.annotation.OrbitExperimental
@@ -17,16 +18,18 @@ import org.orbitmvi.orbit.syntax.simple.SimpleContext
 import org.orbitmvi.orbit.syntax.simple.SimpleSyntax
 import org.orbitmvi.orbit.syntax.simple.blockingIntent
 import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 
-private typealias IntentContext = SimpleSyntax<RegisterState, Nothing>
+private typealias IntentContext = SimpleSyntax<RegisterState, RegisterSideEffect>
 private typealias ReduceContext = SimpleContext<RegisterState>
 
 internal class RegisterScreenModel(
     private val registerUseCase: RegisterUseCase
-) : ContainerHost<RegisterState, Nothing>, ScreenModel {
+) : ContainerHost<RegisterState, RegisterSideEffect>, ScreenModel {
 
-    override val container = coroutineScope.container<RegisterState, Nothing>(RegisterState())
+    override val container =
+        coroutineScope.container<RegisterState, RegisterSideEffect>(RegisterState())
 
     fun register() = intent {
         if (!checkIfEmailAndPasswordValid()) return@intent
@@ -43,8 +46,8 @@ internal class RegisterScreenModel(
         }
     }
 
-    fun goToSignIn() = intent {
-        //TODO("Перейти к авторизации")
+    fun navigateToSignIn() = intent {
+        postSideEffect(RegisterSideEffect.NavigateToSignIn)
     }
 
     @OptIn(OrbitExperimental::class)

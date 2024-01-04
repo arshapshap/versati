@@ -39,7 +39,7 @@ internal fun RegisterContent(state: RegisterState, screenModel: RegisterScreenMo
         onUpdateEmail = screenModel::updateEmail,
         onUpdatePassword = screenModel::updatePassword,
         onRegister = screenModel::register,
-        onSwitchToSignIn = screenModel::goToSignIn
+        onSwitchToSignIn = screenModel::navigateToSignIn
     )
 }
 

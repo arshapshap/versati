@@ -9,6 +9,7 @@ import com.arshapshap.versati.feature.auth.api.domain.usecase.SignInUseCase
 import com.arshapshap.versati.feature.auth.impl.presentation.common.contract.EmailFieldError
 import com.arshapshap.versati.feature.auth.impl.presentation.common.contract.PasswordFieldError
 import com.arshapshap.versati.feature.auth.impl.presentation.signin.contract.SignInErrorWithMessage
+import com.arshapshap.versati.feature.auth.impl.presentation.signin.contract.SignInSideEffect
 import com.arshapshap.versati.feature.auth.impl.presentation.signin.contract.SignInState
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.annotation.OrbitExperimental
@@ -17,16 +18,17 @@ import org.orbitmvi.orbit.syntax.simple.SimpleContext
 import org.orbitmvi.orbit.syntax.simple.SimpleSyntax
 import org.orbitmvi.orbit.syntax.simple.blockingIntent
 import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 
-private typealias IntentContext = SimpleSyntax<SignInState, Nothing>
+private typealias IntentContext = SimpleSyntax<SignInState, SignInSideEffect>
 private typealias ReduceContext = SimpleContext<SignInState>
 
 internal class SignInScreenModel(
     private val signInUseCase: SignInUseCase
-) : ContainerHost<SignInState, Nothing>, ScreenModel {
+) : ContainerHost<SignInState, SignInSideEffect>, ScreenModel {
 
-    override val container = coroutineScope.container<SignInState, Nothing>(SignInState())
+    override val container = coroutineScope.container<SignInState, SignInSideEffect>(SignInState())
 
     fun signIn() = intent {
         if (!checkIfEmailAndPasswordValid()) return@intent
@@ -43,8 +45,8 @@ internal class SignInScreenModel(
         }
     }
 
-    fun goToRegistration() = intent {
-        //TODO("Перейти к регистрации")
+    fun navigateToRegistration() = intent {
+        postSideEffect(SignInSideEffect.NavigateToRegistration)
     }
 
     @OptIn(OrbitExperimental::class)

@@ -71,10 +71,8 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 voyager-androidx = { group = "cafe.adriel.voyager", name = "voyager-androidx", version.ref = "voyager" }
-voyager-bs = { group = "cafe.adriel.voyager", name = "voyager-bottom-sheet-navigator", version.ref = "voyager" }
-voyager-core = { group = "cafe.adriel.voyager", name = "voyager-navigator", version.ref = "voyager" }
 voyager-koin = { group = "cafe.adriel.voyager", name = "voyager-koin", version.ref = "voyager" }
-voyager-tab = { group = "cafe.adriel.voyager", name = "voyager-tab-navigator", version.ref = "voyager" }
+voyager-navigator = { group = "cafe.adriel.voyager", name = "voyager-navigator", version.ref = "voyager" }
 voyager-transitions = { group = "cafe.adriel.voyager", name = "voyager-transitions", version.ref = "voyager" }
 
 [plugins]
@@ -89,4 +87,4 @@ org-jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.seriali
 compose-ui = ["compose-material3", "compose-ui", "compose-ui-graphics", "compose-ui-tooling-preview"]
 room = ["room-ktx", "room-runtime"]
 test = ["junit", "junit-jupiter", "mockk"]
-voyager = ["voyager-core", "voyager-bs", "voyager-tab", "voyager-koin", "voyager-androidx", "voyager-transitions"]
+voyager = ["voyager-androidx", "voyager-koin", "voyager-navigator", "voyager-transitions"]

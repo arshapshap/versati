@@ -11,10 +11,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.navigator.CurrentScreen
+import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.transitions.SlideTransition
 import com.arshapshap.versati.core.designsystem.theme.VersatiTheme
-import com.arshapshap.versati.feature.auth.impl.presentation.register.RegisterScreen
+import com.arshapshap.versati.core.navigation.AuthFeatureScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Navigator(screen = RegisterScreen()) {
+                    Navigator(screen = rememberScreen(AuthFeatureScreen.SignIn)) { navigator ->
                         Scaffold(
                             topBar = { TopBar() },
                             content = {
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier
                                         .padding(it)
                                 ) {
-                                    CurrentScreen()
+                                    SlideTransition(navigator)
                                 }
                             },
                             bottomBar = { BottomBar() }
