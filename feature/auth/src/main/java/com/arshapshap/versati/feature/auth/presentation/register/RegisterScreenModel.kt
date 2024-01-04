@@ -95,7 +95,7 @@ internal class RegisterScreenModel(
 
     private suspend fun IntentContext.handleRegisterError(error: RegisterError) {
         when (error) {
-            RegisterError.EmailAlreadyInUse -> reduce { getStateWithError(RegisterErrorWithMessage.EmailAlreadyInUse) }
+            RegisterError.EmailAlreadyInUse -> reduce { getStateWithEmailError(EmailFieldError.EmailAlreadyInUse) }
             RegisterError.InvalidEmail -> reduce { getStateWithEmailError(EmailFieldError.InvalidEmail) }
             RegisterError.WeakPassword -> reduce { getStateWithPasswordError(PasswordFieldError.WeakPassword) }
             RegisterError.UnknownError -> reduce {
