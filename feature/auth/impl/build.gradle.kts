@@ -49,7 +49,6 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.core.ktx)
     implementation(libs.firebase.auth)
-    implementation(libs.firebase.database)
     implementation(platform(libs.firebase.bom))
     implementation(libs.koin)
     implementation(libs.koin.compose)

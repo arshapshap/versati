@@ -1,6 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.com.android.application)
+    alias(libs.plugins.com.google.firebase.crashlytics)
     alias(libs.plugins.com.google.gms.google.services)
     alias(libs.plugins.org.jetbrains.kotlin.android)
 }
@@ -67,6 +68,7 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.core.ktx)
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
     implementation(platform(libs.firebase.bom))
     implementation(libs.koin)
     implementation(libs.koin.compose)
