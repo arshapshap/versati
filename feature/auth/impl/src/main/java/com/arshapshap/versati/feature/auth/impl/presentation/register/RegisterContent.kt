@@ -73,7 +73,7 @@ private fun RegisterContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(horizontal = 16.dp)
             .alpha(if (state.loading || state.success) 0.5f else 1f)
     ) {
         Text(

@@ -14,4 +14,5 @@
     <string name="create_qr_code">Create QR-code</string>
     <string name="show_advanced_options">Show advanced options</string>
     <string name="advanced_options">Advanced options</string>
+    <string name="open_requests_history">Open requests history</string>
 </resources>
