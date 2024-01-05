@@ -18,6 +18,7 @@ rootProject.name = "Versati"
 include(":app")
 include(":core:database")
 include(":core:designsystem")
+include(":core:firebase")
 include(":core:navigation")
 include(":core:network")
 include(":core:utils")
