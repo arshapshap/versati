@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.com.google.firebase.crashlytics)
+    alias(libs.plugins.com.google.firebase.perf)
     alias(libs.plugins.com.google.gms.google.services)
     alias(libs.plugins.org.jetbrains.kotlin.android)
 }
@@ -69,6 +70,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.perf)
     implementation(platform(libs.firebase.bom))
     implementation(libs.koin)
     implementation(libs.koin.compose)
