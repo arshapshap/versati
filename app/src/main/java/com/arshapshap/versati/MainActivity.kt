@@ -21,13 +21,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.arshapshap.versati.core.designsystem.theme.VersatiTheme
+import com.arshapshap.versati.core.navigation.AuthFeature
+import com.arshapshap.versati.core.navigation.QRCodesFeature
+import com.arshapshap.versati.feature.auth.impl.presentation.register.RegisterScreen
+import com.arshapshap.versati.feature.auth.impl.presentation.signin.SignInScreen
+import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.QRCodeGenerationScreen
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberNavController()
+
             VersatiTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -35,20 +46,43 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Scaffold(
-                        topBar = {
-                            TopBar()
-                        },
+                        topBar = { },
                         content = {
-                            Box(
-                                modifier = Modifier
-                                    .padding(it)
-                            ) {
-                                // screen
-                            }
+                            MainNavHost(
+                                modifier = Modifier.padding(it),
+                                navController = navController,
+                                startRoute = QRCodesFeature.QRCodeGeneration.route
+                            )
                         },
                         bottomBar = { BottomBar() }
                     )
                 }
+            }
+        }
+    }
+
+    @Composable
+    private fun MainNavHost(
+        modifier: Modifier,
+        navController: NavHostController,
+        startRoute: String
+    ) {
+        NavHost(
+            modifier = modifier,
+            navController = navController,
+            startDestination = startRoute
+        ) {
+            composable(AuthFeature.SignIn.route) { SignInScreen.Content(navController = navController) }
+            composable(AuthFeature.Register.route) { RegisterScreen.Content(navController = navController) }
+
+            composable(
+                route = QRCodesFeature.QRCodeGeneration.route,
+                arguments = QRCodesFeature.QRCodeGeneration.arguments
+            ) {
+                QRCodeGenerationScreen.Content(
+                    navController = navController,
+                    id = it.arguments?.getLong(QRCodesFeature.QRCodeGeneration.idArgument)
+                )
             }
         }
     }

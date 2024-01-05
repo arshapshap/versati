@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavHostController
 import com.arshapshap.versati.core.utils.ImageLoadingHelper
 import com.arshapshap.versati.core.utils.SharingHelper
 import com.arshapshap.versati.core.utils.StorageHelper
@@ -13,12 +14,10 @@ import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
 
-internal class QRCodeGenerationScreen(
-    private val id: Long
-) {
+object QRCodeGenerationScreen {
 
     @Composable
-    fun Content() {
+    fun Content(navController: NavHostController, id: Long?) {
         val screenModel = getViewModel<QRCodeGenerationViewModel>()
         val state by screenModel.collectAsState()
 
