@@ -12,8 +12,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import com.arshapshap.versati.feature.auth.impl.R
 
 @Composable
 internal fun EmailTextField(
@@ -44,8 +46,8 @@ internal fun EmailTextField(
         },
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-        label = { Text(text = "Email") },
-        placeholder = { Text(text = "Your email") },
+        label = { Text(text = stringResource(R.string.email)) },
+        placeholder = { Text(text = stringResource(R.string.email_hint)) },
         onValueChange = onValueChange,
         isError = isError,
         enabled = enabled
@@ -82,8 +84,8 @@ internal fun PasswordTextField(
         },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         visualTransformation = PasswordVisualTransformation(),
-        label = { Text(text = "Password") },
-        placeholder = { Text(text = "Your password") },
+        label = { Text(text = stringResource(R.string.password)) },
+        placeholder = { Text(text = stringResource(R.string.password_hint)) },
         onValueChange = onValueChange,
         isError = isError,
         enabled = enabled

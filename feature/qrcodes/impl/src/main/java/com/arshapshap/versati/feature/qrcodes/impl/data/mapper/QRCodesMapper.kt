@@ -4,6 +4,7 @@ import com.arshapshap.versati.core.database.model.qrcodesfeature.QRCodeRequestLo
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeOptions
 import com.arshapshap.versati.feature.qrcodes.impl.BuildConfig
+import okhttp3.internal.toHexString
 
 internal class QRCodesMapper {
 
@@ -12,8 +13,8 @@ internal class QRCodesMapper {
         url.append("create-qr-code/")
         url.append("?data=$data")
         url.append("&size=${size}x${size}")
-        url.append("&color=${color.toHexColor()}")
-        url.append("&bgcolor=${backgroundColor.toHexColor()}")
+        url.append("&color=${color.toHexString().padStart(6, '0')}")
+        url.append("&bgcolor=${backgroundColor.toHexString().padStart(6, '0')}")
         url.append("&qzone=$quietZone")
         url.append("&format=${format.name.lowercase()}")
 
@@ -43,6 +44,4 @@ internal class QRCodesMapper {
             format = ImageFormat.valueOf(local.format.uppercase())
         )
     }
-
-    private fun Long.toHexColor() = this.toString(16).padStart(6, '0')
 }

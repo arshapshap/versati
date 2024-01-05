@@ -48,13 +48,18 @@ android {
 dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:navigation"))
     implementation(project(":core:network"))
+    implementation(project(":core:utils"))
     implementation(project(":feature:qrcodes:api"))
 
     implementation(libs.appcompat)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.svg)
     implementation(libs.core.ktx)
     implementation(libs.koin)
     implementation(libs.koin.compose)
+    implementation(libs.bundles.orbit)
     implementation(libs.bundles.voyager)
     testImplementation(libs.bundles.test)
 }

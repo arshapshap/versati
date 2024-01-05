@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
@@ -35,8 +36,8 @@ import com.arshapshap.versati.feature.auth.impl.presentation.signin.contract.Sig
 internal fun SignInContent(state: SignInState, screenModel: SignInScreenModel) {
     SignInContent(
         state = state,
-        onUpdateEmail = screenModel::updateEmail,
-        onUpdatePassword = screenModel::updatePassword,
+        onEmailChange = screenModel::updateEmail,
+        onPasswordChange = screenModel::updatePassword,
         onSignIn = screenModel::signIn,
         onSwitchToRegister = screenModel::navigateToRegistration
     )
@@ -45,8 +46,8 @@ internal fun SignInContent(state: SignInState, screenModel: SignInScreenModel) {
 @Composable
 private fun SignInContent(
     state: SignInState,
-    onUpdateEmail: (String) -> Unit,
-    onUpdatePassword: (String) -> Unit,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
     onSignIn: () -> Unit,
     onSwitchToRegister: () -> Unit
 ) {
@@ -81,8 +82,8 @@ private fun SignInContent(
         Form(
             modifier = Modifier.fillMaxSize(),
             state = state,
-            onUpdateEmail = onUpdateEmail,
-            onUpdatePassword = onUpdatePassword,
+            onEmailChange = onEmailChange,
+            onPasswordChange = onPasswordChange,
             onSignIn = onSignIn,
             onSwitchToRegister = onSwitchToRegister
         )
@@ -93,8 +94,8 @@ private fun SignInContent(
 private fun Form(
     modifier: Modifier = Modifier,
     state: SignInState,
-    onUpdateEmail: (String) -> Unit,
-    onUpdatePassword: (String) -> Unit,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
     onSignIn: () -> Unit,
     onSwitchToRegister: () -> Unit
 ) {
@@ -108,7 +109,7 @@ private fun Form(
             errorText = state.emailFieldError?.res?.let { stringResource(id = it) } ?: "",
             modifier = Modifier
                 .padding(vertical = 8.dp),
-            onValueChange = onUpdateEmail,
+            onValueChange = onEmailChange,
             enabled = !state.loading && !state.success
         )
         PasswordTextField(text = state.password,
@@ -118,13 +119,14 @@ private fun Form(
                 ?: "",
             modifier = Modifier
                 .padding(vertical = 8.dp),
-            onValueChange = onUpdatePassword,
+            onValueChange = onPasswordChange,
             enabled = !state.loading && !state.success
         )
         Button(
             onClick = onSignIn,
             modifier = Modifier
                 .fillMaxWidth()
+                .height(70.dp)
                 .padding(vertical = 8.dp),
             enabled = !state.loading && !state.success
         ) {
@@ -179,8 +181,8 @@ private fun SignInContentPreview() {
     val state = SignInState()
     SignInContent(
         state = state,
-        onUpdateEmail = { },
-        onUpdatePassword = { },
+        onEmailChange = { },
+        onPasswordChange = { },
         onSignIn = { },
         onSwitchToRegister = { }
     )

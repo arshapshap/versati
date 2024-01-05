@@ -6,6 +6,7 @@ import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.CreateQRCodeUse
 import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.GetRequestHistoryUseCase
 import com.arshapshap.versati.feature.qrcodes.impl.data.mapper.QRCodesMapper
 import com.arshapshap.versati.feature.qrcodes.impl.data.repository.QRCodesRepositoryImpl
+import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.QRCodeGenerationScreenModel
 import org.koin.dsl.module
 
 val qrCodesFeatureModule = module {
@@ -21,4 +22,7 @@ val qrCodesFeatureModule = module {
     // Domain
     factory<CreateQRCodeUseCase> { CreateQRCodeUseCase(get<QRCodesRepository>()) }
     factory<GetRequestHistoryUseCase> { GetRequestHistoryUseCase(get<QRCodesRepository>()) }
+
+    // Presentation
+    factory<QRCodeGenerationScreenModel> { QRCodeGenerationScreenModel(get<CreateQRCodeUseCase>()) }
 }

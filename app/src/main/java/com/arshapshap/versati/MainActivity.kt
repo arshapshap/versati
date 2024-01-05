@@ -15,7 +15,7 @@ import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.arshapshap.versati.core.designsystem.theme.VersatiTheme
-import com.arshapshap.versati.core.navigation.AuthFeatureScreen
+import com.arshapshap.versati.core.navigation.QRCodesFeatureScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Navigator(screen = rememberScreen(AuthFeatureScreen.SignIn)) { navigator ->
+                    Navigator(screen = rememberScreen(QRCodesFeatureScreen.QRCodeGeneration(0))) { navigator ->
                         Scaffold(
                             topBar = { TopBar() },
                             content = {

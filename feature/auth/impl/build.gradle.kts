@@ -52,8 +52,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.koin)
     implementation(libs.koin.compose)
-    implementation(libs.orbit.compose)
-    implementation(libs.orbit.core)
+    implementation(libs.bundles.orbit)
     implementation(libs.bundles.voyager)
     testImplementation(libs.bundles.test)
 }
