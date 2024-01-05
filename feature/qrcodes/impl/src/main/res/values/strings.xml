@@ -19,4 +19,8 @@
 
     <!-- RequestHistory -->
     <string name="request_history">QR-codes history</string>
+    <string name="clear_history">Clear history</string>
+    <string name="clearing_the_history">Clearing the history</string>
+    <string name="do_you_really_want_to_clear_the_history">Do you really want to clear the history?</string>
+    <string name="the_history_of_qr_codes_is_empty">The history of QR codes is empty</string>
 </resources>

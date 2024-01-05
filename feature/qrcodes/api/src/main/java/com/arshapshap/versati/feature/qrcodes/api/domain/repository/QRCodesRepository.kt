@@ -9,4 +9,6 @@ interface QRCodesRepository {
     suspend fun getRequestHistory(): List<QRCodeInfo>
 
     suspend fun getQRCodeInfoById(id: Long): QRCodeInfo?
+
+    suspend fun clearHistory()
 }

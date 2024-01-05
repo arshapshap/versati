@@ -14,6 +14,9 @@ abstract class QRCodeRequestDao {
     @Query("DELETE FROM QRCodeRequest WHERE id IN (SELECT id FROM QRCodeRequest ORDER BY id ASC LIMIT 1)")
     abstract suspend fun deleteOldest()
 
+    @Query("DELETE FROM QRCodeRequest")
+    abstract suspend fun deleteAll()
+
     @Query("SELECT * FROM QRCodeRequest")
     abstract suspend fun getAll(): List<QRCodeRequestLocal>
 

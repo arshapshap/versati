@@ -27,4 +27,8 @@ internal class QRCodesRepositoryImpl(
     override suspend fun getQRCodeInfoById(id: Long): QRCodeInfo? {
         return dao.getById(id)?.let { mapper.mapFromLocal(it) }
     }
+
+    override suspend fun clearHistory() {
+        dao.deleteAll()
+    }
 }
