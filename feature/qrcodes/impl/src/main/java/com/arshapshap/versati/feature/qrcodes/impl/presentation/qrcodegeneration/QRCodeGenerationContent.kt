@@ -30,11 +30,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
 import com.arshapshap.versati.feature.qrcodes.impl.R
+import com.arshapshap.versati.feature.qrcodes.impl.presentation.common.ui.QRCodeImage
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract.QRCodeGenerationState
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.elements.ColorInput
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.elements.DataInput
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.elements.FormatInput
-import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.elements.QRCodeImage
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.elements.QuietZoneInput
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.elements.SizeInput
 

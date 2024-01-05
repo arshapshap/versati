@@ -4,7 +4,7 @@ import android.text.TextUtils
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
-import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeOptions
+import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeInfo
 import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.CreateQRCodeUseCase
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract.QRCodeGenerationSideEffect
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract.QRCodeGenerationState
@@ -106,14 +106,15 @@ internal class QRCodeGenerationViewModel(
         return !state.showDataFieldError && !state.showColorFieldError && !state.showBackgroundColorFieldError
     }
 
-    private suspend fun IntentContext.getQRCodeOptions() = QRCodeOptions(
+    private suspend fun IntentContext.getQRCodeOptions() = QRCodeInfo(
         id = 0,
         data = state.data,
         size = state.size ?: 200,
         color = state.qrCodeColor ?: 0x000000,
         backgroundColor = state.backgroundColor ?: 0xFFFFFF,
         quietZone = state.quietZone ?: 0,
-        format = state.format
+        format = state.format,
+        imageUrl = ""
     )
 
     private fun validateSize(size: Int?, format: ImageFormat): Int {

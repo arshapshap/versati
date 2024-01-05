@@ -2,13 +2,13 @@ package com.arshapshap.versati.feature.qrcodes.impl.data.mapper
 
 import com.arshapshap.versati.core.database.model.qrcodesfeature.QRCodeRequestLocal
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
-import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeOptions
+import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeInfo
 import com.arshapshap.versati.feature.qrcodes.impl.BuildConfig
 import okhttp3.internal.toHexString
 
 internal class QRCodesMapper {
 
-    fun createImageUrl(options: QRCodeOptions): String = with(options) {
+    fun createImageUrl(options: QRCodeInfo): String = with(options) {
         val url = StringBuilder(BuildConfig.GOQR_BASE_URL)
         url.append("create-qr-code/")
         url.append("?data=$data")
@@ -21,7 +21,7 @@ internal class QRCodesMapper {
         return url.toString()
     }
 
-    fun mapToLocal(options: QRCodeOptions, id: Long): QRCodeRequestLocal {
+    fun mapToLocal(options: QRCodeInfo, id: Long, imageUrl: String): QRCodeRequestLocal {
         return QRCodeRequestLocal(
             id = id,
             data = options.data,
@@ -29,19 +29,21 @@ internal class QRCodesMapper {
             color = options.color,
             backgroundColor = options.backgroundColor,
             quietZone = options.quietZone,
-            format = options.format.name.lowercase()
+            format = options.format.name.lowercase(),
+            imageUrl = imageUrl
         )
     }
 
-    fun mapFromLocal(local: QRCodeRequestLocal): QRCodeOptions {
-        return QRCodeOptions(
+    fun mapFromLocal(local: QRCodeRequestLocal): QRCodeInfo {
+        return QRCodeInfo(
             id = local.id,
             data = local.data,
             size = local.size,
             color = local.color,
             backgroundColor = local.backgroundColor,
             quietZone = local.quietZone,
-            format = ImageFormat.valueOf(local.format.uppercase())
+            format = ImageFormat.valueOf(local.format.uppercase()),
+            imageUrl = local.imageUrl
         )
     }
 }

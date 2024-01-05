@@ -13,5 +13,6 @@ data class QRCodeRequestLocal(
     @ColumnInfo(name = "color") val color: Int,
     @ColumnInfo(name = "background_color") val backgroundColor: Int,
     @ColumnInfo(name = "quiet_zone") val quietZone: Int,
-    @ColumnInfo(name = "format") val format: String
+    @ColumnInfo(name = "format") val format: String,
+    @ColumnInfo(name = "image_url") val imageUrl: String
 )

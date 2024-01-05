@@ -10,8 +10,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import com.arshapshap.versati.core.navigation.AppBarState
-import com.arshapshap.versati.core.navigation.AuthFeature
+import com.arshapshap.versati.core.navigation.QRCodesFeature
+import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.core.utils.ImageLoadingHelper
 import com.arshapshap.versati.core.utils.SharingHelper
 import com.arshapshap.versati.core.utils.StorageHelper
@@ -44,7 +44,7 @@ object QRCodeGenerationScreen {
                     )
 
                 QRCodeGenerationSideEffect.NavigateToRequestHistory ->
-                    navController.navigate(AuthFeature.SignIn.destination())
+                    navController.navigate(QRCodesFeature.RequestHistory.destination())
             }
         }
 
@@ -54,7 +54,7 @@ object QRCodeGenerationScreen {
                     context,
                     screenModel::navigateToRequestHistory
                 )
-            ) // TODO: сделать переход к истории
+            )
         }
         QRCodeGenerationContent(state = state, viewModel = screenModel)
     }
@@ -68,7 +68,7 @@ object QRCodeGenerationScreen {
             IconButton(onClick = onHistoryClick) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_history),
-                    contentDescription = stringResource(R.string.open_requests_history)
+                    contentDescription = stringResource(R.string.open_request_history)
                 )
             }
         }

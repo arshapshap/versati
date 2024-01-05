@@ -1,10 +1,10 @@
 package com.arshapshap.versati.feature.qrcodes.api.domain.repository
 
-import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeOptions
+import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeInfo
 
 interface QRCodesRepository {
 
-    suspend fun createQRCodeImageUrl(options: QRCodeOptions): String
+    suspend fun createQRCodeImageUrl(options: QRCodeInfo): String
 
-    suspend fun getRequestHistory(): List<QRCodeOptions>
+    suspend fun getRequestHistory(): List<QRCodeInfo>
 }

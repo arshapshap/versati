@@ -11,7 +11,7 @@ sealed interface QRCodesFeature {
 
         private const val screen = "qrcode_generation"
         const val idArgument = "id"
-        const val route = "$baseRoute/$screen/?$idArgument={$idArgument}"
+        const val route = "$baseRoute/$screen?$idArgument={$idArgument}"
 
         val arguments = listOf(
             navArgument(idArgument) {
@@ -20,10 +20,10 @@ sealed interface QRCodesFeature {
             }
         )
 
-        fun destination(id: Long = 0L) = "$baseRoute/$screen/$id"
+        fun destination(id: Long = 0L) = "$baseRoute/$screen?$idArgument=$id"
     }
 
-    data object RequestsHistory : QRCodesFeature {
+    data object RequestHistory : QRCodesFeature {
 
         const val route = "$baseRoute/history"
 

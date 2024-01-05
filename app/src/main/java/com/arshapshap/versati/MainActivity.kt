@@ -33,12 +33,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.arshapshap.versati.core.designsystem.theme.VersatiTheme
-import com.arshapshap.versati.core.navigation.AppBarState
 import com.arshapshap.versati.core.navigation.AuthFeature
 import com.arshapshap.versati.core.navigation.QRCodesFeature
+import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.auth.impl.presentation.register.RegisterScreen
 import com.arshapshap.versati.feature.auth.impl.presentation.signin.SignInScreen
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.QRCodeGenerationScreen
+import com.arshapshap.versati.feature.qrcodes.impl.presentation.requesthistory.RequestHistoryScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
@@ -152,6 +153,14 @@ class MainActivity : ComponentActivity() {
                 QRCodeGenerationScreen.Content(
                     navController = navController,
                     id = it.arguments?.getLong(QRCodesFeature.QRCodeGeneration.idArgument),
+                    appBarConfigure = appBarConfigure
+                )
+            }
+            composable(
+                route = QRCodesFeature.RequestHistory.route
+            ) {
+                RequestHistoryScreen.Content(
+                    navController = navController,
                     appBarConfigure = appBarConfigure
                 )
             }

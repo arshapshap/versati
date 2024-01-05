@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- QR-code Generation -->
+    <string name="qr_code">QR-code</string>
     <string name="data">Data</string>
     <string name="data_hint">Your data</string>
     <string name="enter_data">Enter data (URL or plain text)</string>
@@ -10,9 +12,11 @@
     <string name="quiet_zone">Quiet zone</string>
     <string name="image_format">Image format</string>
     <string name="uploading_qr_code_error">An error occurred while uploading the QR code</string>
-    <string name="qr_code">QR-code</string>
     <string name="create_qr_code">Create QR-code</string>
     <string name="show_advanced_options">Show advanced options</string>
     <string name="advanced_options">Advanced options</string>
-    <string name="open_requests_history">Open requests history</string>
+    <string name="open_request_history">Open requests history</string>
+
+    <!-- RequestHistory -->
+    <string name="request_history">QR-codes history</string>
 </resources>

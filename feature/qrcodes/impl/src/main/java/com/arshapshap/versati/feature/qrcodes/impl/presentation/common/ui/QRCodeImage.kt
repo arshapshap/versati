@@ -1,7 +1,6 @@
-package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.elements
+package com.arshapshap.versati.feature.qrcodes.impl.presentation.common.ui
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.CircularProgressIndicator
@@ -23,7 +22,7 @@ import com.arshapshap.versati.feature.qrcodes.impl.R
 internal fun QRCodeImage(
     modifier: Modifier,
     imageUrl: String,
-    onSuccess: () -> Unit
+    onSuccess: () -> Unit = { }
 ) {
     SubcomposeAsyncImage(
         model = ImageRequest.Builder(LocalContext.current)
@@ -35,7 +34,7 @@ internal fun QRCodeImage(
     ) {
         val state = painter.state
         if (state is AsyncImagePainter.State.Loading)
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center)
                 )

@@ -1,7 +1,7 @@
 package com.arshapshap.versati.feature.qrcodes.impl.data.repository
 
 import com.arshapshap.versati.core.database.dao.qrcodesfeature.QRCodeRequestDao
-import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeOptions
+import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeInfo
 import com.arshapshap.versati.feature.qrcodes.api.domain.repository.QRCodesRepository
 import com.arshapshap.versati.feature.qrcodes.impl.data.mapper.QRCodesMapper
 
@@ -12,14 +12,15 @@ internal class QRCodesRepositoryImpl(
     private val mapper: QRCodesMapper,
 ) : QRCodesRepository {
 
-    override suspend fun createQRCodeImageUrl(options: QRCodeOptions): String {
-        dao.add(mapper.mapToLocal(options, 0))
+    override suspend fun createQRCodeImageUrl(options: QRCodeInfo): String {
+        val imageUrl = mapper.createImageUrl(options)
+        dao.add(mapper.mapToLocal(options, 0, imageUrl))
         if (dao.getCount() > MAX_HISTORY_SIZE)
             dao.deleteOldest()
-        return mapper.createImageUrl(options)
+        return imageUrl
     }
 
-    override suspend fun getRequestHistory(): List<QRCodeOptions> {
+    override suspend fun getRequestHistory(): List<QRCodeInfo> {
         return dao.getAll().map { mapper.mapFromLocal(it) }
     }
 }

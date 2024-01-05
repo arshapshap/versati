@@ -1,4 +1,4 @@
-package com.arshapshap.versati.core.navigation
+package com.arshapshap.versati.core.navigation.state
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable

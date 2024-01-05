@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
-import com.arshapshap.versati.core.navigation.AppBarState
 import com.arshapshap.versati.core.navigation.AuthFeature
+import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.auth.impl.presentation.signin.contract.SignInSideEffect
 import org.koin.androidx.compose.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
