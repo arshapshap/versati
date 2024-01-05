@@ -6,8 +6,8 @@ import com.arshapshap.versati.feature.auth.api.domain.usecase.RegisterUseCase
 import com.arshapshap.versati.feature.auth.api.domain.usecase.SignInUseCase
 import com.arshapshap.versati.feature.auth.impl.data.mapper.AuthMapper
 import com.arshapshap.versati.feature.auth.impl.data.repository.AuthRepositoryImpl
-import com.arshapshap.versati.feature.auth.impl.presentation.register.RegisterScreenModel
-import com.arshapshap.versati.feature.auth.impl.presentation.signin.SignInScreenModel
+import com.arshapshap.versati.feature.auth.impl.presentation.register.RegisterViewModel
+import com.arshapshap.versati.feature.auth.impl.presentation.signin.SignInViewModel
 import org.koin.dsl.module
 
 val authFeatureModule = module {
@@ -21,6 +21,6 @@ val authFeatureModule = module {
     factory<RegisterUseCase> { RegisterUseCase(get<AuthRepository>()) }
 
     // Presentation
-    factory<SignInScreenModel> { SignInScreenModel(get<SignInUseCase>()) }
-    factory<RegisterScreenModel> { RegisterScreenModel(get<RegisterUseCase>()) }
+    factory<SignInViewModel> { SignInViewModel(get<SignInUseCase>()) }
+    factory<RegisterViewModel> { RegisterViewModel(get<RegisterUseCase>()) }
 }

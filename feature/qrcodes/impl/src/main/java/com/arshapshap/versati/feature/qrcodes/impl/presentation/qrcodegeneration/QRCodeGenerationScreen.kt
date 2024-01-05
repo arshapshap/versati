@@ -4,23 +4,22 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import cafe.adriel.voyager.androidx.AndroidScreen
-import cafe.adriel.voyager.koin.getScreenModel
 import com.arshapshap.versati.core.utils.ImageLoadingHelper
 import com.arshapshap.versati.core.utils.SharingHelper
 import com.arshapshap.versati.core.utils.StorageHelper
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract.QRCodeGenerationSideEffect
+import org.koin.androidx.compose.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
 
 internal class QRCodeGenerationScreen(
     private val id: Long
-) : AndroidScreen() {
+) {
 
     @Composable
-    override fun Content() {
-        val screenModel = getScreenModel<QRCodeGenerationScreenModel>()
+    fun Content() {
+        val screenModel = getViewModel<QRCodeGenerationViewModel>()
         val state by screenModel.collectAsState()
 
         val context = LocalContext.current
@@ -35,7 +34,7 @@ internal class QRCodeGenerationScreen(
             }
         }
 
-        QRCodeGenerationContent(state = state, screenModel = screenModel)
+        QRCodeGenerationContent(state = state, viewModel = screenModel)
     }
 
     private suspend fun shareQRCode(context: Context, imageUrl: String, format: String) {

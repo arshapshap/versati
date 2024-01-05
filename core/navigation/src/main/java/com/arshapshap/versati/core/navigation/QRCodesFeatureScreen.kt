@@ -1,8 +1,6 @@
 package com.arshapshap.versati.core.navigation
 
-import cafe.adriel.voyager.core.registry.ScreenProvider
-
-sealed class QRCodesFeatureScreen : ScreenProvider {
+sealed class QRCodesFeatureScreen {
 
     data class QRCodeGeneration(val id: Long) : QRCodesFeatureScreen()
 

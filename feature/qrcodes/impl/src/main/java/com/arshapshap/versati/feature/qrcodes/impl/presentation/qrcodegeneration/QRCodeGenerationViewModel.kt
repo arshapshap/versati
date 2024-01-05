@@ -1,8 +1,8 @@
 package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration
 
 import android.text.TextUtils
-import cafe.adriel.voyager.core.model.ScreenModel
-import cafe.adriel.voyager.core.model.coroutineScope
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeOptions
 import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.CreateQRCodeUseCase
@@ -21,14 +21,13 @@ import kotlin.math.min
 
 private typealias IntentContext = SimpleSyntax<QRCodeGenerationState, QRCodeGenerationSideEffect>
 
-internal class QRCodeGenerationScreenModel(
+internal class QRCodeGenerationViewModel(
     private val createQRCodeUseCase: CreateQRCodeUseCase
-) : ContainerHost<QRCodeGenerationState, QRCodeGenerationSideEffect>, ScreenModel {
+) : ContainerHost<QRCodeGenerationState, QRCodeGenerationSideEffect>, ViewModel() {
 
     override val container =
-        coroutineScope.container<QRCodeGenerationState, QRCodeGenerationSideEffect>(
-            QRCodeGenerationState()
-        )
+        viewModelScope
+            .container<QRCodeGenerationState, QRCodeGenerationSideEffect>(QRCodeGenerationState())
 
     fun createQRCode() = intent {
         reduce { state.copy(qrCodeImageUrl = "", success = false) }

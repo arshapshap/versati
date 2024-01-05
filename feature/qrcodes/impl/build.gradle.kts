@@ -60,6 +60,5 @@ dependencies {
     implementation(libs.koin)
     implementation(libs.koin.compose)
     implementation(libs.bundles.orbit)
-    implementation(libs.bundles.voyager)
     testImplementation(libs.bundles.test)
 }

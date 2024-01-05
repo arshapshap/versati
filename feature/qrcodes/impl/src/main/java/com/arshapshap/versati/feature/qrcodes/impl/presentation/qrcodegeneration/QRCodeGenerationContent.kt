@@ -41,19 +41,19 @@ import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration
 @Composable
 internal fun QRCodeGenerationContent(
     state: QRCodeGenerationState,
-    screenModel: QRCodeGenerationScreenModel
+    viewModel: QRCodeGenerationViewModel
 ) {
     QRCodeGenerationContent(
         state = state,
-        onDataChange = screenModel::updateData,
-        onSizeChange = screenModel::updateSize,
-        onQRCodeColorChange = screenModel::updateColor,
-        onBackgroundColorChange = screenModel::updateBackgroundColor,
-        onQuietZoneChange = screenModel::updateQuietZone,
-        onFormatChange = screenModel::updateFormat,
-        onCreateClick = screenModel::createQRCode,
-        onShareClick = screenModel::shareQRCode,
-        onSuccessfulLoading = screenModel::setSuccess
+        onDataChange = viewModel::updateData,
+        onSizeChange = viewModel::updateSize,
+        onQRCodeColorChange = viewModel::updateColor,
+        onBackgroundColorChange = viewModel::updateBackgroundColor,
+        onQuietZoneChange = viewModel::updateQuietZone,
+        onFormatChange = viewModel::updateFormat,
+        onCreateClick = viewModel::createQRCode,
+        onShareClick = viewModel::shareQRCode,
+        onSuccessfulLoading = viewModel::setSuccess
     )
 }
 

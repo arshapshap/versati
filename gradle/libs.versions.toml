@@ -31,7 +31,6 @@ org-jetbrains-kotlin = "1.9.21"
 retrofit-core = "2.9.0"
 retrofit-kotlinx-serialization-converter = "1.0.0"
 room = "2.6.1"
-voyager = "1.0.0-rc07"
 
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
@@ -74,10 +73,6 @@ retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "re
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
-voyager-androidx = { group = "cafe.adriel.voyager", name = "voyager-androidx", version.ref = "voyager" }
-voyager-koin = { group = "cafe.adriel.voyager", name = "voyager-koin", version.ref = "voyager" }
-voyager-navigator = { group = "cafe.adriel.voyager", name = "voyager-navigator", version.ref = "voyager" }
-voyager-transitions = { group = "cafe.adriel.voyager", name = "voyager-transitions", version.ref = "voyager" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
@@ -92,4 +87,3 @@ compose-ui = ["compose-material3", "compose-ui", "compose-ui-graphics", "compose
 orbit = ["orbit-compose", "orbit-core"]
 room = ["room-ktx", "room-runtime"]
 test = ["junit", "junit-jupiter", "mockk"]
-voyager = ["voyager-androidx", "voyager-koin", "voyager-navigator", "voyager-transitions"]

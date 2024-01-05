@@ -2,28 +2,23 @@ package com.arshapshap.versati.feature.auth.impl.presentation.register
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import cafe.adriel.voyager.androidx.AndroidScreen
-import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import com.arshapshap.versati.feature.auth.impl.presentation.register.contract.RegisterSideEffect
+import org.koin.androidx.compose.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
-internal class RegisterScreen : AndroidScreen() {
+internal class RegisterScreen {
 
     @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
-
-        val screenModel = getScreenModel<RegisterScreenModel>()
-        val state by screenModel.collectAsState()
-        screenModel.collectSideEffect {
+    fun Content() {
+        val viewModel = getViewModel<RegisterViewModel>()
+        val state by viewModel.collectAsState()
+        viewModel.collectSideEffect {
             when (it) {
-                RegisterSideEffect.NavigateToSignIn -> navigator.pop()
+                RegisterSideEffect.NavigateToSignIn -> TODO()
             }
         }
 
-        RegisterContent(state = state, screenModel = screenModel)
+        RegisterContent(state = state, viewModel = viewModel)
     }
 }

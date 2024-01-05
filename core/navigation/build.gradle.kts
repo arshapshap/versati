@@ -22,5 +22,4 @@ android {
 
 dependencies {
 
-    implementation(libs.bundles.voyager)
 }

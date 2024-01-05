@@ -34,13 +34,16 @@ import com.arshapshap.versati.feature.auth.impl.presentation.common.ui.PasswordT
 import com.arshapshap.versati.feature.auth.impl.presentation.register.contract.RegisterState
 
 @Composable
-internal fun RegisterContent(state: RegisterState, screenModel: RegisterScreenModel) {
+internal fun RegisterContent(
+    state: RegisterState,
+    viewModel: RegisterViewModel
+) {
     RegisterContent(
         state = state,
-        onUpdateEmail = screenModel::updateEmail,
-        onUpdatePassword = screenModel::updatePassword,
-        onRegister = screenModel::register,
-        onSwitchToSignIn = screenModel::navigateToSignIn
+        onUpdateEmail = viewModel::updateEmail,
+        onUpdatePassword = viewModel::updatePassword,
+        onRegister = viewModel::register,
+        onSwitchToSignIn = viewModel::navigateToSignIn
     )
 }
 

@@ -2,31 +2,23 @@ package com.arshapshap.versati.feature.auth.impl.presentation.signin
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import cafe.adriel.voyager.androidx.AndroidScreen
-import cafe.adriel.voyager.core.registry.rememberScreen
-import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import com.arshapshap.versati.core.navigation.AuthFeatureScreen
 import com.arshapshap.versati.feature.auth.impl.presentation.signin.contract.SignInSideEffect
+import org.koin.androidx.compose.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
-internal class SignInScreen : AndroidScreen() {
+internal class SignInScreen {
 
     @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
-        val registerScreen = rememberScreen(AuthFeatureScreen.Register)
-
-        val screenModel = getScreenModel<SignInScreenModel>()
+    fun Content() {
+        val screenModel = getViewModel<SignInViewModel>()
         val state by screenModel.collectAsState()
         screenModel.collectSideEffect {
             when (it) {
-                SignInSideEffect.NavigateToRegistration -> navigator.push(registerScreen)
+                SignInSideEffect.NavigateToRegistration -> TODO()
             }
         }
 
-        SignInContent(state = state, screenModel = screenModel)
+        SignInContent(state = state, viewModel = screenModel)
     }
 }
