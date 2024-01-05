@@ -18,18 +18,23 @@ object SignInScreen {
         navController: NavHostController,
         appBarConfigure: (AppBarState) -> Unit
     ) {
-        val screenModel = getViewModel<SignInViewModel>()
-        val state by screenModel.collectAsState()
-        screenModel.collectSideEffect {
+        val viewModel = getViewModel<SignInViewModel>()
+        val state by viewModel.collectAsState()
+        viewModel.collectSideEffect {
             when (it) {
                 SignInSideEffect.NavigateToRegistration -> navController.navigate(AuthFeature.Register.destination())
+                SignInSideEffect.NavigateToAccount -> navController.navigate(AuthFeature.Account.destination()) {
+                    popUpTo(AuthFeature.SignIn.route) {
+                        inclusive = true
+                    }
+                }
             }
         }
 
         SideEffect {
             appBarConfigure(getAppBarState())
         }
-        SignInContent(state = state, viewModel = screenModel)
+        SignInContent(state = state, viewModel = viewModel)
     }
 
     private fun getAppBarState() = AppBarState(

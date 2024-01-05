@@ -3,7 +3,7 @@ package com.arshapshap.versati.feature.auth.api.domain.usecase
 import com.arshapshap.versati.feature.auth.api.domain.model.User
 import com.arshapshap.versati.feature.auth.api.domain.repository.AuthRepository
 
-class GetCurrentUserUseCase internal constructor(
+class GetCurrentUserUseCase(
     private val repository: AuthRepository
 ) {
 

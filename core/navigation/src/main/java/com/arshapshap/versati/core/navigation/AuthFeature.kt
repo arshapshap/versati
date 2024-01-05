@@ -4,9 +4,9 @@ private const val baseRoute = "auth_feature"
 
 sealed interface AuthFeature {
 
-    data object SignIn : AuthFeature {
+    data object Account : AuthFeature {
 
-        const val route = "$baseRoute/sign_in"
+        const val route = "$baseRoute/account"
 
         fun destination() = route
     }
@@ -14,6 +14,13 @@ sealed interface AuthFeature {
     data object Register : AuthFeature {
 
         const val route = "$baseRoute/register"
+
+        fun destination() = route
+    }
+
+    data object SignIn : AuthFeature {
+
+        const val route = "$baseRoute/sign_in"
 
         fun destination() = route
     }

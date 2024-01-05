@@ -26,8 +26,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.arshapshap.versati.core.designsystem.theme.ButtonHeight
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
 import com.arshapshap.versati.feature.qrcodes.impl.R
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.common.ui.QRCodeImage
@@ -115,7 +117,7 @@ private fun QRCodeGenerationContent(
         Row(
             modifier = Modifier
                 .padding(vertical = 8.dp)
-                .height(70.dp)
+                .height(ButtonHeight)
         ) {
             Button(
                 onClick = onCreateClick,
@@ -125,7 +127,8 @@ private fun QRCodeGenerationContent(
             ) {
                 Text(
                     text = stringResource(R.string.create_qr_code),
-                    style = MaterialTheme.typography.headlineSmall
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold
                 )
             }
             if (state.success) {

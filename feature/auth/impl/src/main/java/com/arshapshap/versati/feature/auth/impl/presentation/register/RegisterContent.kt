@@ -3,6 +3,7 @@ package com.arshapshap.versati.feature.auth.impl.presentation.register
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.arshapshap.versati.core.designsystem.theme.ButtonHeight
 import com.arshapshap.versati.feature.auth.impl.R
 import com.arshapshap.versati.feature.auth.impl.presentation.common.contract.PasswordFieldError
 import com.arshapshap.versati.feature.auth.impl.presentation.common.ui.EmailTextField
@@ -40,8 +42,8 @@ internal fun RegisterContent(
 ) {
     RegisterContent(
         state = state,
-        onUpdateEmail = viewModel::updateEmail,
-        onUpdatePassword = viewModel::updatePassword,
+        onEmailChange = viewModel::updateEmail,
+        onPasswordChange = viewModel::updatePassword,
         onRegister = viewModel::register,
         onSwitchToSignIn = viewModel::navigateToSignIn
     )
@@ -50,8 +52,8 @@ internal fun RegisterContent(
 @Composable
 private fun RegisterContent(
     state: RegisterState,
-    onUpdateEmail: (String) -> Unit,
-    onUpdatePassword: (String) -> Unit,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
     onRegister: () -> Unit,
     onSwitchToSignIn: () -> Unit
 ) {
@@ -76,6 +78,7 @@ private fun RegisterContent(
             .padding(horizontal = 16.dp)
             .alpha(if (state.loading || state.success) 0.5f else 1f)
     ) {
+        Spacer(Modifier.weight(1f))
         Text(
             text = stringResource(R.string.registration_label),
             style = MaterialTheme.typography.displayLarge,
@@ -84,10 +87,10 @@ private fun RegisterContent(
             fontWeight = FontWeight.Black
         )
         Form(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.weight(10f),
             state = state,
-            onUpdateEmail = onUpdateEmail,
-            onUpdatePassword = onUpdatePassword,
+            onEmailChange = onEmailChange,
+            onPasswordChange = onPasswordChange,
             onRegister = onRegister,
             onSwitchToSignIn = onSwitchToSignIn
         )
@@ -98,8 +101,8 @@ private fun RegisterContent(
 private fun Form(
     modifier: Modifier = Modifier,
     state: RegisterState,
-    onUpdateEmail: (String) -> Unit,
-    onUpdatePassword: (String) -> Unit,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
     onRegister: () -> Unit,
     onSwitchToSignIn: () -> Unit
 ) {
@@ -113,7 +116,7 @@ private fun Form(
             errorText = state.emailFieldError?.res?.let { stringResource(id = it) } ?: "",
             modifier = Modifier
                 .padding(vertical = 8.dp),
-            onValueChange = onUpdateEmail,
+            onValueChange = onEmailChange,
             enabled = !state.loading && !state.success
         )
         PasswordTextField(text = state.password,
@@ -123,14 +126,14 @@ private fun Form(
                 ?: "",
             modifier = Modifier
                 .padding(vertical = 8.dp),
-            onValueChange = onUpdatePassword,
+            onValueChange = onPasswordChange,
             enabled = !state.loading && !state.success
         )
         Button(
             onClick = onRegister,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(70.dp)
+                .height(ButtonHeight)
                 .padding(vertical = 8.dp),
             enabled = !state.loading && !state.success
         ) {
@@ -189,8 +192,8 @@ private fun SignInContentPreview() {
     )
     RegisterContent(
         state = state,
-        onUpdateEmail = { },
-        onUpdatePassword = { },
+        onEmailChange = { },
+        onPasswordChange = { },
         onRegister = { },
         onSwitchToSignIn = { }
     )

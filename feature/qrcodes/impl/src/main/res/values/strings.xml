@@ -3,8 +3,7 @@
     <!-- QR-code Generation -->
     <string name="qr_code">QR-code</string>
     <string name="data">Data</string>
-    <string name="data_hint">Your data</string>
-    <string name="enter_data">Enter data (URL or plain text)</string>
+    <string name="data_hint">URL or plain text</string>
     <string name="width">Width</string>
     <string name="height">Height</string>
     <string name="qr_code_color">QR-code color</string>

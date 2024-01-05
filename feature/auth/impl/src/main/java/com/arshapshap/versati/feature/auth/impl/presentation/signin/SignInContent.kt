@@ -3,6 +3,7 @@ package com.arshapshap.versati.feature.auth.impl.presentation.signin
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.arshapshap.versati.core.designsystem.theme.ButtonHeight
 import com.arshapshap.versati.feature.auth.impl.R
 import com.arshapshap.versati.feature.auth.impl.presentation.common.ui.EmailTextField
 import com.arshapshap.versati.feature.auth.impl.presentation.common.ui.PasswordTextField
@@ -75,6 +77,7 @@ private fun SignInContent(
             .padding(horizontal = 16.dp)
             .alpha(if (state.loading || state.success) 0.5f else 1f)
     ) {
+        Spacer(Modifier.weight(1f))
         Text(
             text = stringResource(R.string.authorization_label),
             style = MaterialTheme.typography.displayLarge,
@@ -83,7 +86,7 @@ private fun SignInContent(
             fontWeight = FontWeight.Black
         )
         Form(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.weight(10f),
             state = state,
             onEmailChange = onEmailChange,
             onPasswordChange = onPasswordChange,
@@ -129,7 +132,7 @@ private fun Form(
             onClick = onSignIn,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(70.dp)
+                .height(ButtonHeight)
                 .padding(vertical = 8.dp),
             enabled = !state.loading && !state.success
         ) {

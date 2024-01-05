@@ -40,7 +40,7 @@ internal class RegisterViewModel(
 
         if (result.isSuccessful) {
             reduce { state.copy(success = true) }
-            //TODO("Уйти с экрана регистрации через несколько секунд")
+            postSideEffect(RegisterSideEffect.NavigateToAccount)
         } else {
             handleRegisterError(result.error!!)
         }

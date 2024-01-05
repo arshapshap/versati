@@ -39,7 +39,7 @@ internal class SignInViewModel(
 
         if (result.isSuccessful) {
             reduce { state.copy(success = true) }
-            //TODO("Уйти с экрана авторизации через несколько секунд")
+            postSideEffect(SignInSideEffect.NavigateToAccount)
         } else {
             handleSignInError(result.error!!)
         }
