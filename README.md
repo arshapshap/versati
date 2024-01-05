@@ -25,6 +25,12 @@
 <image src='https://github.com/arshapshap/versati/assets/48681339/9bd5e737-ae78-4e25-9029-cb6bd6cbf794' width=200 />
 <image src='https://github.com/arshapshap/versati/assets/48681339/9449e3ea-b0a3-4b7d-8c0a-ec72a48edb49' width=200 />
 
+## Скачивание
+      
+  * APK-файл доступен для скачивания в разделе Releases:
+
+    - [v0.1](https://github.com/arshapshap/versati/releases/tag/v0.1)
+
 ## Архитектура
 * Clean Architecture
 * MVI
