@@ -26,9 +26,7 @@ import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.presentation.elements.BottomBar
 import com.arshapshap.versati.presentation.elements.TopBar
 import com.arshapshap.versati.presentation.navigation.MainNavHost
-import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.analytics
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
@@ -37,8 +35,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        analytics = Firebase.analytics
 
         setContent {
             val navController = rememberNavController()

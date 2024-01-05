@@ -56,6 +56,7 @@ android {
 dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:firebase"))
     implementation(project(":core:navigation"))
     implementation(project(":core:network"))
     implementation(project(":core:utils"))
@@ -70,6 +71,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.messaging)
     implementation(libs.firebase.perf)
     implementation(platform(libs.firebase.bom))
     implementation(libs.koin)
