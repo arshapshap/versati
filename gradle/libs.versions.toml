@@ -12,9 +12,7 @@ coil = "2.5.0"
 compose-bom = "2023.10.01"
 core-ktx = "1.12.0"
 espresso-core = "3.5.1"
-firebase-auth = "22.3.0"
 firebase-bom = "32.7.0"
-firebase-database = "20.3.0"
 google-services = "4.4.0"
 junit = "4.13.2"
 junit-jupiter = "5.8.2"
@@ -51,9 +49,9 @@ compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
-firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebase-auth" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
-firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebase-database" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database" }
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "google-services" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit-jupiter" }
