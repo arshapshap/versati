@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeInfo
 import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.CreateQRCodeUseCase
+import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.GetQRCodeInfoById
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract.QRCodeGenerationSideEffect
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract.QRCodeGenerationState
 import okhttp3.internal.toHexString
@@ -22,19 +23,28 @@ import kotlin.math.min
 private typealias IntentContext = SimpleSyntax<QRCodeGenerationState, QRCodeGenerationSideEffect>
 
 internal class QRCodeGenerationViewModel(
-    private val createQRCodeUseCase: CreateQRCodeUseCase
+    qrCodeInfoId: Long,
+    private val createQRCodeUseCase: CreateQRCodeUseCase,
+    private val getQRCodeInfoById: GetQRCodeInfoById
 ) : ContainerHost<QRCodeGenerationState, QRCodeGenerationSideEffect>, ViewModel() {
 
     override val container =
         viewModelScope
             .container<QRCodeGenerationState, QRCodeGenerationSideEffect>(QRCodeGenerationState())
 
+    init {
+        if (qrCodeInfoId != 0L)
+            loadQRCodeInfo(qrCodeInfoId)
+    }
+
     fun createQRCode() = intent {
+        if (!state.optionsChanged) return@intent
+
         reduce { state.copy(qrCodeImageUrl = "", success = false) }
         if (!checkIfOptionsValid()) return@intent
 
         val result = createQRCodeUseCase(getQRCodeOptions())
-        reduce { state.copy(qrCodeImageUrl = result) }
+        reduce { state.copy(qrCodeImageUrl = result, optionsChanged = false) }
     }
 
     fun shareQRCode() = intent {
@@ -51,12 +61,12 @@ internal class QRCodeGenerationViewModel(
 
     @OptIn(OrbitExperimental::class)
     fun updateData(data: String) = blockingIntent {
-        reduce { state.copy(data = data) }
+        reduce { state.copy(data = data, optionsChanged = true) }
     }
 
     @OptIn(OrbitExperimental::class)
     fun updateSize(size: String) = blockingIntent {
-        reduce { state.copy(size = size.toIntOrNull()) }
+        reduce { state.copy(size = size.toIntOrNull(), optionsChanged = true) }
     }
 
     @OptIn(OrbitExperimental::class)
@@ -64,7 +74,8 @@ internal class QRCodeGenerationViewModel(
         reduce {
             state.copy(
                 qrCodeColorString = color,
-                qrCodeColor = color.toIntOrNull(16)
+                qrCodeColor = color.toIntOrNull(16),
+                optionsChanged = true
             )
         }
     }
@@ -74,25 +85,42 @@ internal class QRCodeGenerationViewModel(
         reduce {
             state.copy(
                 backgroundColorString = color,
-                backgroundColor = color.toIntOrNull(16)
+                backgroundColor = color.toIntOrNull(16),
+                optionsChanged = true
             )
         }
     }
 
     @OptIn(OrbitExperimental::class)
     fun updateQuietZone(quietZone: String) = blockingIntent {
-        reduce { state.copy(quietZone = quietZone.toIntOrNull()) }
+        reduce { state.copy(quietZone = quietZone.toIntOrNull(), optionsChanged = true) }
     }
 
     @OptIn(OrbitExperimental::class)
     fun updateFormat(format: ImageFormat) = blockingIntent {
-        reduce { state.copy(format = format) }
+        reduce { state.copy(format = format, optionsChanged = true) }
+    }
+
+    private fun loadQRCodeInfo(id: Long) = intent {
+        val qrCodeInfoById = getQRCodeInfoById(id) ?: return@intent
+        reduce {
+            state.copy(
+                data = qrCodeInfoById.data,
+                size = qrCodeInfoById.size,
+                qrCodeColor = qrCodeInfoById.color,
+                backgroundColor = qrCodeInfoById.backgroundColor,
+                quietZone = qrCodeInfoById.quietZone,
+                format = qrCodeInfoById.format,
+                qrCodeImageUrl = qrCodeInfoById.imageUrl,
+                optionsChanged = false
+            )
+        }
     }
 
     private suspend fun IntentContext.checkIfOptionsValid(): Boolean {
         reduce {
             state.copy(
-                size = validateSize(state.size, state.format),
+                size = validateSize(state.size),
                 showDataFieldError = TextUtils.isEmpty(state.data),
                 qrCodeColorString = state.qrCodeColor?.toHexString()?.padStart(6, '0')
                     ?: state.qrCodeColorString,
@@ -106,7 +134,7 @@ internal class QRCodeGenerationViewModel(
         return !state.showDataFieldError && !state.showColorFieldError && !state.showBackgroundColorFieldError
     }
 
-    private suspend fun IntentContext.getQRCodeOptions() = QRCodeInfo(
+    private fun IntentContext.getQRCodeOptions() = QRCodeInfo(
         id = 0,
         data = state.data,
         size = state.size ?: 200,
@@ -117,7 +145,7 @@ internal class QRCodeGenerationViewModel(
         imageUrl = ""
     )
 
-    private fun validateSize(size: Int?, format: ImageFormat): Int {
+    private fun validateSize(size: Int?): Int {
         if (size == null || size < 10)
             return 10
         return min(size, 1000)

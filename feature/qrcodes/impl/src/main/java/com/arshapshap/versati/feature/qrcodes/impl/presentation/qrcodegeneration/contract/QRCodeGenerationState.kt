@@ -15,5 +15,6 @@ internal data class QRCodeGenerationState(
     val quietZone: Int? = 1,
     val format: ImageFormat = ImageFormat.PNG,
     val qrCodeImageUrl: String = "",
-    val success: Boolean = false
+    val success: Boolean = false,
+    val optionsChanged: Boolean = true
 )

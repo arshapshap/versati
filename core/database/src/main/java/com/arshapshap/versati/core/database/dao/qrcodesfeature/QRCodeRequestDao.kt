@@ -19,4 +19,7 @@ abstract class QRCodeRequestDao {
 
     @Query("SELECT COUNT(id) FROM QRCodeRequest")
     abstract suspend fun getCount(): Int
+
+    @Query("SELECT * FROM QRCodeRequest WHERE id = :id")
+    abstract suspend fun getById(id: Long): QRCodeRequestLocal?
 }

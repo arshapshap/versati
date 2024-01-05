@@ -18,6 +18,7 @@ import com.arshapshap.versati.core.utils.StorageHelper
 import com.arshapshap.versati.feature.qrcodes.impl.R
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract.QRCodeGenerationSideEffect
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
@@ -30,7 +31,8 @@ object QRCodeGenerationScreen {
         id: Long?,
         appBarConfigure: (AppBarState) -> Unit
     ) {
-        val screenModel = getViewModel<QRCodeGenerationViewModel>()
+        val screenModel =
+            getViewModel<QRCodeGenerationViewModel>(parameters = { parametersOf(id ?: 0) })
         val state by screenModel.collectAsState()
 
         val context = LocalContext.current

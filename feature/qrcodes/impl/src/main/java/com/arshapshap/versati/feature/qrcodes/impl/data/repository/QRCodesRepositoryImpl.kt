@@ -23,4 +23,8 @@ internal class QRCodesRepositoryImpl(
     override suspend fun getRequestHistory(): List<QRCodeInfo> {
         return dao.getAll().map { mapper.mapFromLocal(it) }
     }
+
+    override suspend fun getQRCodeInfoById(id: Long): QRCodeInfo? {
+        return dao.getById(id)?.let { mapper.mapFromLocal(it) }
+    }
 }

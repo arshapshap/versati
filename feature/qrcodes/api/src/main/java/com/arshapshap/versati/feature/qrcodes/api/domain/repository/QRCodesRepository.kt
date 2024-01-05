@@ -7,4 +7,6 @@ interface QRCodesRepository {
     suspend fun createQRCodeImageUrl(options: QRCodeInfo): String
 
     suspend fun getRequestHistory(): List<QRCodeInfo>
+
+    suspend fun getQRCodeInfoById(id: Long): QRCodeInfo?
 }
