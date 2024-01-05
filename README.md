@@ -41,7 +41,12 @@
 * Room
 * Navigation Compose
 * Coil
-* Firebase (authentication)
+* Firebase:
+  - Authentication
+  - Analytics
+  - Crashlytics
+  - Perfomance monitoring
+  - Messaging
 
 ## Используемые API
 * [GoQR](https://goqr.me/api/)
