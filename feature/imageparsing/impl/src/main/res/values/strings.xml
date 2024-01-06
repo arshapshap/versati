@@ -10,4 +10,9 @@
     <string name="language">Language</string>
     <string name="network_error">Network error. Check the connection</string>
     <string name="parsing_error">Couldn\'t read the text from the image</string>
+    <string name="result">Result:</string>
+    <plurals name="parsed_images">
+        <item quantity="one">Parsed image:</item>
+        <item quantity="other">Parsed images:</item>
+    </plurals>
 </resources>
