@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="image_parsing">Image parsing</string>
+    <string name="image_url">Image URL</string>
+    <string name="url">URL</string>
+    <string name="open_parsing_history">Open parsing history</string>
+    <string name="parse_image">Parse image</string>
+    <string name="authorization_error">Authorization error on the server (invalid API key)</string>
+    <string name="timeout_error">The server is not responding</string>
+</resources>

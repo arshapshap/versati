@@ -69,7 +69,7 @@ object QRCodeGenerationScreen {
         actions = {
             IconButton(onClick = onHistoryClick) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_history),
+                    painter = painterResource(id = com.arshapshap.versati.core.designsystem.R.drawable.ic_history),
                     contentDescription = stringResource(R.string.open_request_history)
                 )
             }

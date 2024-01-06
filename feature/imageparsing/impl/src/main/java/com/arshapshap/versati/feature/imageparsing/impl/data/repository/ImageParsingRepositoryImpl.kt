@@ -2,6 +2,7 @@ package com.arshapshap.versati.feature.imageparsing.impl.data.repository
 
 import android.graphics.Bitmap
 import com.arshapshap.versati.core.database.dao.imageparsingfeature.ParsingResultDao
+import com.arshapshap.versati.core.firebase.RemoteConfig
 import com.arshapshap.versati.feature.imageparsing.api.domain.model.Language
 import com.arshapshap.versati.feature.imageparsing.api.domain.model.ParsingResult
 import com.arshapshap.versati.feature.imageparsing.api.domain.repository.ImageParsingRepository
@@ -18,7 +19,7 @@ internal class ImageParsingRepositoryImpl(
 
     override suspend fun parseImageByUrl(url: String, language: Language): ParsingResult {
         val requestBody = mapper.mapToRequestBody(url, language)
-        val response = api.parseImageByUrl(requestBody)
+        val response = api.parseImageByUrl(RemoteConfig.OCRApiKey, requestBody)
         val parsingResult = mapper.mapFromRemote(response, 0)
 
         val id = dao.add(mapper.mapToLocal(parsingResult))

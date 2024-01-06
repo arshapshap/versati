@@ -1,6 +1,7 @@
 package com.arshapshap.versati.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -26,7 +27,12 @@ import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.presentation.elements.BottomBar
 import com.arshapshap.versati.presentation.elements.TopBar
 import com.arshapshap.versati.presentation.navigation.MainNavHost
+import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.analytics
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.remoteConfig
+import com.google.firebase.remoteconfig.remoteConfigSettings
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
@@ -35,6 +41,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        configureFirebase()
 
         setContent {
             val navController = rememberNavController()
@@ -71,6 +79,20 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun configureFirebase() {
+        analytics = Firebase.analytics
+        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 3600
+        }
+        remoteConfig.setConfigSettingsAsync(configSettings)
+        remoteConfig.setDefaultsAsync(com.arshapshap.versati.core.firebase.R.xml.remote_config_defaults)
+        remoteConfig.fetch()
+        remoteConfig.activate()
+        val asd = remoteConfig.getString("OCR_API_KEY")
+        Log.d("TAG", "KEY " + asd)
     }
 
     @Preview

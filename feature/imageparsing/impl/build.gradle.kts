@@ -46,12 +46,18 @@ android {
 dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:firebase"))
+    implementation(project(":core:navigation"))
     implementation(project(":core:network"))
+    implementation(project(":core:utils"))
     implementation(project(":feature:imageparsing:api"))
 
     implementation(libs.appcompat)
+    implementation(libs.coil.compose)
     implementation(libs.core.ktx)
     implementation(libs.koin)
     implementation(libs.koin.compose)
+    implementation(libs.navigation.compose)
+    implementation(libs.bundles.orbit)
     testImplementation(libs.bundles.test)
 }

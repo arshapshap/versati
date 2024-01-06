@@ -9,6 +9,7 @@ import com.arshapshap.versati.feature.imageparsing.impl.BuildConfig
 import com.arshapshap.versati.feature.imageparsing.impl.data.mapper.ImageParsingMapper
 import com.arshapshap.versati.feature.imageparsing.impl.data.network.OCRApi
 import com.arshapshap.versati.feature.imageparsing.impl.data.repository.ImageParsingRepositoryImpl
+import com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing.ParsingViewModel
 import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -29,4 +30,12 @@ val imageParsingFeatureModule = module {
     factory<GetParsingHistoryUseCase> { GetParsingHistoryUseCase(get<ImageParsingRepository>()) }
     factory<ParseImageBitmapUseCase> { ParseImageBitmapUseCase(get<ImageParsingRepository>()) }
     factory<ParseImageByUrlUseCase> { ParseImageByUrlUseCase(get<ImageParsingRepository>()) }
+
+    // Presentation
+    factory<ParsingViewModel> {
+        ParsingViewModel(
+            get<ParseImageByUrlUseCase>(),
+            get<ParseImageBitmapUseCase>()
+        )
+    }
 }
