@@ -22,11 +22,14 @@ internal class ImageParsingRepositoryImpl(
         val response = api.parseImageByUrl(RemoteConfig.OCRApiKey, requestBody)
         val parsingResult = mapper.mapFromRemote(response, 0)
 
-        val id = dao.add(mapper.mapToLocal(parsingResult))
-        if (dao.getCount() > MAX_HISTORY_SIZE)
-            dao.deleteOldest()
+        if (parsingResult.ocrExitCode == 1) {
+            val id = dao.add(mapper.mapToLocal(parsingResult))
+            if (dao.getCount() > MAX_HISTORY_SIZE)
+                dao.deleteOldest()
+            return parsingResult.copy(id = id)
+        }
 
-        return parsingResult.copy(id = id)
+        return parsingResult
     }
 
     override suspend fun parseImageBitmap(image: Bitmap, language: Language): ParsingResult {

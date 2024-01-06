@@ -18,6 +18,12 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeKotlinCompiler.get()
+    }
 }
 
 dependencies {
@@ -25,4 +31,6 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.coil)
     implementation(libs.coil.svg)
+    api(platform(libs.compose.bom))
+    api(libs.bundles.compose.ui)
 }

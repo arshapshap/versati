@@ -1,7 +1,6 @@
 package com.arshapshap.versati.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -61,7 +60,11 @@ class MainActivity : ComponentActivity() {
                             TopBar(
                                 scrollBehavior = scrollBehavior,
                                 state = appBarState,
-                                onProfileClick = { navController.navigate(AuthFeature.Account.destination()) }
+                                onProfileClick = {
+                                    navController.navigate(AuthFeature.Account.destination()) {
+                                        launchSingleTop = true
+                                    }
+                                }
                             )
                         },
                         content = {
@@ -69,11 +72,15 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier.padding(it),
                                 navController = navController
                             ) { state ->
-                                appBarState = state
+                                if (navController.currentDestination?.route == state.currentRoute)
+                                    appBarState = state
                             }
                         },
                         bottomBar = {
-                            BottomBar()
+                            if (appBarState.showBottomBar)
+                                BottomBar(
+                                    navController = navController
+                                )
                         }
                     )
                 }
@@ -89,10 +96,7 @@ class MainActivity : ComponentActivity() {
         }
         remoteConfig.setConfigSettingsAsync(configSettings)
         remoteConfig.setDefaultsAsync(com.arshapshap.versati.core.firebase.R.xml.remote_config_defaults)
-        remoteConfig.fetch()
-        remoteConfig.activate()
-        val asd = remoteConfig.getString("OCR_API_KEY")
-        Log.d("TAG", "KEY " + asd)
+        remoteConfig.fetchAndActivate()
     }
 
     @Preview
@@ -110,7 +114,9 @@ class MainActivity : ComponentActivity() {
 
                 }
             },
-            bottomBar = { BottomBar() }
+            bottomBar = {
+                //BottomBar()
+            }
         )
     }
 }

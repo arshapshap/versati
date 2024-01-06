@@ -41,7 +41,9 @@ object AccountScreen {
     }
 
     private fun getAppBarState(context: Context) = AppBarState(
+        currentRoute = AuthFeature.Account.route,
         title = context.getString(R.string.account),
-        showArrowBack = true
+        showArrowBack = true,
+        showBottomBar = false
     )
 }

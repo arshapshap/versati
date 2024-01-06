@@ -3,15 +3,18 @@ package com.arshapshap.versati.core.navigation
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 
-private const val baseRoute = "imageparsing_feature"
-
 sealed interface ImageParsingFeature {
+
+    companion object {
+
+        const val featureRoute = "imageparsing_feature"
+    }
 
     data object Parsing : ImageParsingFeature {
 
         private const val screen = "parsing"
         const val idArgument = "id"
-        const val route = "$baseRoute/$screen?$idArgument={$idArgument}"
+        const val route = "$featureRoute/$screen?$idArgument={$idArgument}"
 
         val arguments = listOf(
             navArgument(idArgument) {
@@ -20,6 +23,6 @@ sealed interface ImageParsingFeature {
             }
         )
 
-        fun destination(id: Long = 0L) = "$baseRoute/$screen?$idArgument=$id"
+        fun destination(id: Long = 0L) = "$featureRoute/$screen?$idArgument=$id"
     }
 }

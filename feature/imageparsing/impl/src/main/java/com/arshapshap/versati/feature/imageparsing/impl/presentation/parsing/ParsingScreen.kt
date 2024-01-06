@@ -6,6 +6,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
+import com.arshapshap.versati.core.navigation.ImageParsingFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.core.utils.showToast
 import com.arshapshap.versati.feature.imageparsing.impl.R
@@ -30,6 +31,8 @@ object ParsingScreen {
             when (sideEffect) {
                 ParsingSideEffect.AuthorizationError -> context.showToast(R.string.authorization_error)
                 ParsingSideEffect.TimeoutError -> context.showToast(R.string.timeout_error)
+                ParsingSideEffect.NetworkError -> context.showToast(R.string.network_error)
+                ParsingSideEffect.ParsingError -> context.showToast(R.string.parsing_error)
             }
         }
 
@@ -47,6 +50,7 @@ object ParsingScreen {
         context: Context,
         onHistoryClick: () -> Unit = { }
     ) = AppBarState(
+        currentRoute = ImageParsingFeature.Parsing.route,
         title = context.getString(R.string.image_parsing),
         actions = {
 //            IconButton(onClick = onHistoryClick) {

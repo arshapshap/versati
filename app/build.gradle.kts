@@ -79,4 +79,5 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.navigation.compose)
+    implementation(libs.navigation.ui)
 }

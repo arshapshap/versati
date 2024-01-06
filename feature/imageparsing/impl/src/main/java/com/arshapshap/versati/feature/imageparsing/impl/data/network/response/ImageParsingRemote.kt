@@ -6,11 +6,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 internal data class ImageParsingRemote(
     @SerialName("ParsedResults")
-    val parsedResults: List<ParsedImageRemote>,
+    val parsedResults: List<ParsedImageRemote> = listOf(),
     @SerialName("OCRExitCode")
     val ocrExitCode: Int,
     @SerialName("IsErroredOnProcessing")
     val isErroredOnProcessing: Boolean,
     @SerialName("SearchablePDFURL")
-    val searchablePDFURL: String
+    val searchablePDFURL: String = ""
 )

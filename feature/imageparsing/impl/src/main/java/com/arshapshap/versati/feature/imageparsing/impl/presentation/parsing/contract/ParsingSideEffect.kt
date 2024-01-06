@@ -5,4 +5,8 @@ internal sealed interface ParsingSideEffect {
     data object AuthorizationError : ParsingSideEffect
 
     data object TimeoutError : ParsingSideEffect
+
+    data object NetworkError : ParsingSideEffect
+
+    data object ParsingError : ParsingSideEffect
 }

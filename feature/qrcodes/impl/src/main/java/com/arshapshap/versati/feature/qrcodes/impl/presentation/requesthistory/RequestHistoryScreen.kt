@@ -55,6 +55,7 @@ object RequestHistoryScreen {
         showClearButton: Boolean,
         onClearClick: () -> Unit
     ) = AppBarState(
+        currentRoute = QRCodesFeature.RequestHistory.route,
         title = context.getString(R.string.request_history),
         showArrowBack = true,
         actions = {

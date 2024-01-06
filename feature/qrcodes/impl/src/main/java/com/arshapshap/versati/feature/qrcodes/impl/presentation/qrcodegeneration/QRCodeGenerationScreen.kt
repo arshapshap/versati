@@ -65,6 +65,7 @@ object QRCodeGenerationScreen {
         context: Context,
         onHistoryClick: () -> Unit
     ) = AppBarState(
+        currentRoute = QRCodesFeature.QRCodeGeneration.route,
         title = context.getString(R.string.qr_code),
         actions = {
             IconButton(onClick = onHistoryClick) {

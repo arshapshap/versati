@@ -17,6 +17,7 @@ import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 private typealias IntentContext = SimpleSyntax<ParsingState, ParsingSideEffect>
 
@@ -37,12 +38,19 @@ internal class ParsingViewModel(
         try {
             reduce { state.copy(parsingResult = null, loading = true) }
             val result = parseImageByUrlUseCase(state.url, state.language)
-            reduce { state.copy(parsingResult = result, loading = false) }
+
+            if (result.ocrExitCode != 1) {
+                reduce { state.copy(loading = false) }
+                postSideEffect(ParsingSideEffect.ParsingError)
+            } else {
+                reduce { state.copy(parsingResult = result, loading = false) }
+            }
         } catch (e: Exception) {
             reduce { state.copy(loading = false) }
             when (e) {
                 is HttpException -> handleHttpException(e)
                 is SocketTimeoutException -> postSideEffect(ParsingSideEffect.TimeoutError)
+                is UnknownHostException -> postSideEffect(ParsingSideEffect.NetworkError)
             }
         }
     }
