@@ -65,11 +65,12 @@ object QRCodeGenerationScreen {
         context: Context,
         onHistoryClick: () -> Unit
     ) = AppBarState(
+        currentRoute = QRCodesFeature.QRCodeGeneration.route,
         title = context.getString(R.string.qr_code),
         actions = {
             IconButton(onClick = onHistoryClick) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_history),
+                    painter = painterResource(id = com.arshapshap.versati.core.designsystem.R.drawable.ic_history),
                     contentDescription = stringResource(R.string.open_request_history)
                 )
             }

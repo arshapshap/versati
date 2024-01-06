@@ -39,15 +39,15 @@ internal fun QRCodeImage(
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
-        else if (state is AsyncImagePainter.State.Error && imageUrl != "")
-            Icon(
-                imageVector = Icons.Default.Warning,
-                contentDescription = stringResource(R.string.uploading_qr_code_error),
-            )
-        else if (state is AsyncImagePainter.State.Error)
+        else if (imageUrl == "")
             Icon(
                 painter = painterResource(R.drawable.ic_qr_code),
                 contentDescription = stringResource(R.string.qr_code)
+            )
+        else if (state is AsyncImagePainter.State.Error)
+            Icon(
+                imageVector = Icons.Default.Warning,
+                contentDescription = stringResource(R.string.uploading_qr_code_error),
             )
         else {
             onSuccess()

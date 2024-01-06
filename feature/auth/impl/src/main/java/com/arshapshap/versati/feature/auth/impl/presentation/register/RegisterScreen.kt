@@ -38,6 +38,8 @@ object RegisterScreen {
     }
 
     private fun getAppBarState() = AppBarState(
-        showArrowBack = true
+        currentRoute = AuthFeature.Register.route,
+        showArrowBack = true,
+        showBottomBar = false
     )
 }

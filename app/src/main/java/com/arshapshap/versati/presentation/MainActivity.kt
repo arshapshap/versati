@@ -26,7 +26,12 @@ import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.presentation.elements.BottomBar
 import com.arshapshap.versati.presentation.elements.TopBar
 import com.arshapshap.versati.presentation.navigation.MainNavHost
+import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.analytics
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.remoteConfig
+import com.google.firebase.remoteconfig.remoteConfigSettings
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
@@ -35,6 +40,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        configureFirebase()
 
         setContent {
             val navController = rememberNavController()
@@ -53,7 +60,11 @@ class MainActivity : ComponentActivity() {
                             TopBar(
                                 scrollBehavior = scrollBehavior,
                                 state = appBarState,
-                                onProfileClick = { navController.navigate(AuthFeature.Account.destination()) }
+                                onProfileClick = {
+                                    navController.navigate(AuthFeature.Account.destination()) {
+                                        launchSingleTop = true
+                                    }
+                                }
                             )
                         },
                         content = {
@@ -61,16 +72,31 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier.padding(it),
                                 navController = navController
                             ) { state ->
-                                appBarState = state
+                                if (navController.currentDestination?.route == state.currentRoute)
+                                    appBarState = state
                             }
                         },
                         bottomBar = {
-                            BottomBar()
+                            if (appBarState.showBottomBar)
+                                BottomBar(
+                                    navController = navController
+                                )
                         }
                     )
                 }
             }
         }
+    }
+
+    private fun configureFirebase() {
+        analytics = Firebase.analytics
+        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 3600
+        }
+        remoteConfig.setConfigSettingsAsync(configSettings)
+        remoteConfig.setDefaultsAsync(com.arshapshap.versati.core.firebase.R.xml.remote_config_defaults)
+        remoteConfig.fetchAndActivate()
     }
 
     @Preview
@@ -88,7 +114,9 @@ class MainActivity : ComponentActivity() {
 
                 }
             },
-            bottomBar = { BottomBar() }
+            bottomBar = {
+                //BottomBar()
+            }
         )
     }
 }

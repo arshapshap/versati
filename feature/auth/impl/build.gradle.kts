@@ -44,6 +44,7 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:navigation"))
     implementation(project(":core:network"))
+    implementation(project(":core:utils"))
     implementation(project(":feature:auth:api"))
 
     implementation(libs.appcompat)

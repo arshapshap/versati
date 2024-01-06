@@ -1,4 +1,4 @@
-package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.elements
+package com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing.elements
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import com.arshapshap.versati.feature.qrcodes.impl.R
+import com.arshapshap.versati.feature.imageparsing.impl.R
 
 @Composable
 internal fun DataInput(
@@ -42,8 +42,8 @@ internal fun DataInput(
             .fillMaxWidth(),
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri),
-        label = { Text(text = stringResource(R.string.data)) },
-        placeholder = { Text(text = stringResource(R.string.data_hint)) },
+        label = { Text(text = stringResource(R.string.image_url)) },
+        placeholder = { Text(text = stringResource(R.string.url)) },
         onValueChange = onValueChange,
         isError = isError
     )

@@ -38,6 +38,8 @@ object SignInScreen {
     }
 
     private fun getAppBarState() = AppBarState(
-        showArrowBack = true
+        currentRoute = AuthFeature.SignIn.route,
+        showArrowBack = true,
+        showBottomBar = false
     )
 }

@@ -3,16 +3,16 @@ package com.arshapshap.versati.core.navigation
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 
-sealed interface QRCodesFeature {
+sealed interface ImageParsingFeature {
 
     companion object {
 
-        const val featureRoute = "qrcodes_feature"
+        const val featureRoute = "imageparsing_feature"
     }
 
-    data object QRCodeGeneration : QRCodesFeature {
+    data object Parsing : ImageParsingFeature {
 
-        private const val screen = "qrcode_generation"
+        private const val screen = "parsing"
         const val idArgument = "id"
         const val route = "$featureRoute/$screen?$idArgument={$idArgument}"
 
@@ -24,12 +24,5 @@ sealed interface QRCodesFeature {
         )
 
         fun destination(id: Long = 0L) = "$featureRoute/$screen?$idArgument=$id"
-    }
-
-    data object RequestHistory : QRCodesFeature {
-
-        const val route = "$featureRoute/history"
-
-        fun destination() = route
     }
 }
