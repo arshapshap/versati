@@ -43,7 +43,7 @@
       
   * APK-файл доступен для скачивания в разделе Releases:
 
-    - [v1](https://github.com/arshapshap/versati/releases/tag/v1)
+    - [Version 1](https://github.com/arshapshap/versati/releases/tag/v1)
 
 ## Архитектура
 * Clean Architecture
