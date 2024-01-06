@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -105,7 +106,7 @@ private fun Result(
         modifier = modifier
     ) {
         Text(
-            text = "Result:",
+            text = stringResource(R.string.result),
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(vertical = 8.dp)
@@ -127,7 +128,7 @@ private fun Result(
             }
         }
         Text(
-            text = "Parsed images:",
+            text = pluralStringResource(R.plurals.parsed_images, result.parsedResults.size),
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier
