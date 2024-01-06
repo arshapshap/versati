@@ -53,6 +53,7 @@ dependencies {
     implementation(project(":feature:imageparsing:api"))
 
     implementation(libs.appcompat)
+    implementation(libs.bouquet)
     implementation(libs.coil.compose)
     implementation(libs.core.ktx)
     implementation(libs.koin)

@@ -2,6 +2,7 @@ package com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.arshapshap.versati.feature.imageparsing.api.domain.model.Language
 import com.arshapshap.versati.feature.imageparsing.api.domain.usecase.ParseImageBitmapUseCase
 import com.arshapshap.versati.feature.imageparsing.api.domain.usecase.ParseImageByUrlUseCase
 import com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing.contract.ParsingSideEffect
@@ -55,5 +56,10 @@ internal class ParsingViewModel(
     @OptIn(OrbitExperimental::class)
     fun updateUrl(url: String) = blockingIntent {
         reduce { state.copy(url = url, showUrlFieldError = false) }
+    }
+
+    @OptIn(OrbitExperimental::class)
+    fun updateLanguage(language: Language) = blockingIntent {
+        reduce { state.copy(language = language) }
     }
 }

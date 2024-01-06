@@ -1,4 +1,4 @@
-package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.elements
+package com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing.elements
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -8,40 +8,39 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.arshapshap.versati.core.designsystem.elements.DropdownInput
-import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
-import com.arshapshap.versati.feature.qrcodes.impl.R
+import com.arshapshap.versati.feature.imageparsing.api.domain.model.Language
+import com.arshapshap.versati.feature.imageparsing.impl.R
 
 @Composable
-internal fun FormatInput(
+internal fun LanguageInput(
     modifier: Modifier,
-    format: ImageFormat,
-    onValueChange: (ImageFormat) -> Unit
+    language: Language,
+    onValueChange: (Language) -> Unit
 ) {
     DropdownInput(
         modifier = modifier,
-        valueString = format.name,
+        valueString = language.name,
         onSelect = {
-            onValueChange(ImageFormat.valueOf(it))
+            onValueChange(Language.valueOf(it))
         },
-        entries = ImageFormat.entries.map { it.name },
+        entries = Language.entries.map { it.name },
         leadingIcon = {
-
             Icon(
-                painter = painterResource(R.drawable.ic_file),
+                painter = painterResource(R.drawable.ic_language),
                 tint = MaterialTheme.colorScheme.outline,
                 contentDescription = null
             )
         },
-        label = stringResource(R.string.image_format)
+        label = stringResource(R.string.language)
     )
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun FormatInputPreview() {
-    FormatInput(
+    LanguageInput(
         modifier = Modifier,
-        format = ImageFormat.PNG,
+        language = Language.English,
         onValueChange = { }
     )
 }

@@ -1,31 +1,32 @@
 package com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.arshapshap.versati.core.designsystem.theme.ButtonHeight
+import com.arshapshap.versati.feature.imageparsing.api.domain.model.Language
 import com.arshapshap.versati.feature.imageparsing.api.domain.model.ParsedImage
 import com.arshapshap.versati.feature.imageparsing.api.domain.model.ParsingResult
 import com.arshapshap.versati.feature.imageparsing.impl.R
 import com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing.contract.ParsingState
 import com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing.elements.DataInput
+import com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing.elements.LanguageInput
+import com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing.elements.ParsedImage
 
 @Composable
 internal fun ParsingContent(
@@ -35,6 +36,7 @@ internal fun ParsingContent(
     ParsingContent(
         state = state,
         onUrlChange = viewModel::updateUrl,
+        onLanguageChange = viewModel::updateLanguage,
         onParseClick = viewModel::parseImage
     )
 }
@@ -43,11 +45,13 @@ internal fun ParsingContent(
 private fun ParsingContent(
     state: ParsingState,
     onUrlChange: (String) -> Unit = { },
+    onLanguageChange: (Language) -> Unit = { },
     onParseClick: () -> Unit = { }
 ) {
     Column(
         modifier = Modifier
             .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         DataInput(
             modifier = Modifier
@@ -55,6 +59,12 @@ private fun ParsingContent(
             text = state.url,
             onValueChange = onUrlChange,
             isError = state.showUrlFieldError
+        )
+        LanguageInput(
+            modifier = Modifier
+                .padding(vertical = 8.dp),
+            language = state.language,
+            onValueChange = onLanguageChange
         )
         Button(
             onClick = onParseClick,
@@ -69,11 +79,10 @@ private fun ParsingContent(
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold
             )
-        }
-        if (state.loading) {
-            Box(modifier = Modifier.fillMaxSize()) {
+            if (state.loading) {
                 CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier
+                        .padding(start = 16.dp)
                 )
             }
         }
@@ -101,13 +110,35 @@ private fun Result(
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(vertical = 8.dp)
         )
-        SelectionContainer {
-            LazyColumn {
-                items(result.parsedResults) {
-                    Text(text = it.parsedText)
+        SelectionContainer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.outlineVariant,
+                    shape = MaterialTheme.shapes.extraSmall
+                )
+                .padding(8.dp)
+        ) {
+            Column {
+                for (parsedImage in result.parsedResults) {
+                    Text(text = parsedImage.parsedText)
                 }
             }
         }
+        Text(
+            text = "Parsed images:",
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .padding(top = 16.dp, bottom = 8.dp)
+        )
+        ParsedImage(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            parsingResult = result
+        )
     }
 }
 
@@ -123,7 +154,8 @@ private fun Preview() {
                 )
             ),
             searchablePDFURL = "asd"
-        )
+        ),
+        loading = true
     )
     ParsingContent(state = state)
 }
