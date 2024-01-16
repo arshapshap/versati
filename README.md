@@ -9,7 +9,8 @@
   - Формат изображения.
 * Отправка QR-кода в мессенджеры или загрузка на устройство;
 * Просмотр истории генерации QR-кодов;
-* Парсинг текста с изображения по ссылке.
+* Парсинг текста с изображения по ссылке;
+* Просмотр истории парсинга текста.
 
 ## Скриншоты:
 * **Авторизация и регистрация:**
@@ -28,10 +29,11 @@
 <br>
 <br>
 
-* **Парсинг текста:**
+* **Парсинг текста и просмотр истории:**
 
-<image src='https://github.com/arshapshap/versati/assets/48681339/48e0ac3e-c277-4696-a823-78d537bf2064' width=200 />
-<image src='https://github.com/arshapshap/versati/assets/48681339/78de3aee-8502-4c4f-b1e7-5b029edbe079' width=200 />
+<image src='https://github.com/arshapshap/versati/assets/48681339/a6726ae5-10be-4413-add9-09fcb3572416' width=200 />
+<image src='https://github.com/arshapshap/versati/assets/48681339/3049303f-9ad9-4c7d-ba45-621c4cb44270' width=200 />
+<image src='https://github.com/arshapshap/versati/assets/48681339/c426975d-fe38-4264-8071-5b3c82ca877f' width=200 />
 
 Для примера на скриншоте использовалось [это изображение](https://favim.com/pd/s6/orig/61/text-harry-potter-hermione-Favim.com-576725.jpg).
 
