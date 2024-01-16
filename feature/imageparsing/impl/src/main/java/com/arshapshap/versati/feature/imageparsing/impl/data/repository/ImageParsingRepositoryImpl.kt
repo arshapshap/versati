@@ -23,7 +23,8 @@ internal class ImageParsingRepositoryImpl(
         val parsingResult = mapper.mapFromRemote(response, 0)
 
         if (parsingResult.ocrExitCode == 1) {
-            val id = dao.add(mapper.mapToLocal(parsingResult))
+            val local = mapper.mapToLocal(parsingResult)
+            val id = dao.add(local)
             if (dao.getCount() > MAX_HISTORY_SIZE)
                 dao.deleteOldest()
             return parsingResult.copy(id = id)
@@ -38,5 +39,13 @@ internal class ImageParsingRepositoryImpl(
 
     override suspend fun getParsingHistory(): List<ParsingResult> {
         return dao.getAll().map(mapper::mapFromLocal)
+    }
+
+    override suspend fun clearHistory() {
+        dao.deleteAll()
+    }
+
+    override suspend fun getParsingResultById(id: Long): ParsingResult? {
+        return dao.getById(id)?.let { mapper.mapFromLocal(it) }
     }
 }

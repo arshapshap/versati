@@ -4,7 +4,7 @@ import com.arshapshap.versati.core.database.dao.qrcodesfeature.QRCodeRequestDao
 import com.arshapshap.versati.feature.qrcodes.api.domain.repository.QRCodesRepository
 import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.ClearHistoryUseCase
 import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.CreateQRCodeUseCase
-import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.GetQRCodeInfoById
+import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.GetQRCodeInfoByIdUseCase
 import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.GetRequestHistoryUseCase
 import com.arshapshap.versati.feature.qrcodes.impl.data.mapper.QRCodesMapper
 import com.arshapshap.versati.feature.qrcodes.impl.data.repository.QRCodesRepositoryImpl
@@ -25,12 +25,12 @@ val qrCodesFeatureModule = module {
     // Domain
     factory<ClearHistoryUseCase> { ClearHistoryUseCase(get<QRCodesRepository>()) }
     factory<CreateQRCodeUseCase> { CreateQRCodeUseCase(get<QRCodesRepository>()) }
-    factory<GetQRCodeInfoById> { GetQRCodeInfoById(get<QRCodesRepository>()) }
+    factory<GetQRCodeInfoByIdUseCase> { GetQRCodeInfoByIdUseCase(get<QRCodesRepository>()) }
     factory<GetRequestHistoryUseCase> { GetRequestHistoryUseCase(get<QRCodesRepository>()) }
 
     // Presentation
     factory<QRCodeGenerationViewModel> { (id: Long) ->
-        QRCodeGenerationViewModel(id, get<CreateQRCodeUseCase>(), get<GetQRCodeInfoById>())
+        QRCodeGenerationViewModel(id, get<CreateQRCodeUseCase>(), get<GetQRCodeInfoByIdUseCase>())
     }
     factory<RequestHistoryViewModel> {
         RequestHistoryViewModel(get<GetRequestHistoryUseCase>(), get<ClearHistoryUseCase>())

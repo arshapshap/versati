@@ -1,5 +1,6 @@
 package com.arshapshap.versati.presentation.elements
 
+import android.util.Log
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -37,7 +38,10 @@ internal fun TopBar(
             if (state.showArrowBack) {
                 val backPressDispatcher = LocalOnBackPressedDispatcherOwner.current
                 IconButton(
-                    onClick = { backPressDispatcher?.onBackPressedDispatcher?.onBackPressed() },
+                    onClick = {
+                        Log.d("LALAL", state.currentRoute)
+                        backPressDispatcher?.onBackPressedDispatcher?.onBackPressed()
+                    },
                     content = {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,

@@ -11,7 +11,7 @@ import org.koin.androidx.compose.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
-object RegisterScreen {
+internal object RegisterScreen {
 
     @Composable
     fun Content(

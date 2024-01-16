@@ -23,7 +23,7 @@ import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
 
-object QRCodeGenerationScreen {
+internal object QRCodeGenerationScreen {
 
     @Composable
     fun Content(
@@ -31,12 +31,12 @@ object QRCodeGenerationScreen {
         id: Long?,
         appBarConfigure: (AppBarState) -> Unit
     ) {
-        val screenModel =
+        val viewModel =
             getViewModel<QRCodeGenerationViewModel>(parameters = { parametersOf(id ?: 0) })
-        val state by screenModel.collectAsState()
+        val state by viewModel.collectAsState()
 
         val context = LocalContext.current
-        screenModel.collectSideEffect { sideEffect ->
+        viewModel.collectSideEffect { sideEffect ->
             when (sideEffect) {
                 is QRCodeGenerationSideEffect.ShareQRCode ->
                     shareQRCode(
@@ -54,11 +54,11 @@ object QRCodeGenerationScreen {
             appBarConfigure(
                 getAppBarState(
                     context,
-                    screenModel::navigateToRequestHistory
+                    viewModel::navigateToRequestHistory
                 )
             )
         }
-        QRCodeGenerationContent(state = state, viewModel = screenModel)
+        QRCodeGenerationContent(state = state, viewModel = viewModel)
     }
 
     private fun getAppBarState(

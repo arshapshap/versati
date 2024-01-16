@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Image Parsing -->
     <string name="image_parsing">Image parsing</string>
     <string name="image_url">Image URL</string>
     <string name="url">URL</string>
@@ -15,4 +16,11 @@
         <item quantity="one">Parsed image:</item>
         <item quantity="other">Parsed images:</item>
     </plurals>
+
+    <!-- Parsing History -->
+    <string name="parsing_history">Parsing history</string>
+    <string name="clear_history">Clear history</string>
+    <string name="clearing_the_history">Clearing the history</string>
+    <string name="do_you_really_want_to_clear_the_history">Do you really want to clear the history?</string>
+    <string name="parsing_history_empty">The image parsing history is empty</string>
 </resources>

@@ -28,7 +28,7 @@ android {
 
 dependencies {
 
-    implementation(libs.navigation.compose)
+    api(libs.navigation.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose.ui)
 }
