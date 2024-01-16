@@ -3,6 +3,7 @@ package com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arshapshap.versati.feature.imageparsing.api.domain.model.Language
+import com.arshapshap.versati.feature.imageparsing.api.domain.usecase.GetParsingResultByIdUseCase
 import com.arshapshap.versati.feature.imageparsing.api.domain.usecase.ParseImageBitmapUseCase
 import com.arshapshap.versati.feature.imageparsing.api.domain.usecase.ParseImageByUrlUseCase
 import com.arshapshap.versati.feature.imageparsing.impl.presentation.parsing.contract.ParsingSideEffect
@@ -22,13 +23,20 @@ import java.net.UnknownHostException
 private typealias IntentContext = SimpleSyntax<ParsingState, ParsingSideEffect>
 
 internal class ParsingViewModel(
+    parsingResultId: Long,
     private val parseImageByUrlUseCase: ParseImageByUrlUseCase,
-    private val parseImageBitmapUseCase: ParseImageBitmapUseCase
+    private val parseImageBitmapUseCase: ParseImageBitmapUseCase,
+    private val getParsingResultByIdUseCase: GetParsingResultByIdUseCase
 ) : ContainerHost<ParsingState, ParsingSideEffect>, ViewModel() {
 
     override val container =
         viewModelScope
             .container<ParsingState, ParsingSideEffect>(ParsingState())
+
+    init {
+        if (parsingResultId != 0L)
+            loadParsingResult(parsingResultId)
+    }
 
     fun parseImage() = intent {
         if (state.url.isEmpty()) {
@@ -55,12 +63,6 @@ internal class ParsingViewModel(
         }
     }
 
-    private suspend fun IntentContext.handleHttpException(e: HttpException) {
-        when (e.code()) {
-            403 -> postSideEffect(ParsingSideEffect.AuthorizationError)
-        }
-    }
-
     @OptIn(OrbitExperimental::class)
     fun updateUrl(url: String) = blockingIntent {
         reduce { state.copy(url = url, showUrlFieldError = false) }
@@ -69,5 +71,24 @@ internal class ParsingViewModel(
     @OptIn(OrbitExperimental::class)
     fun updateLanguage(language: Language) = blockingIntent {
         reduce { state.copy(language = language) }
+    }
+
+    fun navigateToParsingHistory() = intent {
+        postSideEffect(ParsingSideEffect.NavigateToHistory)
+    }
+
+    private suspend fun IntentContext.handleHttpException(e: HttpException) {
+        when (e.code()) {
+            403 -> postSideEffect(ParsingSideEffect.AuthorizationError)
+        }
+    }
+
+    private fun loadParsingResult(id: Long) = intent {
+        val parsingResult = getParsingResultByIdUseCase(id) ?: return@intent
+        reduce {
+            state.copy(
+                parsingResult = parsingResult
+            )
+        }
     }
 }

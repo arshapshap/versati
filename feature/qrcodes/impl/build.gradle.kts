@@ -59,7 +59,6 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.koin)
     implementation(libs.koin.compose)
-    implementation(libs.navigation.compose)
     implementation(libs.bundles.orbit)
     testImplementation(libs.bundles.test)
 }

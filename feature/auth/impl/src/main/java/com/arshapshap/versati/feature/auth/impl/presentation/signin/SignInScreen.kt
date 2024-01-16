@@ -11,7 +11,7 @@ import org.koin.androidx.compose.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
-object SignInScreen {
+internal object SignInScreen {
 
     @Composable
     fun Content(

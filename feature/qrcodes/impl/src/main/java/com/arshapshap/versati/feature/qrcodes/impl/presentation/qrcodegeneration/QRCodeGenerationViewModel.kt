@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeInfo
 import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.CreateQRCodeUseCase
-import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.GetQRCodeInfoById
+import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.GetQRCodeInfoByIdUseCase
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract.QRCodeGenerationSideEffect
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract.QRCodeGenerationState
 import okhttp3.internal.toHexString
@@ -25,7 +25,7 @@ private typealias IntentContext = SimpleSyntax<QRCodeGenerationState, QRCodeGene
 internal class QRCodeGenerationViewModel(
     qrCodeInfoId: Long,
     private val createQRCodeUseCase: CreateQRCodeUseCase,
-    private val getQRCodeInfoById: GetQRCodeInfoById
+    private val getQRCodeInfoByIdUseCase: GetQRCodeInfoByIdUseCase
 ) : ContainerHost<QRCodeGenerationState, QRCodeGenerationSideEffect>, ViewModel() {
 
     override val container =
@@ -102,7 +102,7 @@ internal class QRCodeGenerationViewModel(
     }
 
     private fun loadQRCodeInfo(id: Long) = intent {
-        val qrCodeInfoById = getQRCodeInfoById(id) ?: return@intent
+        val qrCodeInfoById = getQRCodeInfoByIdUseCase(id) ?: return@intent
         reduce {
             state.copy(
                 data = qrCodeInfoById.data,

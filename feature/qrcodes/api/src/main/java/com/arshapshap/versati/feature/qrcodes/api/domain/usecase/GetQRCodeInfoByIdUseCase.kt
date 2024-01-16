@@ -3,7 +3,7 @@ package com.arshapshap.versati.feature.qrcodes.api.domain.usecase
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeInfo
 import com.arshapshap.versati.feature.qrcodes.api.domain.repository.QRCodesRepository
 
-class GetQRCodeInfoById(
+class GetQRCodeInfoByIdUseCase(
     private val repository: QRCodesRepository
 ) {
 

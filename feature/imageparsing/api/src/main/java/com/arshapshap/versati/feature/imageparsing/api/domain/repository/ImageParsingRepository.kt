@@ -11,4 +11,8 @@ interface ImageParsingRepository {
     suspend fun parseImageBitmap(image: Bitmap, language: Language): ParsingResult
 
     suspend fun getParsingHistory(): List<ParsingResult>
+
+    suspend fun clearHistory()
+
+    suspend fun getParsingResultById(id: Long): ParsingResult?
 }

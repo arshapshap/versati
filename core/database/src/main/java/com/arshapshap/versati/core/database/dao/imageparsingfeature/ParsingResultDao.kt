@@ -14,8 +14,14 @@ abstract class ParsingResultDao {
     @Query("DELETE FROM ParsingResult WHERE id IN (SELECT id FROM ParsingResult ORDER BY id ASC LIMIT 1)")
     abstract suspend fun deleteOldest()
 
+    @Query("DELETE FROM ParsingResult")
+    abstract suspend fun deleteAll()
+
     @Query("SELECT * FROM ParsingResult")
     abstract suspend fun getAll(): List<ParsingResultLocal>
+
+    @Query("SELECT * FROM ParsingResult WHERE id=:id")
+    abstract suspend fun getById(id: Long): ParsingResultLocal?
 
     @Query("SELECT COUNT(id) FROM PARSINGRESULT")
     abstract suspend fun getCount(): Int

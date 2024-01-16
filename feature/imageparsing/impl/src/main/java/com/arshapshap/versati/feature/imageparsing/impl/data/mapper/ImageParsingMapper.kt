@@ -37,8 +37,9 @@ internal class ImageParsingMapper {
             id = parsingResult.id,
             parsedText = parsingResult.parsedResults
                 .filter { it.fileParseExitCode == 1 }
-                .map { it.copy(parsedText = it.parsedText.replace(PARSED_TEXT_SEPARATOR, "")) }
-                .joinToString(PARSED_TEXT_SEPARATOR),
+                .joinToString(PARSED_TEXT_SEPARATOR) {
+                    it.parsedText.replace(PARSED_TEXT_SEPARATOR, "")
+                },
             searchablePDFURL = parsingResult.searchablePDFURL
         )
     }

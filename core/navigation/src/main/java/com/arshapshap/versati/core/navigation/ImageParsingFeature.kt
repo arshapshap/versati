@@ -25,4 +25,11 @@ sealed interface ImageParsingFeature {
 
         fun destination(id: Long = 0L) = "$featureRoute/$screen?$idArgument=$id"
     }
+
+    data object ParsingHistory : ImageParsingFeature {
+
+        const val route = "${featureRoute}/history"
+
+        fun destination() = route
+    }
 }

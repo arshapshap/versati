@@ -37,7 +37,9 @@ internal fun TopBar(
             if (state.showArrowBack) {
                 val backPressDispatcher = LocalOnBackPressedDispatcherOwner.current
                 IconButton(
-                    onClick = { backPressDispatcher?.onBackPressedDispatcher?.onBackPressed() },
+                    onClick = {
+                        backPressDispatcher?.onBackPressedDispatcher?.onBackPressed()
+                    },
                     content = {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,

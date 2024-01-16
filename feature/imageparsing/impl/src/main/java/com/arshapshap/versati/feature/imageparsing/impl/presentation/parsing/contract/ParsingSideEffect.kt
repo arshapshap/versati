@@ -9,4 +9,6 @@ internal sealed interface ParsingSideEffect {
     data object NetworkError : ParsingSideEffect
 
     data object ParsingError : ParsingSideEffect
+
+    data object NavigateToHistory : ParsingSideEffect
 }

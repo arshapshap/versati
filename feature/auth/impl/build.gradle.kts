@@ -53,7 +53,6 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.koin)
     implementation(libs.koin.compose)
-    implementation(libs.navigation.compose)
     implementation(libs.bundles.orbit)
     testImplementation(libs.bundles.test)
 }
