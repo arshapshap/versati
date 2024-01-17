@@ -11,7 +11,11 @@ class ImageLoadingHelper {
 
     companion object {
 
-        suspend fun loadImageAsBitmap(context: Context, imageUrl: String, format: String): Bitmap {
+        suspend fun loadImageAsBitmap(
+            context: Context,
+            imageUrl: String,
+            format: String = "png"
+        ): Bitmap {
             if (format == "svg")
                 return loadSvgAsBitmap(context, imageUrl)
             return loadImageAsBitmap(context, imageUrl)

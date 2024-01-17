@@ -1,4 +1,4 @@
-package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration
+package com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration
 
 import android.content.Context
 import androidx.compose.material3.Icon
@@ -10,20 +10,20 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import com.arshapshap.versati.core.navigation.QRCodesFeature
+import com.arshapshap.versati.core.navigation.ChartsFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.core.utils.ImageLoadingHelper
 import com.arshapshap.versati.core.utils.SharingHelper
 import com.arshapshap.versati.core.utils.StorageHelper
-import com.arshapshap.versati.feature.qrcodes.impl.R
-import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract.QRCodeGenerationSideEffect
+import com.arshapshap.versati.feature.charts.impl.R
+import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.contract.ChartGenerationSideEffect
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
 
-internal object QRCodeGenerationScreen {
+internal object ChartGenerationScreen {
 
     @Composable
     fun Content(
@@ -32,21 +32,20 @@ internal object QRCodeGenerationScreen {
         appBarConfigure: (AppBarState) -> Unit
     ) {
         val viewModel =
-            getViewModel<QRCodeGenerationViewModel>(parameters = { parametersOf(id ?: 0) })
+            getViewModel<ChartGenerationViewModel>(parameters = { parametersOf(id ?: 0) })
         val state by viewModel.collectAsState()
 
         val context = LocalContext.current
         viewModel.collectSideEffect { sideEffect ->
             when (sideEffect) {
-                is QRCodeGenerationSideEffect.ShareQRCode ->
+                is ChartGenerationSideEffect.ShareChart ->
                     shareQRCode(
                         context,
-                        sideEffect.imageUrl,
-                        sideEffect.imageFormat.name.lowercase()
+                        sideEffect.imageUrl
                     )
 
-                QRCodeGenerationSideEffect.NavigateToQRCodesHistory ->
-                    navController.navigate(QRCodesFeature.QRCodesHistory.destination())
+                ChartGenerationSideEffect.NavigateToChartsHistory ->
+                    navController.navigate(ChartsFeature.ChartsHistory.destination())
             }
         }
 
@@ -54,7 +53,7 @@ internal object QRCodeGenerationScreen {
             appBarConfigure(
                 getAppBarState(
                     context,
-                    viewModel::navigateToQRCodesHistory
+                    viewModel::navigateToChartsHistory
                 )
             )
         }
@@ -65,21 +64,21 @@ internal object QRCodeGenerationScreen {
         context: Context,
         onHistoryClick: () -> Unit
     ) = AppBarState(
-        currentRoute = QRCodesFeature.QRCodeGeneration.route,
-        title = context.getString(R.string.qr_codes),
+        currentRoute = ChartsFeature.ChartGeneration.route,
+        title = context.getString(R.string.charts),
         actions = {
             IconButton(onClick = onHistoryClick) {
                 Icon(
                     painter = painterResource(id = com.arshapshap.versati.core.designsystem.R.drawable.ic_history),
-                    contentDescription = stringResource(R.string.open_qr_codes_history)
+                    contentDescription = stringResource(R.string.open_charts_history)
                 )
             }
         }
     )
 
-    private suspend fun shareQRCode(context: Context, imageUrl: String, format: String) {
-        val bitmap = ImageLoadingHelper.loadImageAsBitmap(context, imageUrl, format)
-        val uri = StorageHelper.getImageUriFromBitmap(context, bitmap, format)
+    private suspend fun shareQRCode(context: Context, imageUrl: String) {
+        val bitmap = ImageLoadingHelper.loadImageAsBitmap(context, imageUrl)
+        val uri = StorageHelper.getImageUriFromBitmap(context, bitmap)
         SharingHelper.shareImage(context, uri)
     }
 }

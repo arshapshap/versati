@@ -8,5 +8,5 @@ internal sealed interface QRCodeGenerationSideEffect {
         val imageFormat: ImageFormat
     ) : QRCodeGenerationSideEffect
 
-    data object NavigateToRequestHistory : QRCodeGenerationSideEffect
+    data object NavigateToQRCodesHistory : QRCodeGenerationSideEffect
 }

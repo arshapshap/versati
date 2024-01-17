@@ -51,8 +51,8 @@ internal class QRCodeGenerationViewModel(
         postSideEffect(QRCodeGenerationSideEffect.ShareQRCode(state.qrCodeImageUrl, state.format))
     }
 
-    fun navigateToRequestHistory() = intent {
-        postSideEffect(QRCodeGenerationSideEffect.NavigateToRequestHistory)
+    fun navigateToQRCodesHistory() = intent {
+        postSideEffect(QRCodeGenerationSideEffect.NavigateToQRCodesHistory)
     }
 
     fun setSuccess() = intent {

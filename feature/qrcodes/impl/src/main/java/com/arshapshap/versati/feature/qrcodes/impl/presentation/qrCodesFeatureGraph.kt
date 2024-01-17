@@ -21,8 +21,6 @@ fun NavGraphBuilder.qrCodesFeatureGraph(
             route = QRCodesFeature.QRCodeGeneration.route,
             arguments = QRCodesFeature.QRCodeGeneration.arguments
         ) {
-//            BackHandler { }
-
             QRCodeGenerationScreen.Content(
                 navController = navController,
                 id = it.arguments?.getLong(QRCodesFeature.QRCodeGeneration.idArgument),

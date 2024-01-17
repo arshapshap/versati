@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.arshapshap.feature.charts.impl"
+    namespace = "com.arshapshap.versati.feature.charts.impl"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {

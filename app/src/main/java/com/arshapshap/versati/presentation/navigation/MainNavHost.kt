@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import com.arshapshap.versati.core.navigation.QRCodesFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.auth.impl.presentation.authFeatureGraph
+import com.arshapshap.versati.feature.charts.impl.presentation.chartsFeatureGraph
 import com.arshapshap.versati.feature.imageparsing.impl.presentation.imageParsingFeatureGraph
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrCodesFeatureGraph
 
@@ -22,6 +23,7 @@ internal fun MainNavHost(
         startDestination = QRCodesFeature.featureRoute
     ) {
         authFeatureGraph(navController, appBarConfigure)
+        chartsFeatureGraph(navController, appBarConfigure)
         qrCodesFeatureGraph(navController, appBarConfigure)
         imageParsingFeatureGraph(navController, appBarConfigure)
     }

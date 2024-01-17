@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Chart Generation -->
+    <string name="charts">Charts</string>
+    <string name="open_charts_history">Open charts history</string>
+    <string name="create_chart">Create chart</string>
+    <string name="advanced_options">Advanced options</string>
+    <string name="show_advanced_options">Show advanced options</string>
+</resources>

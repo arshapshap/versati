@@ -42,7 +42,7 @@ internal fun QRCodeImage(
         else if (imageUrl == "")
             Icon(
                 painter = painterResource(R.drawable.ic_qr_code),
-                contentDescription = stringResource(R.string.qr_code)
+                contentDescription = stringResource(R.string.qr_codes)
             )
         else if (state is AsyncImagePainter.State.Error)
             Icon(
