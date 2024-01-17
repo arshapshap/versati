@@ -63,6 +63,8 @@ dependencies {
     implementation(project(":core:utils"))
     implementation(project(":feature:auth:api"))
     implementation(project(":feature:auth:impl"))
+    implementation(project(":feature:charts:api"))
+    implementation(project(":feature:charts:impl"))
     implementation(project(":feature:imageparsing:api"))
     implementation(project(":feature:imageparsing:impl"))
     implementation(project(":feature:qrcodes:api"))
