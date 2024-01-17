@@ -1,0 +1,11 @@
+package com.arshapshap.feature.charts.api.model
+
+data class ChartInfo(
+    val id: Long,
+    val type: ChartType,
+    val xAxisLabels: List<Int>,
+    val datasets: List<Dataset>,
+    val width: Int,
+    val height: Int,
+    val backgroundColor: Int
+)
