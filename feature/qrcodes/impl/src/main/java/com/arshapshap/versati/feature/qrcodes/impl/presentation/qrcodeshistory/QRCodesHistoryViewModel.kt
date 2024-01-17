@@ -1,32 +1,32 @@
-package com.arshapshap.versati.feature.qrcodes.impl.presentation.requesthistory
+package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodeshistory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.ClearHistoryUseCase
-import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.GetRequestHistoryUseCase
-import com.arshapshap.versati.feature.qrcodes.impl.presentation.requesthistory.contract.RequestHistorySideEffect
-import com.arshapshap.versati.feature.qrcodes.impl.presentation.requesthistory.contract.RequestHistoryState
+import com.arshapshap.versati.feature.qrcodes.api.domain.usecase.GetQRCodesHistoryUseCase
+import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodeshistory.contract.QRCodesHistorySideEffect
+import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodeshistory.contract.QRCodesHistoryState
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.container
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 
-internal class RequestHistoryViewModel(
-    private val getRequestHistoryUseCase: GetRequestHistoryUseCase,
+internal class QRCodesHistoryViewModel(
+    private val getQrCodesHistoryUseCase: GetQRCodesHistoryUseCase,
     private val clearHistoryUseCase: ClearHistoryUseCase
-) : ContainerHost<RequestHistoryState, RequestHistorySideEffect>, ViewModel() {
+) : ContainerHost<QRCodesHistoryState, QRCodesHistorySideEffect>, ViewModel() {
 
     override val container =
         viewModelScope
-            .container<RequestHistoryState, RequestHistorySideEffect>(RequestHistoryState())
+            .container<QRCodesHistoryState, QRCodesHistorySideEffect>(QRCodesHistoryState())
 
     init {
         loadHistory()
     }
 
     fun openQRCode(id: Long) = intent {
-        postSideEffect(RequestHistorySideEffect.OpenQRCode(id))
+        postSideEffect(QRCodesHistorySideEffect.OpenQRCode(id))
     }
 
     fun clearHistoryUnconfirmed() = intent {
@@ -43,7 +43,7 @@ internal class RequestHistoryViewModel(
     }
 
     private fun loadHistory() = intent {
-        val list = getRequestHistoryUseCase().asReversed()
+        val list = getQrCodesHistoryUseCase().asReversed()
         reduce { state.copy(history = list) }
     }
 }

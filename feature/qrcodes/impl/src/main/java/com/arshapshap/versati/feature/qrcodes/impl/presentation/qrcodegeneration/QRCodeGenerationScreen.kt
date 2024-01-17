@@ -46,7 +46,7 @@ internal object QRCodeGenerationScreen {
                     )
 
                 QRCodeGenerationSideEffect.NavigateToRequestHistory ->
-                    navController.navigate(QRCodesFeature.RequestHistory.destination())
+                    navController.navigate(QRCodesFeature.QRCodesHistory.destination())
             }
         }
 

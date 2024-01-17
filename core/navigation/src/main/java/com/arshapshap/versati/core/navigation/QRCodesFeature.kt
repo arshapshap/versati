@@ -26,7 +26,7 @@ sealed interface QRCodesFeature {
         fun destination(id: Long = 0L) = "$featureRoute/$screen?$idArgument=$id"
     }
 
-    data object RequestHistory : QRCodesFeature {
+    data object QRCodesHistory : QRCodesFeature {
 
         const val route = "$featureRoute/history"
 

@@ -1,4 +1,4 @@
-package com.arshapshap.versati.feature.qrcodes.impl.presentation.requesthistory
+package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodeshistory
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -25,14 +25,14 @@ import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.QRCodeInfo
 import com.arshapshap.versati.feature.qrcodes.impl.R
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.common.ui.QRCodeImage
-import com.arshapshap.versati.feature.qrcodes.impl.presentation.requesthistory.contract.RequestHistoryState
+import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodeshistory.contract.QRCodesHistoryState
 
 @Composable
-internal fun RequestHistoryContent(
-    state: RequestHistoryState,
-    viewModel: RequestHistoryViewModel
+internal fun QRCodesHistoryContent(
+    state: QRCodesHistoryState,
+    viewModel: QRCodesHistoryViewModel
 ) {
-    RequestHistoryContent(
+    QRCodesHistoryContent(
         state = state,
         onQRCodeClick = viewModel::openQRCode,
         onClearHistory = viewModel::clearHistoryConfirmed,
@@ -41,8 +41,8 @@ internal fun RequestHistoryContent(
 }
 
 @Composable
-private fun RequestHistoryContent(
-    state: RequestHistoryState,
+private fun QRCodesHistoryContent(
+    state: QRCodesHistoryState,
     onQRCodeClick: (Long) -> Unit = { },
     onClearHistory: () -> Unit = { },
     onCancelClearing: () -> Unit = { }
@@ -111,7 +111,7 @@ private fun QRCodeInfo(
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-    val state = RequestHistoryState(
+    val state = QRCodesHistoryState(
         List(5) {
             QRCodeInfo(
                 id = 1,
@@ -125,7 +125,7 @@ private fun Preview() {
             )
         }
     )
-    RequestHistoryContent(
+    QRCodesHistoryContent(
         state = state,
         onQRCodeClick = { }
     )
@@ -134,10 +134,10 @@ private fun Preview() {
 @Preview(showBackground = true)
 @Composable
 private fun HistoryClearPreview() {
-    val state = RequestHistoryState(
+    val state = QRCodesHistoryState(
         listOf()
     )
-    RequestHistoryContent(
+    QRCodesHistoryContent(
         state = state,
         onQRCodeClick = { }
     )

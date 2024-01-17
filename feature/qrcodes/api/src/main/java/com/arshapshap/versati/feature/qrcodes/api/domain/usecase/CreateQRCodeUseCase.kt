@@ -7,7 +7,7 @@ class CreateQRCodeUseCase(
     private val repository: QRCodesRepository
 ) {
 
-    suspend operator fun invoke(options: QRCodeInfo): String {
-        return repository.createQRCodeImageUrl(options)
+    suspend operator fun invoke(qrCodeInfo: QRCodeInfo): String {
+        return repository.createQRCodeImageUrl(qrCodeInfo)
     }
 }

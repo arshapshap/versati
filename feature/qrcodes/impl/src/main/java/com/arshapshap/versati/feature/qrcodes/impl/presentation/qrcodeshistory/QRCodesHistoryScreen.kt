@@ -1,4 +1,4 @@
-package com.arshapshap.versati.feature.qrcodes.impl.presentation.requesthistory
+package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodeshistory
 
 import android.content.Context
 import androidx.compose.material.icons.Icons
@@ -14,26 +14,26 @@ import androidx.navigation.NavHostController
 import com.arshapshap.versati.core.navigation.QRCodesFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.qrcodes.impl.R
-import com.arshapshap.versati.feature.qrcodes.impl.presentation.requesthistory.contract.RequestHistorySideEffect
+import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodeshistory.contract.QRCodesHistorySideEffect
 import org.koin.androidx.compose.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 
 
-internal object RequestHistoryScreen {
+internal object QRCodesHistoryScreen {
 
     @Composable
     fun Content(
         navController: NavHostController,
         appBarConfigure: (AppBarState) -> Unit
     ) {
-        val viewModel = getViewModel<RequestHistoryViewModel>()
+        val viewModel = getViewModel<QRCodesHistoryViewModel>()
         val state by viewModel.collectAsState()
 
         val context = LocalContext.current
         viewModel.collectSideEffect { sideEffect ->
             when (sideEffect) {
-                is RequestHistorySideEffect.OpenQRCode ->
+                is QRCodesHistorySideEffect.OpenQRCode ->
                     navController.navigate(QRCodesFeature.QRCodeGeneration.destination(id = sideEffect.id))
             }
         }
@@ -47,7 +47,7 @@ internal object RequestHistoryScreen {
                 )
             )
         }
-        RequestHistoryContent(state = state, viewModel = viewModel)
+        QRCodesHistoryContent(state = state, viewModel = viewModel)
     }
 
     private fun getAppBarState(
@@ -55,8 +55,8 @@ internal object RequestHistoryScreen {
         showClearButton: Boolean,
         onClearClick: () -> Unit
     ) = AppBarState(
-        currentRoute = QRCodesFeature.RequestHistory.route,
-        title = context.getString(R.string.request_history),
+        currentRoute = QRCodesFeature.QRCodesHistory.route,
+        title = context.getString(R.string.qrcodes_history),
         showArrowBack = true,
         actions = {
             if (showClearButton)

@@ -17,7 +17,7 @@
     <string name="open_request_history">Open requests history</string>
 
     <!-- RequestHistory -->
-    <string name="request_history">QR-codes history</string>
+    <string name="qrcodes_history">QR-codes history</string>
     <string name="clear_history">Clear history</string>
     <string name="clearing_the_history">Clearing the history</string>
     <string name="do_you_really_want_to_clear_the_history">Do you really want to clear the history?</string>
