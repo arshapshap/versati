@@ -1,6 +1,7 @@
 package com.arshapshap.versati.core.database
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -12,13 +13,15 @@ import com.arshapshap.versati.core.database.model.imageparsingfeature.ParsingRes
 import com.arshapshap.versati.core.database.model.qrcodesfeature.QRCodeRequestLocal
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [
         ChartLocal::class,
         ParsingResultLocal::class,
         QRCodeRequestLocal::class
     ],
-    exportSchema = false
+    autoMigrations = [
+        AutoMigration(from = 1, to = 2)
+    ]
 )
 internal abstract class AppDatabase : RoomDatabase() {
 
