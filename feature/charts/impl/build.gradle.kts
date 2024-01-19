@@ -55,7 +55,6 @@ dependencies {
     implementation(project(":feature:charts:api"))
 
     implementation(libs.appcompat)
-    implementation(libs.coil.compose)
     implementation(libs.core.ktx)
     implementation(libs.koin)
     implementation(libs.koin.compose)

@@ -1,4 +1,4 @@
-package com.arshapshap.versati.feature.qrcodes.impl.presentation.common.ui
+package com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements
 
 import android.graphics.Bitmap
 import androidx.compose.material.icons.Icons
@@ -9,14 +9,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.arshapshap.versati.core.designsystem.elements.ImageWithLoading
-import com.arshapshap.versati.feature.qrcodes.impl.R
+import com.arshapshap.versati.feature.charts.impl.R
 
 @Composable
-internal fun QRCodeImage(
+internal fun ChartImage(
     modifier: Modifier,
     imageUrl: String,
     onSuccess: (Bitmap?) -> Unit = { },
-    onError: () -> Unit = { }
+    onError: () -> Unit = { },
 ) {
     ImageWithLoading(
         modifier = modifier,
@@ -25,14 +25,14 @@ internal fun QRCodeImage(
         onError = onError,
         placeholderIcon = {
             Icon(
-                painter = painterResource(R.drawable.ic_qr_code),
+                painter = painterResource(R.drawable.ic_chart_finance),
                 contentDescription = null
             )
         },
         errorIcon = {
             Icon(
                 imageVector = Icons.Default.Warning,
-                contentDescription = stringResource(R.string.uploading_qr_code_error),
+                contentDescription = stringResource(R.string.uploading_chart_error),
             )
         }
     )

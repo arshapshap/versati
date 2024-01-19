@@ -22,4 +22,6 @@
     <string name="clearing_the_history">Clearing the history</string>
     <string name="do_you_really_want_to_clear_the_history">Do you really want to clear the history?</string>
     <string name="the_history_of_qr_codes_is_empty">The history of QR codes is empty</string>
+    <string name="timeout_error">The server is not responding. Try again</string>
+    <string name="no_uploaded_image">There is no uploaded image</string>
 </resources>

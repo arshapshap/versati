@@ -18,8 +18,8 @@ internal data class DataSerializable(
 internal data class DatasetSerializable(
     val label: String,
     val data: List<Int>,
-    val borderColor: String,
-    val borderWidth: Int,
-    val fill: Boolean,
-    val backgroundColor: String
+    val borderColor: String? = null,
+    val borderWidth: Int? = null,
+    val fill: Boolean? = null,
+    val backgroundColor: String? = null
 )

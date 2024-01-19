@@ -6,4 +6,17 @@
     <string name="create_chart">Create chart</string>
     <string name="advanced_options">Advanced options</string>
     <string name="show_advanced_options">Show advanced options</string>
+    <string name="x_axis_labels">X-axis labels</string>
+    <string name="x_axis_labels_example">January, February, March, April, May</string>
+    <string name="dataset_with_number">Dataset %1$s</string>
+    <string name="dataset_label">Dataset label</string>
+    <string name="dataset_label_example">Users</string>
+    <string name="dataset">Dataset</string>
+    <string name="dataset_example">120, 60, 50, 180, 120</string>
+    <string name="share_chart">Share chart</string>
+    <string name="uploading_chart_error">An error occurred while uploading the chart image</string>
+    <string name="timeout_error">The server is not responding. Try again</string>
+    <string name="add_dataset">Add dataset</string>
+    <string name="first_generation_hint">The first generation may be long due to server limitations.</string>
+    <string name="no_uploaded_image">There is no uploaded image</string>
 </resources>

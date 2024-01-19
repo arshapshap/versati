@@ -5,8 +5,8 @@ data class ChartInfo(
     val type: ChartType,
     val xAxisLabels: List<String>,
     val datasets: List<Dataset>,
-    val width: Int,
-    val height: Int,
-    val backgroundColor: Int,
+    val width: Int?,
+    val height: Int?,
+    val backgroundColor: Int?,
     val imageUrl: String
 )

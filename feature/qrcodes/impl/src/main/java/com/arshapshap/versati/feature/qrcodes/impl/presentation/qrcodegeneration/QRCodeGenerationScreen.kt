@@ -1,6 +1,7 @@
 package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration
 
 import android.content.Context
+import android.graphics.Bitmap
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -12,9 +13,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.arshapshap.versati.core.navigation.QRCodesFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
-import com.arshapshap.versati.core.utils.ImageLoadingHelper
 import com.arshapshap.versati.core.utils.SharingHelper
 import com.arshapshap.versati.core.utils.StorageHelper
+import com.arshapshap.versati.core.utils.showToast
 import com.arshapshap.versati.feature.qrcodes.impl.R
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract.QRCodeGenerationSideEffect
 import org.koin.androidx.compose.getViewModel
@@ -40,9 +41,9 @@ internal object QRCodeGenerationScreen {
             when (sideEffect) {
                 is QRCodeGenerationSideEffect.ShareQRCode ->
                     shareQRCode(
-                        context,
-                        sideEffect.imageUrl,
-                        sideEffect.imageFormat.name.lowercase()
+                        context = context,
+                        bitmap = sideEffect.bitmap,
+                        format = sideEffect.imageFormat.name.lowercase()
                     )
 
                 QRCodeGenerationSideEffect.NavigateToQRCodesHistory ->
@@ -77,8 +78,11 @@ internal object QRCodeGenerationScreen {
         }
     )
 
-    private suspend fun shareQRCode(context: Context, imageUrl: String, format: String) {
-        val bitmap = ImageLoadingHelper.loadImageAsBitmap(context, imageUrl, format)
+    private fun shareQRCode(context: Context, bitmap: Bitmap?, format: String) {
+        if (bitmap == null) {
+            context.showToast(context.getString(R.string.no_uploaded_image))
+            return
+        }
         val uri = StorageHelper.getImageUriFromBitmap(context, bitmap, format)
         SharingHelper.shareImage(context, uri)
     }
