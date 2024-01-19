@@ -12,8 +12,7 @@ internal data class ChartGenerationState(
     val success: Boolean = false,
     val bitmap: Bitmap? = null,
     val optionsChanged: Boolean = true,
-    val loadingRetries: Int = 0,
-    val generationNumber: Int = 0
+    val loadingNumber: Int = 0
 )
 
 internal data class DatasetState(

@@ -2,10 +2,14 @@ package com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration
 
 import android.content.Context
 import android.graphics.Bitmap
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.arshapshap.versati.core.navigation.ChartsFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
@@ -66,12 +70,12 @@ internal object ChartGenerationScreen {
         currentRoute = ChartsFeature.ChartGeneration.route,
         title = context.getString(R.string.charts),
         actions = {
-//            IconButton(onClick = onHistoryClick) {
-//                Icon(
-//                    painter = painterResource(id = com.arshapshap.versati.core.designsystem.R.drawable.ic_history),
-//                    contentDescription = stringResource(R.string.open_charts_history)
-//                )
-//            }
+            IconButton(onClick = onHistoryClick) {
+                Icon(
+                    painter = painterResource(id = com.arshapshap.versati.core.designsystem.R.drawable.ic_history),
+                    contentDescription = stringResource(R.string.open_charts_history)
+                )
+            }
         }
     )
 

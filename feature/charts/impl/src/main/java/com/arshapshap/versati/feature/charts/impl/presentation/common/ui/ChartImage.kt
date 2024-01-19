@@ -1,4 +1,4 @@
-package com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements
+package com.arshapshap.versati.feature.charts.impl.presentation.common.ui
 
 import android.graphics.Bitmap
 import androidx.compose.material.icons.Icons

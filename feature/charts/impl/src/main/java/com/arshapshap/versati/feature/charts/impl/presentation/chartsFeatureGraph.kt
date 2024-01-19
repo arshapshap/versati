@@ -7,6 +7,7 @@ import androidx.navigation.navigation
 import com.arshapshap.versati.core.navigation.ChartsFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.ChartGenerationScreen
+import com.arshapshap.versati.feature.charts.impl.presentation.chartshistory.ChartsHistoryScreen
 
 fun NavGraphBuilder.chartsFeatureGraph(
     navController: NavHostController,
@@ -26,13 +27,13 @@ fun NavGraphBuilder.chartsFeatureGraph(
                 appBarConfigure = appBarConfigure
             )
         }
-//        composable(
-//            route = ChartsFeature.ChartsHistory.route
-//        ) {
-//            ChartsHistoryScreen.Content(
-//                navController = navController,
-//                appBarConfigure = appBarConfigure
-//            )
-//        }
+        composable(
+            route = ChartsFeature.ChartsHistory.route
+        ) {
+            ChartsHistoryScreen.Content(
+                navController = navController,
+                appBarConfigure = appBarConfigure
+            )
+        }
     }
 }

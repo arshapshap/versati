@@ -37,12 +37,12 @@ import com.arshapshap.versati.core.designsystem.theme.ButtonHeight
 import com.arshapshap.versati.feature.charts.impl.R
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.contract.ChartGenerationState
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.contract.DatasetState
-import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements.ChartImage
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements.DatasetInput
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements.DatasetLabelInput
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements.LabelsInput
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements.SelectedDataset
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements.UnselectedDataset
+import com.arshapshap.versati.feature.charts.impl.presentation.common.ui.ChartImage
 
 @Composable
 internal fun ChartGenerationContent(
@@ -150,9 +150,9 @@ private fun ChartGenerationContent(
                 }
             }
         }
-        if (state.generationNumber == 1 && state.loading)
+        if (state.loadingNumber == 1 && state.loading)
             Text(
-                text = stringResource(id = R.string.first_generation_hint),
+                text = stringResource(id = R.string.first_loading_hint),
                 color = MaterialTheme.colorScheme.secondary,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.bodySmall,

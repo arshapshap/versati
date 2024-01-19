@@ -1,17 +1,14 @@
 package com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration
 
 import android.graphics.Bitmap
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.arshapshap.versati.feature.charts.api.model.ChartInfo
-import com.arshapshap.versati.feature.charts.api.model.ChartType
-import com.arshapshap.versati.feature.charts.api.model.Dataset
 import com.arshapshap.versati.feature.charts.api.usecase.CreateChartUseCase
 import com.arshapshap.versati.feature.charts.api.usecase.GetChartInfoByIdUseCase
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.contract.ChartGenerationSideEffect
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.contract.ChartGenerationState
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.contract.DatasetState
+import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.mapper.ChartGenerationStateMapper
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.annotation.OrbitExperimental
 import org.orbitmvi.orbit.container
@@ -27,7 +24,8 @@ private typealias IntentContext = SimpleSyntax<ChartGenerationState, ChartGenera
 internal class ChartGenerationViewModel(
     chartInfoId: Long,
     private val createChartUseCase: CreateChartUseCase,
-    private val getChartInfoByIdUseCase: GetChartInfoByIdUseCase
+    private val getChartInfoByIdUseCase: GetChartInfoByIdUseCase,
+    private val mapper: ChartGenerationStateMapper
 ) : ContainerHost<ChartGenerationState, ChartGenerationSideEffect>, ViewModel() {
 
     override val container =
@@ -45,13 +43,13 @@ internal class ChartGenerationViewModel(
         if (!checkIfOptionsValid()) return@intent
 
         reduce { state.copy(chartImageUrl = "", bitmap = null, success = false) }
-        val result = createChartUseCase(getChartInfo())
+        val result = createChartUseCase(mapper.fromState(state))
         reduce {
             state.copy(
                 chartImageUrl = result,
                 loading = true,
                 optionsChanged = false,
-                generationNumber = state.generationNumber + 1
+                loadingNumber = state.loadingNumber + 1
             )
         }
     }
@@ -67,12 +65,10 @@ internal class ChartGenerationViewModel(
     }
 
     fun onImageLoadingSuccess(bitmap: Bitmap?) = intent {
-        Log.d("ChartGenerationViewModel", bitmap.toString())
-        reduce { state.copy(success = true, loading = false, loadingRetries = 0, bitmap = bitmap) }
+        reduce { state.copy(success = true, loading = false, bitmap = bitmap) }
     }
 
     fun onImageLoadingError() = intent {
-//        if (retryLoading()) return@intent
 
         if (state.loading)
             postSideEffect(ChartGenerationSideEffect.TimeoutError)
@@ -142,18 +138,10 @@ internal class ChartGenerationViewModel(
 
     private fun loadChartInfo(id: Long) = intent {
         val chartInfo = getChartInfoByIdUseCase(id) ?: return@intent
-//        reduce {
-//            state.copy(
-//                data = qrCodeInfoById.data,
-//                size = qrCodeInfoById.size,
-//                qrCodeColor = qrCodeInfoById.color,
-//                backgroundColor = qrCodeInfoById.backgroundColor,
-//                quietZone = qrCodeInfoById.quietZone,
-//                format = qrCodeInfoById.format,
-//                qrCodeImageUrl = qrCodeInfoById.imageUrl,
-//                optionsChanged = false
-//            )
-//        }
+        reduce {
+            mapper.toState(chartInfo)
+                .copy(optionsChanged = false, loading = true, loadingNumber = 1)
+        }
     }
 
     private suspend fun IntentContext.checkIfOptionsValid(): Boolean {
@@ -178,40 +166,9 @@ internal class ChartGenerationViewModel(
         return !error
     }
 
-    private suspend fun IntentContext.retryLoading(): Boolean {
-        if (state.loadingRetries >= 3) {
-            reduce { state.copy(loadingRetries = 0) }
-            return false
-        }
-        reduce { state.copy(loadingRetries = state.loadingRetries + 1) }
-        Thread.sleep(1000)
-        createChart()
-        return true
-    }
-
     private fun <T> List<T>.replace(index: Int, element: T): List<T> = this
         .toMutableList()
         .apply {
             this[index] = element
         }
-
-    private fun IntentContext.getChartInfo() = ChartInfo(
-        id = 0,
-        type = ChartType.Bar,
-        xAxisLabels = state.labels.split(',').map { it.trim() },
-        datasets = state.datasets.map { dataset ->
-            Dataset(
-                label = dataset.label.trim(),
-                data = dataset.data.split(',').map { it.trim().toIntOrNull() ?: 0 },
-                borderColor = null,
-                borderWidth = null,
-                fill = null,
-                backgroundColor = null,
-            )
-        },
-        backgroundColor = null,
-        width = null,
-        height = null,
-        imageUrl = ""
-    )
 }

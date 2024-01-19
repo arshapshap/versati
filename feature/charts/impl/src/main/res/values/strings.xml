@@ -17,6 +17,16 @@
     <string name="uploading_chart_error">An error occurred while uploading the chart image</string>
     <string name="timeout_error">The server is not responding. Try again</string>
     <string name="add_dataset">Add dataset</string>
-    <string name="first_generation_hint">The first generation may be long due to server limitations.</string>
+    <string name="first_loading_hint">The first loading may be long due to server limitations.\nA repeat request may be required.</string>
     <string name="no_uploaded_image">There is no uploaded image</string>
+
+    <!-- Charts History -->
+    <string name="charts_history">Charts history</string>
+    <string name="clear_history">Clear history</string>
+    <string name="clearing_the_history">Clearing the history</string>
+    <string name="do_you_really_want_to_clear_the_history">Do you really want to clear the history?</string>
+    <string name="charts_history_empty">The charts history is empty</string>
+    <string name="chart_description_labels">X-Axis: %1$s</string>
+    <string name="chart_description_datasets">Datasets: %1$s</string>
+    <string name="chart_description_type">Chart type: %1$s</string>
 </resources>
