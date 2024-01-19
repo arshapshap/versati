@@ -15,7 +15,7 @@ class StorageHelper {
 
     companion object {
 
-        fun getImageUriFromBitmap(context: Context, bitmap: Bitmap, format: String): Uri {
+        fun getImageUriFromBitmap(context: Context, bitmap: Bitmap, format: String = "png"): Uri {
             val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
             val fileName = "QR_$timeStamp"
             val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)

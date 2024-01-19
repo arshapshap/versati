@@ -1,6 +1,7 @@
 package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +18,6 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -26,9 +26,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.arshapshap.versati.core.designsystem.elements.ButtonWithLoading
 import com.arshapshap.versati.core.designsystem.theme.ButtonHeight
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
 import com.arshapshap.versati.feature.qrcodes.impl.R
@@ -55,7 +55,8 @@ internal fun QRCodeGenerationContent(
         onFormatChange = viewModel::updateFormat,
         onCreateClick = viewModel::createQRCode,
         onShareClick = viewModel::shareQRCode,
-        onSuccessfulLoading = viewModel::setSuccess
+        onImageLoadingSuccess = viewModel::onImageLoadingSuccess,
+        onImageLoadingError = viewModel::onImageLoadingError,
     )
 }
 
@@ -70,7 +71,8 @@ private fun QRCodeGenerationContent(
     onFormatChange: (ImageFormat) -> Unit = { },
     onCreateClick: () -> Unit = { },
     onShareClick: () -> Unit = { },
-    onSuccessfulLoading: () -> Unit = { },
+    onImageLoadingSuccess: (Bitmap?) -> Unit = { },
+    onImageLoadingError: () -> Unit = { },
     advancedExpanded: MutableState<Boolean> = remember { mutableStateOf(false) }
 ) {
     Column(
@@ -85,7 +87,8 @@ private fun QRCodeGenerationContent(
                 .height(250.dp)
                 .padding(vertical = 16.dp),
             imageUrl = state.qrCodeImageUrl,
-            onSuccess = onSuccessfulLoading
+            onSuccess = onImageLoadingSuccess,
+            onError = onImageLoadingError,
         )
         DataInput(
             modifier = Modifier
@@ -117,25 +120,21 @@ private fun QRCodeGenerationContent(
         Row(
             modifier = Modifier
                 .padding(vertical = 8.dp)
-                .height(ButtonHeight)
         ) {
-            Button(
-                onClick = onCreateClick,
+            ButtonWithLoading(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .weight(4f)
-            ) {
-                Text(
-                    text = stringResource(R.string.create_qr_code),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+                    .weight(4f),
+                onClick = onCreateClick,
+                text = stringResource(R.string.create_qr_code),
+                loading = state.loading
+            )
             if (state.success) {
                 Spacer(modifier = Modifier.padding(4.dp))
                 Button(
                     onClick = onShareClick,
                     modifier = Modifier
+                        .height(ButtonHeight)
                         .aspectRatio(1f)
                 ) {
                     Icon(
@@ -159,13 +158,13 @@ private fun AdvancedOptions(
 ) {
     SizeInputs(
         modifier = Modifier
-            .padding(vertical = 8.dp),
+            .padding(top = 8.dp),
         size = state.size?.toString() ?: "",
         onValueChange = onSizeChange,
     )
     ColorInputs(
         modifier = Modifier
-            .padding(vertical = 8.dp),
+            .padding(top = 8.dp),
         qrCodeColorString = state.qrCodeColorString,
         qrCodeColor = state.qrCodeColor,
         showQrCodeColorError = state.showColorFieldError,
@@ -177,7 +176,7 @@ private fun AdvancedOptions(
     )
     QuietZoneInput(
         modifier = Modifier
-            .padding(vertical = 8.dp),
+            .padding(top = 8.dp),
         quietZone = state.quietZone,
         onValueChange = onQuietZoneChange
     )

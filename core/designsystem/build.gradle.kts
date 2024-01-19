@@ -30,6 +30,7 @@ dependencies {
 
     implementation(libs.appcompat)
     implementation(libs.core.ktx)
+    implementation(libs.coil.compose)
 
     api(libs.material)
     api(platform(libs.compose.bom))

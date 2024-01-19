@@ -30,6 +30,7 @@ navigation = "2.7.6"
 okhttp = "4.11.0"
 orbit = "6.1.0"
 org-jetbrains-kotlin = "1.9.21"
+preference = "1.2.1"
 retrofit-core = "2.9.0"
 retrofit-kotlinx-serialization-converter = "1.0.0"
 room = "2.6.1"
@@ -78,6 +79,7 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhtt
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 orbit-compose = { group = "org.orbit-mvi", name = "orbit-compose", version.ref = "orbit" }
 orbit-core = { group = "org.orbit-mvi", name = "orbit-core", version.ref = "orbit" }
+preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit-core" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-kotlinx-serialization-converter" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }

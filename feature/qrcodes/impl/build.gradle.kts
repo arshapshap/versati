@@ -54,8 +54,6 @@ dependencies {
     implementation(project(":feature:qrcodes:api"))
 
     implementation(libs.appcompat)
-    implementation(libs.coil.compose)
-    implementation(libs.coil.svg)
     implementation(libs.core.ktx)
     implementation(libs.koin)
     implementation(libs.koin.compose)

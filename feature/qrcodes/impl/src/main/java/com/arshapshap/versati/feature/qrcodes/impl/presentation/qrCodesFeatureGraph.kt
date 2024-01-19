@@ -7,7 +7,7 @@ import androidx.navigation.navigation
 import com.arshapshap.versati.core.navigation.QRCodesFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.QRCodeGenerationScreen
-import com.arshapshap.versati.feature.qrcodes.impl.presentation.requesthistory.RequestHistoryScreen
+import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodeshistory.QRCodesHistoryScreen
 
 fun NavGraphBuilder.qrCodesFeatureGraph(
     navController: NavHostController,
@@ -21,8 +21,6 @@ fun NavGraphBuilder.qrCodesFeatureGraph(
             route = QRCodesFeature.QRCodeGeneration.route,
             arguments = QRCodesFeature.QRCodeGeneration.arguments
         ) {
-//            BackHandler { }
-
             QRCodeGenerationScreen.Content(
                 navController = navController,
                 id = it.arguments?.getLong(QRCodesFeature.QRCodeGeneration.idArgument),
@@ -30,9 +28,9 @@ fun NavGraphBuilder.qrCodesFeatureGraph(
             )
         }
         composable(
-            route = QRCodesFeature.RequestHistory.route
+            route = QRCodesFeature.QRCodesHistory.route
         ) {
-            RequestHistoryScreen.Content(
+            QRCodesHistoryScreen.Content(
                 navController = navController,
                 appBarConfigure = appBarConfigure
             )

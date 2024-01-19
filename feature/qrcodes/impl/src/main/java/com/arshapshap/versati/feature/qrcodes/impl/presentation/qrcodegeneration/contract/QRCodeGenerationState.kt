@@ -1,5 +1,6 @@
 package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract
 
+import android.graphics.Bitmap
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
 
 internal data class QRCodeGenerationState(
@@ -15,6 +16,8 @@ internal data class QRCodeGenerationState(
     val quietZone: Int? = 1,
     val format: ImageFormat = ImageFormat.PNG,
     val qrCodeImageUrl: String = "",
+    val loading: Boolean = false,
     val success: Boolean = false,
+    val bitmap: Bitmap? = null,
     val optionsChanged: Boolean = true
 )

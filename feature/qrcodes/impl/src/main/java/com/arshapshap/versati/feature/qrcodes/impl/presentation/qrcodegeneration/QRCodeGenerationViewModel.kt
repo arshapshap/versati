@@ -1,5 +1,6 @@
 package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration
 
+import android.graphics.Bitmap
 import android.text.TextUtils
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -38,25 +39,30 @@ internal class QRCodeGenerationViewModel(
     }
 
     fun createQRCode() = intent {
-        if (!state.optionsChanged) return@intent
+        if (state.success && !state.optionsChanged) return@intent
 
         reduce { state.copy(qrCodeImageUrl = "", success = false) }
         if (!checkIfOptionsValid()) return@intent
 
+        reduce { state.copy(loading = true) }
         val result = createQRCodeUseCase(getQRCodeOptions())
         reduce { state.copy(qrCodeImageUrl = result, optionsChanged = false) }
     }
 
     fun shareQRCode() = intent {
-        postSideEffect(QRCodeGenerationSideEffect.ShareQRCode(state.qrCodeImageUrl, state.format))
+        postSideEffect(QRCodeGenerationSideEffect.ShareQRCode(state.bitmap, state.format))
     }
 
-    fun navigateToRequestHistory() = intent {
-        postSideEffect(QRCodeGenerationSideEffect.NavigateToRequestHistory)
+    fun navigateToQRCodesHistory() = intent {
+        postSideEffect(QRCodeGenerationSideEffect.NavigateToQRCodesHistory)
     }
 
-    fun setSuccess() = intent {
-        reduce { state.copy(success = true) }
+    fun onImageLoadingSuccess(bitmap: Bitmap?) = intent {
+        reduce { state.copy(success = true, loading = false, bitmap = bitmap) }
+    }
+
+    fun onImageLoadingError() = intent {
+        reduce { state.copy(success = false, loading = false) }
     }
 
     @OptIn(OrbitExperimental::class)

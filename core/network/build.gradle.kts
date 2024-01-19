@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.arshapshap.chatgptclient.core.network"
+    namespace = "com.arshapshap.versati.core.network"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {

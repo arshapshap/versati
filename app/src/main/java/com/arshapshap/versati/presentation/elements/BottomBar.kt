@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.arshapshap.versati.core.navigation.ChartsFeature
 import com.arshapshap.versati.core.navigation.ImageParsingFeature
 import com.arshapshap.versati.core.navigation.QRCodesFeature
 
@@ -24,7 +25,8 @@ internal fun BottomBar(
 ) {
     val screens = listOf(
         Screen.QRCodes,
-        Screen.ImageParsing
+        Screen.ImageParsing,
+        Screen.Charts
     )
     BottomNavigation(
         backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -68,15 +70,21 @@ private sealed class Screen(
     @DrawableRes val iconRes: Int
 ) {
 
-    data object QRCodes : Screen(
-        route = QRCodesFeature.featureRoute,
-        labelRes = com.arshapshap.versati.feature.qrcodes.impl.R.string.qr_code,
-        iconRes = com.arshapshap.versati.feature.qrcodes.impl.R.drawable.ic_qr_code
+    data object Charts : Screen(
+        route = ChartsFeature.featureRoute,
+        labelRes = com.arshapshap.versati.feature.charts.impl.R.string.charts,
+        iconRes = com.arshapshap.versati.feature.charts.impl.R.drawable.ic_create_chart
     )
 
     data object ImageParsing : Screen(
         route = ImageParsingFeature.featureRoute,
         labelRes = com.arshapshap.versati.feature.imageparsing.impl.R.string.image_parsing,
         iconRes = com.arshapshap.versati.feature.imageparsing.impl.R.drawable.ic_image_parsing
+    )
+
+    data object QRCodes : Screen(
+        route = QRCodesFeature.featureRoute,
+        labelRes = com.arshapshap.versati.feature.qrcodes.impl.R.string.qr_codes,
+        iconRes = com.arshapshap.versati.feature.qrcodes.impl.R.drawable.ic_create_qr_code
     )
 }

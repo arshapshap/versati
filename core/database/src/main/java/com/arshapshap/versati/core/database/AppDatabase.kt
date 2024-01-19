@@ -1,21 +1,27 @@
 package com.arshapshap.versati.core.database
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.arshapshap.versati.core.database.dao.chartsfeature.ChartDao
 import com.arshapshap.versati.core.database.dao.imageparsingfeature.ParsingResultDao
 import com.arshapshap.versati.core.database.dao.qrcodesfeature.QRCodeRequestDao
+import com.arshapshap.versati.core.database.model.chartsfeature.ChartLocal
 import com.arshapshap.versati.core.database.model.imageparsingfeature.ParsingResultLocal
 import com.arshapshap.versati.core.database.model.qrcodesfeature.QRCodeRequestLocal
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [
+        ChartLocal::class,
         ParsingResultLocal::class,
         QRCodeRequestLocal::class
     ],
-    exportSchema = false
+    autoMigrations = [
+        AutoMigration(from = 1, to = 2)
+    ]
 )
 internal abstract class AppDatabase : RoomDatabase() {
 
@@ -35,6 +41,8 @@ internal abstract class AppDatabase : RoomDatabase() {
             return instance!!
         }
     }
+
+    abstract fun chartDao(): ChartDao
 
     abstract fun parsingResultDao(): ParsingResultDao
 

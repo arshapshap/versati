@@ -9,7 +9,7 @@ import com.arshapshap.versati.core.database.model.qrcodesfeature.QRCodeRequestLo
 abstract class QRCodeRequestDao {
 
     @Insert
-    abstract suspend fun add(requestDao: QRCodeRequestLocal): Long
+    abstract suspend fun add(qrCodeRequest: QRCodeRequestLocal): Long
 
     @Query("DELETE FROM QRCodeRequest WHERE id IN (SELECT id FROM QRCodeRequest ORDER BY id ASC LIMIT 1)")
     abstract suspend fun deleteOldest()
