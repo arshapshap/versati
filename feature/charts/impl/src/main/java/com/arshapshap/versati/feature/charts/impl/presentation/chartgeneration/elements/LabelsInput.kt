@@ -26,7 +26,7 @@ internal fun LabelsInput(
         value = text,
         leadingIcon = {
             Icon(
-                painter = painterResource(id = R.drawable.ic_abc),
+                painter = painterResource(id = R.drawable.ic_labels),
                 tint = MaterialTheme.colorScheme.outline,
                 contentDescription = null
             )

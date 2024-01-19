@@ -25,7 +25,7 @@ internal fun DatasetLabelInput(
         value = text,
         leadingIcon = {
             Icon(
-                painter = painterResource(id = R.drawable.ic_abc),
+                painter = painterResource(id = R.drawable.ic_label),
                 tint = MaterialTheme.colorScheme.outline,
                 contentDescription = null
             )

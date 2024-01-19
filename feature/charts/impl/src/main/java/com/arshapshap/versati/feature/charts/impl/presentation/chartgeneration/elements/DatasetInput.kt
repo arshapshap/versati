@@ -26,7 +26,7 @@ internal fun DatasetInput(
         value = text,
         leadingIcon = {
             Icon(
-                painter = painterResource(id = R.drawable.ic_bar_chart),
+                painter = painterResource(id = R.drawable.ic_data),
                 tint = MaterialTheme.colorScheme.outline,
                 contentDescription = null
             )

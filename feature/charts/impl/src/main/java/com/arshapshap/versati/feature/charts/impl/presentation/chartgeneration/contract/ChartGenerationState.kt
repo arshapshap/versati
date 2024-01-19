@@ -1,11 +1,13 @@
 package com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.contract
 
 import android.graphics.Bitmap
+import com.arshapshap.versati.feature.charts.api.model.ChartType
 
 internal data class ChartGenerationState(
     val labels: String = "",
     val showLabelsInputError: Boolean = false,
     val datasets: List<DatasetState> = listOf(DatasetState()),
+    val chartType: ChartType = ChartType.Bar,
     val expandedDataset: Int = 0,
     val chartImageUrl: String = "",
     val loading: Boolean = false,

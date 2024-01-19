@@ -22,21 +22,18 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.arshapshap.versati.core.designsystem.elements.ButtonWithLoading
 import com.arshapshap.versati.core.designsystem.theme.ButtonHeight
+import com.arshapshap.versati.feature.charts.api.model.ChartType
 import com.arshapshap.versati.feature.charts.impl.R
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.contract.ChartGenerationState
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.contract.DatasetState
+import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements.ChartTypeInput
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements.DatasetInput
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements.DatasetLabelInput
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.elements.LabelsInput
@@ -52,6 +49,7 @@ internal fun ChartGenerationContent(
     ChartGenerationContent(
         state = state,
         onLabelsChange = viewModel::updateLabels,
+        onChartTypeChange = viewModel::updateChartType,
         onDatasetExpand = viewModel::expandDataset,
         onDatasetDelete = viewModel::deleteDataset,
         onDatasetCreate = viewModel::createDataset,
@@ -68,6 +66,7 @@ internal fun ChartGenerationContent(
 private fun ChartGenerationContent(
     state: ChartGenerationState,
     onLabelsChange: (String) -> Unit = { },
+    onChartTypeChange: (ChartType) -> Unit = { },
     onDatasetExpand: (Int) -> Unit = { },
     onDatasetDelete: (Int) -> Unit = { },
     onDatasetCreate: () -> Unit = { },
@@ -77,7 +76,6 @@ private fun ChartGenerationContent(
     onShareClick: () -> Unit = { },
     onImageLoadingSuccess: (Bitmap?) -> Unit = { },
     onImageLoadingError: () -> Unit = { },
-    advancedExpanded: MutableState<Boolean> = remember { mutableStateOf(false) }
 ) {
     Column(
         modifier = Modifier
@@ -91,14 +89,20 @@ private fun ChartGenerationContent(
                 .height(250.dp)
                 .padding(vertical = 16.dp),
             imageUrl = state.chartImageUrl,
+            showHint = state.loadingNumber == 1 && state.loading,
             onSuccess = onImageLoadingSuccess,
             onError = onImageLoadingError
         )
         LabelsInput(
-            modifier = Modifier.padding(vertical = 8.dp),
+            modifier = Modifier.padding(top = 8.dp),
             text = state.labels,
             onValueChange = onLabelsChange,
             isError = state.showLabelsInputError
+        )
+        ChartTypeInput(
+            modifier = Modifier.padding(vertical = 8.dp),
+            chartType = state.chartType,
+            onValueChange = onChartTypeChange
         )
         Datasets(
             state = state,
@@ -108,21 +112,6 @@ private fun ChartGenerationContent(
             onDatasetLabelChange = onDatasetLabelChange,
             onDatasetChange = onDatasetChange,
         )
-//        Button(
-//            onClick = { advancedExpanded.value = !advancedExpanded.value },
-//        ) {
-//            Icon(
-//                imageVector = Icons.Default.ArrowDropDown,
-//                contentDescription = stringResource(R.string.show_advanced_options),
-//                modifier = Modifier.rotate(if (advancedExpanded.value) 180f else 0f)
-//            )
-//            Text(text = stringResource(R.string.advanced_options))
-//        }
-//        if (advancedExpanded.value) {
-//            AdvancedOptions(
-//                state = state
-//            )
-//        }
         Row(
             modifier = Modifier
                 .padding(vertical = 8.dp)
@@ -150,15 +139,6 @@ private fun ChartGenerationContent(
                 }
             }
         }
-        if (state.loadingNumber == 1 && state.loading)
-            Text(
-                text = stringResource(id = R.string.first_loading_hint),
-                color = MaterialTheme.colorScheme.secondary,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
     }
 }
 
@@ -265,7 +245,6 @@ private fun ChartGenerationContentPreview() {
         expandedDataset = 1
     )
     ChartGenerationContent(
-        state = state,
-        advancedExpanded = mutableStateOf(false)
+        state = state
     )
 }

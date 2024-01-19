@@ -3,6 +3,7 @@ package com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.arshapshap.versati.feature.charts.api.model.ChartType
 import com.arshapshap.versati.feature.charts.api.usecase.CreateChartUseCase
 import com.arshapshap.versati.feature.charts.api.usecase.GetChartInfoByIdUseCase
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.contract.ChartGenerationSideEffect
@@ -134,6 +135,11 @@ internal class ChartGenerationViewModel(
                 optionsChanged = true
             )
         }
+    }
+
+    @OptIn(OrbitExperimental::class)
+    fun updateChartType(chartType: ChartType) = blockingIntent {
+        reduce { state.copy(chartType = chartType, optionsChanged = true) }
     }
 
     private fun loadChartInfo(id: Long) = intent {

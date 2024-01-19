@@ -29,4 +29,5 @@
     <string name="chart_description_labels">X-Axis: %1$s</string>
     <string name="chart_description_datasets">Datasets: %1$s</string>
     <string name="chart_description_type">Chart type: %1$s</string>
+    <string name="chart_type">Chart type</string>
 </resources>

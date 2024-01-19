@@ -4,6 +4,5 @@ enum class ChartType {
     Bar,
     Line,
     Pie,
-    Radar,
-    Polar
+    Radar
 }
