@@ -84,6 +84,6 @@
   - Remote Config
 
 ## Используемые API
-* [GoQR](https://goqr.me/api/)
-* [OCR API](https://ocr.space/OCRAPI)
-* [QuickChart](https://quickchart.io/)
+* Генерация QR-кодов: [GoQR](https://goqr.me/api/)
+* Парсинг текста с изображения: [OCR API](https://ocr.space/OCRAPI)
+* Генерация диаграмм и графиков: [QuickChart](https://quickchart.io/)
