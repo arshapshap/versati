@@ -84,7 +84,11 @@ internal object ChartGenerationScreen {
             context.showToast(R.string.no_uploaded_image)
             return
         }
-        val uri = StorageHelper.getImageUriFromBitmap(context, bitmap)
+        val uri = StorageHelper.getImageUriFromBitmap(
+            context = context,
+            fileNamePrefix = "CHART",
+            bitmap = bitmap
+        )
         SharingHelper.shareImage(context, uri)
     }
 }

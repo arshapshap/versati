@@ -83,7 +83,12 @@ internal object QRCodeGenerationScreen {
             context.showToast(context.getString(R.string.no_uploaded_image))
             return
         }
-        val uri = StorageHelper.getImageUriFromBitmap(context, bitmap, format)
+        val uri = StorageHelper.getImageUriFromBitmap(
+            context = context,
+            bitmap = bitmap,
+            fileNamePrefix = "QR",
+            format = format
+        )
         SharingHelper.shareImage(context, uri)
     }
 }
