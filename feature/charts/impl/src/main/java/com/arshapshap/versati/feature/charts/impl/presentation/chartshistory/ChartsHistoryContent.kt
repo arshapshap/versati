@@ -116,17 +116,20 @@ private fun ChartInfoText(
         Text(
             text = getChartLabelsString(chartInfo),
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
+            maxLines = 1
         )
         Text(
             text = getChartDatasetsString(chartInfo),
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            maxLines = 1
         )
         Text(
             text = getChartTypeString(chartInfo),
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            maxLines = 1
         )
     }
 }
