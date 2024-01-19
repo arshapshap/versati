@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":core:firebase"))
     implementation(project(":core:navigation"))
     implementation(project(":core:network"))
+    implementation(project(":core:storage"))
     implementation(project(":core:utils"))
     implementation(project(":feature:auth:api"))
     implementation(project(":feature:auth:impl"))
@@ -82,4 +83,5 @@ dependencies {
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.navigation.compose)
     implementation(libs.navigation.ui)
+    implementation(libs.bundles.orbit)
 }

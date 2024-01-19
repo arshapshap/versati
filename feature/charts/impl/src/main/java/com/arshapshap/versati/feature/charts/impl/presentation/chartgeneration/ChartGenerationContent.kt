@@ -219,13 +219,6 @@ private fun DatasetOptions(
     }
 }
 
-@Composable
-private fun AdvancedOptions(
-    state: ChartGenerationState
-) {
-
-}
-
 @SuppressLint("UnrememberedMutableState")
 @Preview(showBackground = true)
 @Composable

@@ -22,7 +22,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.arshapshap.versati.core.designsystem.theme.VersatiTheme
 import com.arshapshap.versati.core.navigation.AuthFeature
+import com.arshapshap.versati.core.navigation.QRCodesFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
+import com.arshapshap.versati.data.LastOpenedFeatureRepository
 import com.arshapshap.versati.presentation.elements.BottomBar
 import com.arshapshap.versati.presentation.elements.TopBar
 import com.arshapshap.versati.presentation.navigation.MainNavHost
@@ -32,6 +34,7 @@ import com.google.firebase.analytics.analytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.remoteConfig
 import com.google.firebase.remoteconfig.remoteConfigSettings
+import org.koin.androidx.compose.get
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
@@ -45,6 +48,14 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val navController = rememberNavController()
+
+            val repository = get<LastOpenedFeatureRepository>()
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                destination.route?.let { route ->
+                    if (route.startsWith(AuthFeature.featureRoute)) return@addOnDestinationChangedListener
+                    repository.setLastOpenedFeature(route.takeWhile { it != '/' })
+                }
+            }
 
             VersatiTheme {
                 Surface(
@@ -70,7 +81,9 @@ class MainActivity : ComponentActivity() {
                         content = {
                             MainNavHost(
                                 modifier = Modifier.padding(it),
-                                navController = navController
+                                navController = navController,
+                                startDestination = repository.getLastOpenedFeature()
+                                    ?: QRCodesFeature.featureRoute
                             ) { state ->
                                 if (navController.currentDestination?.route == state.currentRoute)
                                     appBarState = state
