@@ -40,19 +40,12 @@ internal class ChartGenerationViewModel(
 
     fun createChart() = intent {
         if (state.success && !state.optionsChanged) return@intent
-
         if (!checkIfOptionsValid()) return@intent
 
-        reduce { state.copy(chartImageUrl = "", bitmap = null, success = false) }
-        val result = createChartUseCase(mapper.fromState(state))
-        reduce {
-            state.copy(
-                chartImageUrl = result,
-                loading = true,
-                optionsChanged = false,
-                loadingNumber = state.loadingNumber + 1
-            )
-        }
+        if (state.chartImageUrl.isNotEmpty() && !state.success)
+            retryLoading()
+        else
+            loadChart()
     }
 
     fun shareChart() = intent {
@@ -70,7 +63,6 @@ internal class ChartGenerationViewModel(
     }
 
     fun onImageLoadingError() = intent {
-
         if (state.loading)
             postSideEffect(ChartGenerationSideEffect.TimeoutError)
         reduce { state.copy(success = false, loading = false) }
@@ -140,6 +132,32 @@ internal class ChartGenerationViewModel(
     @OptIn(OrbitExperimental::class)
     fun updateChartType(chartType: ChartType) = blockingIntent {
         reduce { state.copy(chartType = chartType, optionsChanged = true) }
+    }
+
+    private suspend fun IntentContext.retryLoading() {
+        val imageUrl = state.chartImageUrl
+        reduce { state.copy(chartImageUrl = "", bitmap = null) }
+        Thread.sleep(1000)
+        reduce {
+            state.copy(
+                chartImageUrl = imageUrl,
+                loading = true,
+                optionsChanged = false,
+            )
+        }
+    }
+
+    private suspend fun IntentContext.loadChart() {
+        reduce { state.copy(chartImageUrl = "", bitmap = null, success = false) }
+        val result = createChartUseCase(mapper.fromState(state))
+        reduce {
+            state.copy(
+                chartImageUrl = result,
+                loading = true,
+                optionsChanged = false,
+                loadingNumber = state.loadingNumber + 1
+            )
+        }
     }
 
     private fun loadChartInfo(id: Long) = intent {
