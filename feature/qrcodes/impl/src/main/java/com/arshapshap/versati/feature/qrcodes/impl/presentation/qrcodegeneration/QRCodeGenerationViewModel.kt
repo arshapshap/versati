@@ -65,6 +65,12 @@ internal class QRCodeGenerationViewModel(
         reduce { state.copy(success = false, loading = false) }
     }
 
+
+    @OptIn(OrbitExperimental::class)
+    fun expandAdvancedOptions() = blockingIntent {
+        reduce { state.copy(advancedOptionsExpanded = !state.advancedOptionsExpanded) }
+    }
+
     @OptIn(OrbitExperimental::class)
     fun updateData(data: String) = blockingIntent {
         reduce { state.copy(data = data, optionsChanged = true) }

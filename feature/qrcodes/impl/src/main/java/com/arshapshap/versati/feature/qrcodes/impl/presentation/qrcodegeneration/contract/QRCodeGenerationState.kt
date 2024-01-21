@@ -6,6 +6,7 @@ import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
 internal data class QRCodeGenerationState(
     val data: String = "",
     val showDataFieldError: Boolean = false,
+    val advancedOptionsExpanded: Boolean = false,
     val size: Int? = 200,
     val qrCodeColorString: String = "000000",
     val qrCodeColor: Int? = 0x000000,
