@@ -9,6 +9,7 @@ import com.arshapshap.versati.feature.auth.impl.presentation.authFeatureGraph
 import com.arshapshap.versati.feature.charts.impl.presentation.chartsFeatureGraph
 import com.arshapshap.versati.feature.imageparsing.impl.presentation.imageParsingFeatureGraph
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrCodesFeatureGraph
+import com.arshapshap.versati.feature.settings.impl.presentation.settingsFeatureGraph
 
 @Composable
 internal fun MainNavHost(
@@ -24,7 +25,8 @@ internal fun MainNavHost(
     ) {
         authFeatureGraph(navController, appBarConfigure)
         chartsFeatureGraph(navController, appBarConfigure)
-        qrCodesFeatureGraph(navController, appBarConfigure)
         imageParsingFeatureGraph(navController, appBarConfigure)
+        qrCodesFeatureGraph(navController, appBarConfigure)
+        settingsFeatureGraph(navController, appBarConfigure)
     }
 }

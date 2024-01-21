@@ -11,7 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import com.arshapshap.versati.core.navigation.ChartsFeature
+import com.arshapshap.versati.core.navigation.features.ChartsFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.charts.impl.R
 import com.arshapshap.versati.feature.charts.impl.presentation.chartshistory.contract.ChartsHistorySideEffect

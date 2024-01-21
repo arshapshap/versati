@@ -72,7 +72,9 @@ private fun ParsingContent(
                 .padding(vertical = 8.dp),
             onClick = onParseClick,
             text = stringResource(R.string.parse_image),
-            loading = state.loading
+            loading = state.loading,
+            textStyle = MaterialTheme.typography.headlineSmall,
+            textFontWeight = FontWeight.Bold
         )
         if (state.parsingResult != null)
             Result(
@@ -141,7 +143,8 @@ private fun Preview() {
                     parsedText = "LLalalallLLalalallaalLLalalallaalLLalalallaalLLalalallaalaal"
                 )
             ),
-            searchablePDFURL = "asd"
+            searchablePDFURL = "asd",
+            sourceUrl = "asd.com"
         ),
         loading = true
     )

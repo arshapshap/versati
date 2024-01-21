@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.arshapshap.versati.core.navigation.ChartsFeature
+import com.arshapshap.versati.core.navigation.features.ChartsFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.charts.impl.presentation.chartgeneration.ChartGenerationScreen
 import com.arshapshap.versati.feature.charts.impl.presentation.chartshistory.ChartsHistoryScreen

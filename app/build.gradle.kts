@@ -15,8 +15,8 @@ android {
         applicationId = "com.arshapshap.versati"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 3
-        versionName = "1.2"
+        versionCode = 4
+        versionName = "1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -70,6 +70,8 @@ dependencies {
     implementation(project(":feature:imageparsing:impl"))
     implementation(project(":feature:qrcodes:api"))
     implementation(project(":feature:qrcodes:impl"))
+    implementation(project(":feature:settings:api"))
+    implementation(project(":feature:settings:impl"))
 
     implementation(libs.activity.compose)
     implementation(libs.core.ktx)

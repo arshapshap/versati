@@ -87,7 +87,8 @@ internal class ParsingViewModel(
         val parsingResult = getParsingResultByIdUseCase(id) ?: return@intent
         reduce {
             state.copy(
-                parsingResult = parsingResult
+                parsingResult = parsingResult,
+                url = parsingResult.sourceUrl
             )
         }
     }

@@ -15,9 +15,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.arshapshap.versati.core.navigation.ChartsFeature
-import com.arshapshap.versati.core.navigation.ImageParsingFeature
-import com.arshapshap.versati.core.navigation.QRCodesFeature
+import com.arshapshap.versati.core.navigation.features.ChartsFeature
+import com.arshapshap.versati.core.navigation.features.ImageParsingFeature
+import com.arshapshap.versati.core.navigation.features.QRCodesFeature
 
 @Composable
 internal fun BottomBar(

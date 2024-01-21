@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -59,8 +60,10 @@ private fun ParsingHistoryContent(
         Text(
             text = stringResource(R.string.parsing_history_empty),
             modifier = Modifier
-                .padding(16.dp),
-            style = MaterialTheme.typography.titleMedium
+                .padding(16.dp)
+                .fillMaxWidth(),
+            style = MaterialTheme.typography.titleMedium,
+            textAlign = TextAlign.Center
         )
     } else {
         LazyColumn {
@@ -115,7 +118,8 @@ private fun Preview() {
                         parsedText = "LLalalallLLalalallaalLLalalallaalLLalalallaalLLalalallaalaal"
                     )
                 ),
-                searchablePDFURL = "asd"
+                searchablePDFURL = "asd",
+                sourceUrl = "asd.com"
             )
         }
     )

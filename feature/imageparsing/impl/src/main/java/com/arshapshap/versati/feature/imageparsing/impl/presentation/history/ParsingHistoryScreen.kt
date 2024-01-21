@@ -11,7 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import com.arshapshap.versati.core.navigation.ImageParsingFeature
+import com.arshapshap.versati.core.navigation.features.ImageParsingFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.imageparsing.impl.R
 import com.arshapshap.versati.feature.imageparsing.impl.presentation.history.contract.ParsingHistorySideEffect

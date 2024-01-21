@@ -4,7 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
-import com.arshapshap.versati.core.navigation.AuthFeature
+import com.arshapshap.versati.core.navigation.features.AuthFeature
+import com.arshapshap.versati.core.navigation.features.SettingsFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.auth.impl.presentation.register.contract.RegisterSideEffect
 import org.koin.androidx.compose.getViewModel
@@ -23,8 +24,8 @@ internal object RegisterScreen {
         viewModel.collectSideEffect {
             when (it) {
                 RegisterSideEffect.NavigateToSignIn -> navController.popBackStack()
-                RegisterSideEffect.NavigateToAccount -> navController.navigate(AuthFeature.Account.destination()) {
-                    popUpTo(AuthFeature.SignIn.route) {
+                RegisterSideEffect.NavigateToSettings -> navController.navigate(SettingsFeature.Settings.destination()) {
+                    popUpTo(SettingsFeature.Settings.route) {
                         inclusive = true
                     }
                 }

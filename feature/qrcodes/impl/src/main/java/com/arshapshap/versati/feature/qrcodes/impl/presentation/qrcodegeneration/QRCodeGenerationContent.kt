@@ -18,14 +18,13 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.arshapshap.versati.core.designsystem.elements.ButtonWithLoading
@@ -47,6 +46,7 @@ internal fun QRCodeGenerationContent(
 ) {
     QRCodeGenerationContent(
         state = state,
+        onAdvancedOptionsExpand = viewModel::expandAdvancedOptions,
         onDataChange = viewModel::updateData,
         onSizeChange = viewModel::updateSize,
         onQRCodeColorChange = viewModel::updateColor,
@@ -63,6 +63,7 @@ internal fun QRCodeGenerationContent(
 @Composable
 private fun QRCodeGenerationContent(
     state: QRCodeGenerationState,
+    onAdvancedOptionsExpand: () -> Unit = { },
     onDataChange: (String) -> Unit = { },
     onSizeChange: (String) -> Unit = { },
     onQRCodeColorChange: (String) -> Unit = { },
@@ -72,8 +73,7 @@ private fun QRCodeGenerationContent(
     onCreateClick: () -> Unit = { },
     onShareClick: () -> Unit = { },
     onImageLoadingSuccess: (Bitmap?) -> Unit = { },
-    onImageLoadingError: () -> Unit = { },
-    advancedExpanded: MutableState<Boolean> = remember { mutableStateOf(false) }
+    onImageLoadingError: () -> Unit = { }
 ) {
     Column(
         modifier = Modifier
@@ -98,16 +98,16 @@ private fun QRCodeGenerationContent(
             isError = state.showDataFieldError,
         )
         Button(
-            onClick = { advancedExpanded.value = !advancedExpanded.value },
+            onClick = { onAdvancedOptionsExpand() },
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,
                 contentDescription = stringResource(R.string.show_advanced_options),
-                modifier = Modifier.rotate(if (advancedExpanded.value) 180f else 0f)
+                modifier = Modifier.rotate(if (state.advancedOptionsExpanded) 180f else 0f)
             )
             Text(text = stringResource(R.string.advanced_options))
         }
-        if (advancedExpanded.value) {
+        if (state.advancedOptionsExpanded) {
             AdvancedOptions(
                 state = state,
                 onSizeChange = onSizeChange,
@@ -127,7 +127,9 @@ private fun QRCodeGenerationContent(
                     .weight(4f),
                 onClick = onCreateClick,
                 text = stringResource(R.string.create_qr_code),
-                loading = state.loading
+                loading = state.loading,
+                textStyle = MaterialTheme.typography.headlineSmall,
+                textFontWeight = FontWeight.Bold
             )
             if (state.success) {
                 Spacer(modifier = Modifier.padding(4.dp))
@@ -256,8 +258,7 @@ private fun ColorInputs(
 private fun QRCodeGenerationContentPreview() {
     val state = QRCodeGenerationState()
     QRCodeGenerationContent(
-        state = state,
-        advancedExpanded = mutableStateOf(false)
+        state = state
     )
 }
 
@@ -270,8 +271,7 @@ private fun QRCodeGenerationContentSuccessPreview() {
         success = true
     )
     QRCodeGenerationContent(
-        state = state,
-        advancedExpanded = mutableStateOf(false)
+        state = state
     )
 }
 
@@ -286,10 +286,10 @@ private fun QRCodeGenerationContentExpandedPreview() {
         qrCodeColor = 0xFF0000,
         backgroundColorString = "000000",
         backgroundColor = null,
+        advancedOptionsExpanded = false
     )
     QRCodeGenerationContent(
-        state = state,
-        advancedExpanded = mutableStateOf(true)
+        state = state
     )
 }
 
@@ -303,10 +303,10 @@ private fun QRCodeGenerationContentExpandedSuccessPreview() {
         qrCodeColor = 0xFF0000,
         backgroundColorString = "000000",
         backgroundColor = null,
-        success = true
+        success = true,
+        advancedOptionsExpanded = false
     )
     QRCodeGenerationContent(
-        state = state,
-        advancedExpanded = mutableStateOf(true)
+        state = state
     )
 }

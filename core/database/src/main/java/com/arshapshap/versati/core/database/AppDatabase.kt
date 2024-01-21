@@ -13,14 +13,15 @@ import com.arshapshap.versati.core.database.model.imageparsingfeature.ParsingRes
 import com.arshapshap.versati.core.database.model.qrcodesfeature.QRCodeRequestLocal
 
 @Database(
-    version = 2,
+    version = 3,
     entities = [
         ChartLocal::class,
         ParsingResultLocal::class,
         QRCodeRequestLocal::class
     ],
     autoMigrations = [
-        AutoMigration(from = 1, to = 2)
+        AutoMigration(from = 1, to = 2),
+        AutoMigration(from = 2, to = 3),
     ]
 )
 internal abstract class AppDatabase : RoomDatabase() {

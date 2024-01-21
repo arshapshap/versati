@@ -1,4 +1,4 @@
-package com.arshapshap.versati.core.navigation
+package com.arshapshap.versati.core.navigation.features
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument

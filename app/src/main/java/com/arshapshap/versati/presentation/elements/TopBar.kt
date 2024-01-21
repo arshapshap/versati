@@ -2,8 +2,8 @@ package com.arshapshap.versati.presentation.elements
 
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,7 +23,7 @@ import com.arshapshap.versati.core.navigation.state.AppBarState
 internal fun TopBar(
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
     state: AppBarState = AppBarState(),
-    onProfileClick: () -> Unit = { }
+    onSettingsClick: () -> Unit = { }
 ) {
     TopAppBar(
         title = {
@@ -49,11 +49,11 @@ internal fun TopBar(
                 )
             } else {
                 IconButton(
-                    onClick = onProfileClick,
+                    onClick = onSettingsClick,
                     content = {
                         Icon(
-                            imageVector = Icons.Default.AccountCircle,
-                            contentDescription = stringResource(R.string.account)
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = stringResource(com.arshapshap.versati.feature.settings.impl.R.string.settings)
                         )
                     }
                 )

@@ -40,7 +40,7 @@ internal class RegisterViewModel(
 
         if (result.isSuccessful) {
             reduce { state.copy(success = true) }
-            postSideEffect(RegisterSideEffect.NavigateToAccount)
+            postSideEffect(RegisterSideEffect.NavigateToSettings)
         } else {
             handleRegisterError(result.error!!)
         }

@@ -21,8 +21,10 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.arshapshap.versati.core.designsystem.theme.VersatiTheme
-import com.arshapshap.versati.core.navigation.AuthFeature
-import com.arshapshap.versati.core.navigation.QRCodesFeature
+import com.arshapshap.versati.core.navigation.features.ChartsFeature
+import com.arshapshap.versati.core.navigation.features.ImageParsingFeature
+import com.arshapshap.versati.core.navigation.features.QRCodesFeature
+import com.arshapshap.versati.core.navigation.features.SettingsFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.data.LastOpenedFeatureRepository
 import com.arshapshap.versati.presentation.elements.BottomBar
@@ -50,10 +52,11 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
 
             val repository = get<LastOpenedFeatureRepository>()
+            repository.setLastOpenedFeature(QRCodesFeature.featureRoute)
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 destination.route?.let { route ->
-                    if (route.startsWith(AuthFeature.featureRoute)) return@addOnDestinationChangedListener
-                    repository.setLastOpenedFeature(route.takeWhile { it != '/' })
+                    if (isSaveableFeatureRoute(route))
+                        repository.setLastOpenedFeature(route.takeWhile { it != '/' })
                 }
             }
 
@@ -71,8 +74,8 @@ class MainActivity : ComponentActivity() {
                             TopBar(
                                 scrollBehavior = scrollBehavior,
                                 state = appBarState,
-                                onProfileClick = {
-                                    navController.navigate(AuthFeature.Account.destination()) {
+                                onSettingsClick = {
+                                    navController.navigate(SettingsFeature.Settings.destination()) {
                                         launchSingleTop = true
                                     }
                                 }
@@ -100,6 +103,11 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    private fun isSaveableFeatureRoute(route: String): Boolean =
+        route.startsWith(ChartsFeature.featureRoute)
+                || route.startsWith(ImageParsingFeature.featureRoute)
+                || route.startsWith(QRCodesFeature.featureRoute)
 
     private fun configureFirebase() {
         analytics = Firebase.analytics

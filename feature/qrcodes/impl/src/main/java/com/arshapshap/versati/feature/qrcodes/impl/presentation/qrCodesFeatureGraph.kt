@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.arshapshap.versati.core.navigation.QRCodesFeature
+import com.arshapshap.versati.core.navigation.features.QRCodesFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.QRCodeGenerationScreen
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodeshistory.QRCodesHistoryScreen
