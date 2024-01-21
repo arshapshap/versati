@@ -5,5 +5,6 @@ data class ParsingResult(
     val parsedResults: List<ParsedImage>,
     val ocrExitCode: Int = 1,
     val isErroredOnProcessing: Boolean = false,
+    val sourceUrl: String,
     val searchablePDFURL: String
 )

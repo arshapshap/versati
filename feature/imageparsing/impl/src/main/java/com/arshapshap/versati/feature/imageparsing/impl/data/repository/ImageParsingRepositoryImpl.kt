@@ -20,7 +20,7 @@ internal class ImageParsingRepositoryImpl(
     override suspend fun parseImageByUrl(url: String, language: Language): ParsingResult {
         val requestBody = mapper.mapToRequestBody(url, language)
         val response = api.parseImageByUrl(RemoteConfig.OCRApiKey, requestBody)
-        val parsingResult = mapper.mapFromRemote(response, 0)
+        val parsingResult = mapper.mapFromRemote(remote = response, id = 0, sourceUrl = url)
 
         if (parsingResult.ocrExitCode == 1) {
             val local = mapper.mapToLocal(parsingResult)

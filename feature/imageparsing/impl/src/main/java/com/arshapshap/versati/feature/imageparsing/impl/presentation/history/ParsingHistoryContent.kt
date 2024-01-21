@@ -115,7 +115,8 @@ private fun Preview() {
                         parsedText = "LLalalallLLalalallaalLLalalallaalLLalalallaalLLalalallaalaal"
                     )
                 ),
-                searchablePDFURL = "asd"
+                searchablePDFURL = "asd",
+                sourceUrl = "asd.com"
             )
         }
     )

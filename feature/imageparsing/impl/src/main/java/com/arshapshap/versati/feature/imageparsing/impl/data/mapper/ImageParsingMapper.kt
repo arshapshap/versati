@@ -22,12 +22,13 @@ internal class ImageParsingMapper {
             .build()
     }
 
-    fun mapFromRemote(remote: ImageParsingRemote, id: Long): ParsingResult {
+    fun mapFromRemote(remote: ImageParsingRemote, id: Long, sourceUrl: String): ParsingResult {
         return ParsingResult(
             id = id,
             parsedResults = remote.parsedResults.map(::mapToParsedImage),
             ocrExitCode = remote.ocrExitCode,
             isErroredOnProcessing = remote.isErroredOnProcessing,
+            sourceUrl = sourceUrl,
             searchablePDFURL = remote.searchablePDFURL
         )
     }
@@ -40,6 +41,7 @@ internal class ImageParsingMapper {
                 .joinToString(PARSED_TEXT_SEPARATOR) {
                     it.parsedText.replace(PARSED_TEXT_SEPARATOR, "")
                 },
+            sourceUrl = parsingResult.sourceUrl,
             searchablePDFURL = parsingResult.searchablePDFURL
         )
     }
@@ -49,6 +51,7 @@ internal class ImageParsingMapper {
             id = local.id,
             parsedResults = local.parsedText.split(PARSED_TEXT_SEPARATOR)
                 .map { ParsedImage(parsedText = it) },
+            sourceUrl = local.sourceUrl,
             searchablePDFURL = local.searchablePDFURL
         )
     }
