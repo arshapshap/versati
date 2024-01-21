@@ -7,19 +7,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.arshapshap.versati.core.designsystem.elements.ButtonWithIcon
 import com.arshapshap.versati.core.designsystem.elements.ConfirmationAlertDialog
-import com.arshapshap.versati.core.designsystem.theme.ButtonHeight
+import com.arshapshap.versati.core.designsystem.elements.OutlinedButtonWithIcon
 import com.arshapshap.versati.feature.auth.api.domain.model.User
 import com.arshapshap.versati.feature.settings.impl.R
 
@@ -70,44 +71,41 @@ private fun AuthorizedUserInfo(
     user: User,
     onLogOutClick: () -> Unit
 ) {
-    Text(text = stringResource(R.string.you_are_logged_in))
+    Text(
+        text = stringResource(R.string.you_are_logged_in),
+        textAlign = TextAlign.Center
+    )
     Text(
         text = user.email,
         style = MaterialTheme.typography.titleMedium,
+        textAlign = TextAlign.Center
     )
     Spacer(modifier = Modifier.padding(8.dp))
-    OutlinedButton(
+    OutlinedButtonWithIcon(
+        modifier = Modifier.fillMaxWidth(),
         onClick = onLogOutClick,
-        modifier = Modifier
-            .height(ButtonHeight)
-            .fillMaxWidth()
-    ) {
-        Text(text = stringResource(id = R.string.log_out))
-        Icon(
-            painter = painterResource(id = R.drawable.ic_log_out),
-            contentDescription = null
-        )
-    }
+        text = stringResource(id = R.string.log_out),
+        painter = painterResource(id = R.drawable.ic_log_out)
+    )
 }
 
 @Composable
 private fun UnauthorizedUserInfo(
     onLogInClick: () -> Unit
 ) {
-    Text(text = stringResource(R.string.you_are_not_logged_in))
+    Text(
+        text = stringResource(R.string.you_are_not_logged_in),
+        textAlign = TextAlign.Center
+    )
     Spacer(modifier = Modifier.padding(8.dp))
-    OutlinedButton(
+    ButtonWithIcon(
+        modifier = Modifier.fillMaxWidth(),
         onClick = onLogInClick,
-        modifier = Modifier
-            .height(ButtonHeight)
-            .fillMaxWidth()
-    ) {
-        Text(text = stringResource(id = R.string.log_in))
-        Icon(
-            painter = painterResource(id = R.drawable.ic_log_in),
-            contentDescription = null
-        )
-    }
+        text = stringResource(id = R.string.log_in),
+        painter = painterResource(id = R.drawable.ic_log_in),
+        textStyle = MaterialTheme.typography.headlineSmall,
+        textFontWeight = FontWeight.Bold
+    )
 }
 
 @Preview(showBackground = true)

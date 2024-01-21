@@ -2,7 +2,6 @@ package com.arshapshap.versati.feature.settings.impl.presentation.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
@@ -13,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.arshapshap.versati.feature.auth.api.domain.model.User
 import com.arshapshap.versati.feature.settings.impl.presentation.settings.contract.SettingsState
 import com.arshapshap.versati.feature.settings.impl.presentation.settings.elements.AccountInfo
+import com.arshapshap.versati.feature.settings.impl.presentation.settings.elements.NotificationsInfo
 
 @Composable
 internal fun SettingsContent(
@@ -43,7 +43,6 @@ private fun SettingsContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AccountInfo(
-            modifier = Modifier.height(170.dp),
             user = state.user,
             loading = state.userLoading,
             showDialogToConfirmLogOut = state.showDialogToConfirmLogOut,
@@ -52,6 +51,8 @@ private fun SettingsContent(
             onCancelLogOut = onCancelLogOut,
             onLogOut = onLogOut
         )
+        Divider()
+        NotificationsInfo()
         Divider()
     }
 }

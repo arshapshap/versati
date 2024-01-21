@@ -1,62 +1,61 @@
 package com.arshapshap.versati.core.designsystem.elements
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.arshapshap.versati.core.designsystem.theme.ButtonHeight
 
 @Composable
-fun ButtonWithLoading(
+fun ButtonWithIcon(
     modifier: Modifier,
     onClick: () -> Unit,
     text: String,
-    loading: Boolean,
+    painter: Painter,
     textStyle: TextStyle? = null,
     textFontWeight: FontWeight? = null,
+    enabled: Boolean = true
 ) {
     Button(
         onClick = onClick,
         modifier = modifier
             .height(ButtonHeight),
-        enabled = !loading
+        enabled = enabled
     ) {
-        if (loading)
-            Spacer(Modifier.weight(2f))
+        Spacer(Modifier.weight(2f))
         Text(
             text = text,
             style = textStyle ?: LocalTextStyle.current,
             fontWeight = textFontWeight
         )
-        if (loading) {
-            Spacer(Modifier.weight(1f))
-            Box(
-                modifier = Modifier.weight(1f),
-                contentAlignment = Alignment.CenterEnd
-            ) {
-                CircularProgressIndicator()
-            }
-        }
+        Spacer(Modifier.weight(1f))
+        Icon(
+            painter = painter,
+            contentDescription = null,
+            modifier = Modifier.weight(1f)
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun ButtonWithLoadingPreview() {
-    ButtonWithLoading(
+private fun Preview() {
+    ButtonWithIcon(
         modifier = Modifier.fillMaxWidth(),
         onClick = { /*TODO*/ },
         text = "Button",
-        loading = true
+        painter = rememberVectorPainter(Icons.Default.ArrowForward)
     )
 }

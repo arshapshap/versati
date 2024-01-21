@@ -45,6 +45,7 @@ dependencies {
     implementation(project(":feature:auth:api"))
     implementation(project(":feature:settings:api"))
 
+    implementation(libs.accompanist.permissions)
     implementation(libs.appcompat)
     implementation(libs.core.ktx)
     implementation(libs.koin)

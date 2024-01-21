@@ -42,7 +42,8 @@ internal class SettingsViewModel(
     }
 
     private fun loadData() = intent {
+        reduce { state.copy(userLoading = true) }
         val user = getCurrentUserUseCase()
-        reduce { state.copy(user = user, showDialogToConfirmLogOut = false) }
+        reduce { state.copy(user = user, showDialogToConfirmLogOut = false, userLoading = false) }
     }
 }
