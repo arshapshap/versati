@@ -11,7 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import com.arshapshap.versati.core.navigation.QRCodesFeature
+import com.arshapshap.versati.core.navigation.features.QRCodesFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.feature.qrcodes.impl.R
 import com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodeshistory.contract.QRCodesHistorySideEffect

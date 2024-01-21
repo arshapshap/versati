@@ -132,8 +132,8 @@ private fun Form(
             onClick = onSignIn,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(ButtonHeight)
-                .padding(vertical = 8.dp),
+                .padding(vertical = 8.dp)
+                .height(ButtonHeight),
             enabled = !state.loading && !state.success
         ) {
             Text(

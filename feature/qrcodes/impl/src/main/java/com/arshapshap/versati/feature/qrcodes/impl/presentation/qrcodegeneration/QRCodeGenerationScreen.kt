@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import com.arshapshap.versati.core.navigation.QRCodesFeature
+import com.arshapshap.versati.core.navigation.features.QRCodesFeature
 import com.arshapshap.versati.core.navigation.state.AppBarState
 import com.arshapshap.versati.core.utils.SharingHelper
 import com.arshapshap.versati.core.utils.StorageHelper

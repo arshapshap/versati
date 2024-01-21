@@ -4,5 +4,5 @@ internal sealed interface SignInSideEffect {
 
     data object NavigateToRegistration : SignInSideEffect
 
-    data object NavigateToAccount : SignInSideEffect
+    data object NavigateToSettings : SignInSideEffect
 }

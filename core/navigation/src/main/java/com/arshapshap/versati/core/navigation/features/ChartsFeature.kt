@@ -1,18 +1,18 @@
-package com.arshapshap.versati.core.navigation
+package com.arshapshap.versati.core.navigation.features
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 
-sealed interface ImageParsingFeature {
+sealed interface ChartsFeature {
 
     companion object {
 
-        const val featureRoute = "imageparsing_feature"
+        const val featureRoute = "charts_feature"
     }
 
-    data object Parsing : ImageParsingFeature {
+    data object ChartGeneration : ChartsFeature {
 
-        private const val screen = "parsing"
+        private const val screen = "chart_generation"
         const val idArgument = "id"
         const val route = "$featureRoute/$screen?$idArgument={$idArgument}"
 
@@ -26,9 +26,9 @@ sealed interface ImageParsingFeature {
         fun destination(id: Long = 0L) = "$featureRoute/$screen?$idArgument=$id"
     }
 
-    data object ParsingHistory : ImageParsingFeature {
+    data object ChartsHistory : ChartsFeature {
 
-        const val route = "${featureRoute}/history"
+        const val route = "$featureRoute/history"
 
         fun destination() = route
     }

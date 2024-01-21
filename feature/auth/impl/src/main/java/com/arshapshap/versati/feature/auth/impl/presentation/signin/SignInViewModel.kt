@@ -39,7 +39,7 @@ internal class SignInViewModel(
 
         if (result.isSuccessful) {
             reduce { state.copy(success = true) }
-            postSideEffect(SignInSideEffect.NavigateToAccount)
+            postSideEffect(SignInSideEffect.NavigateToSettings)
         } else {
             handleSignInError(result.error!!)
         }

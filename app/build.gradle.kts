@@ -70,6 +70,8 @@ dependencies {
     implementation(project(":feature:imageparsing:impl"))
     implementation(project(":feature:qrcodes:api"))
     implementation(project(":feature:qrcodes:impl"))
+    implementation(project(":feature:settings:api"))
+    implementation(project(":feature:settings:impl"))
 
     implementation(libs.activity.compose)
     implementation(libs.core.ktx)
