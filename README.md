@@ -19,25 +19,26 @@
 
 ## Скриншоты:
 * **Авторизация и регистрация:**
+
 <image src='https://github.com/arshapshap/versati/assets/48681339/5ef80259-70fc-405c-a96b-35dbeddc55f8' width=200 />
 <image src='https://github.com/arshapshap/versati/assets/48681339/a94402f1-882a-4377-87d7-7a3f76dfe3bb' width=200 />
-<image src='https://github.com/arshapshap/versati/assets/48681339/7b703312-df6a-4740-9e1a-eec948a621cd' width=200 />
+<image src='https://github.com/arshapshap/versati/assets/48681339/b6ae8de2-e74c-4856-8101-f5eb5fb3db10' width=200 />
 <br>
 <br>
 
 * **QR-коды:**
 
-<image src='https://github.com/arshapshap/versati/assets/48681339/1c48900f-8da1-4a71-a217-c6c7b0fce752' width=200 />
-<image src='https://github.com/arshapshap/versati/assets/48681339/8964ffac-fa4b-4d85-a3f7-b2783058461c' width=200 />
-<image src='https://github.com/arshapshap/versati/assets/48681339/49a2eb47-7836-4f2b-b0b2-7b34ca4589f6' width=200 />
+<image src='https://github.com/arshapshap/versati/assets/48681339/ac5d3781-52c8-41d1-9480-881d55a75880' width=200 />
+<image src='https://github.com/arshapshap/versati/assets/48681339/a690d43a-6424-4cd6-99c4-2a6a2176fe11' width=200 />
+<image src='https://github.com/arshapshap/versati/assets/48681339/594229c3-ef1e-44aa-9d3d-24f6ed7445f7' width=200 />
 <image src='https://github.com/arshapshap/versati/assets/48681339/a3c53a9a-ff30-4ed7-a515-34f1863d328d' width=200 />
 <br>
 <br>
 
 * **Парсинг текста:**
 
-<image src='https://github.com/arshapshap/versati/assets/48681339/b1b348b3-a79a-4be8-b305-49ac918b5a9c' width=200 />
-<image src='https://github.com/arshapshap/versati/assets/48681339/339103bf-7496-490a-8403-427d8a8c2113' width=200 />
+<image src='https://github.com/arshapshap/versati/assets/48681339/a29659f3-a243-4cf7-acea-d2659d4a6b42' width=200 />
+<image src='https://github.com/arshapshap/versati/assets/48681339/ca5e22cf-2f73-418c-be56-42fcb32bac7f' width=200 />
 <image src='https://github.com/arshapshap/versati/assets/48681339/9d1f004b-1a71-44c2-9e65-3f1a6b80b549' width=200 />
 
 Для примера на скриншоте использовалось [это изображение](https://favim.com/pd/s6/orig/61/text-harry-potter-hermione-Favim.com-576725.jpg).
@@ -46,9 +47,8 @@
 
 * **Диаграммы и графики:**
 
-
-<image src='https://github.com/arshapshap/versati/assets/48681339/71f35d5a-5848-43c6-abf9-4935116c34ef' width=200 />
-<image src='https://github.com/arshapshap/versati/assets/48681339/a226d052-7f3f-4787-a9c9-c7568d23285e' width=200 />
+<image src='https://github.com/arshapshap/versati/assets/48681339/bca5ce24-5201-442e-b92a-b908fd247bd6' width=200 />
+<image src='https://github.com/arshapshap/versati/assets/48681339/0c8b1358-7eaa-43a1-ab4a-70f80e46a8e6' width=200 />
 <image src='https://github.com/arshapshap/versati/assets/48681339/426f8f9b-fa96-4770-a0a4-691a4a7c709b' width=200 />
 
 
@@ -56,7 +56,7 @@
       
   * APK-файл доступен для скачивания в разделе Releases:
 
-    - [Version 1.2](https://github.com/arshapshap/versati/releases/tag/v1.2)
+    - [Version 1.3](https://github.com/arshapshap/versati/releases/tag/v1.3)
 
 ## Архитектура
 * Clean Architecture
