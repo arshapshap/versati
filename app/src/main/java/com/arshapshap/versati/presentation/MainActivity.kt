@@ -36,22 +36,22 @@ import com.google.firebase.analytics.analytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.remoteConfig
 import com.google.firebase.remoteconfig.remoteConfigSettings
-import org.koin.androidx.compose.get
+import org.koin.android.ext.android.inject
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
 
     private lateinit var analytics: FirebaseAnalytics
+    private val repository: LastOpenedFeatureRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         configureFirebase()
 
+        val startDestination = repository.getLastOpenedFeature() ?: QRCodesFeature.featureRoute
         setContent {
             val navController = rememberNavController()
-
-            val repository = get<LastOpenedFeatureRepository>()
             repository.setLastOpenedFeature(QRCodesFeature.featureRoute)
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 destination.route?.let { route ->
@@ -85,8 +85,7 @@ class MainActivity : ComponentActivity() {
                             MainNavHost(
                                 modifier = Modifier.padding(it),
                                 navController = navController,
-                                startDestination = repository.getLastOpenedFeature()
-                                    ?: QRCodesFeature.featureRoute
+                                startDestination = startDestination
                             ) { state ->
                                 if (navController.currentDestination?.route == state.currentRoute)
                                     appBarState = state
