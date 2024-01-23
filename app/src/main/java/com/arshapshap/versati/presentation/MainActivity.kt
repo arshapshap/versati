@@ -75,7 +75,6 @@ class MainActivity : ComponentActivity() {
                                 scrollBehavior = scrollBehavior,
                                 state = appBarState,
                                 onSettingsClick = {
-                                    println("MainActivity: settings navigation")
                                     navController.navigate(SettingsFeature.Settings.destination()) {
                                         launchSingleTop = true
                                     }
