@@ -2,7 +2,9 @@ package com.arshapshap.versati.core.navigation.state
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 
+@Immutable
 data class AppBarState(
     val currentRoute: String = "",
     val title: String = "",

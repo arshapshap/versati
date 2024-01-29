@@ -1,5 +1,8 @@
 package com.arshapshap.versati.feature.auth.impl.presentation.signin.contract
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 internal data class SignInState(
     val email: String = "",
     val password: String = "",

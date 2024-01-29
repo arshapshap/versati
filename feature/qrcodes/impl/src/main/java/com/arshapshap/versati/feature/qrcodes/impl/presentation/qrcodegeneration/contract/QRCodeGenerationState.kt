@@ -1,8 +1,10 @@
 package com.arshapshap.versati.feature.qrcodes.impl.presentation.qrcodegeneration.contract
 
 import android.graphics.Bitmap
+import androidx.compose.runtime.Immutable
 import com.arshapshap.versati.feature.qrcodes.api.domain.model.ImageFormat
 
+@Immutable
 internal data class QRCodeGenerationState(
     val data: String = "",
     val showDataFieldError: Boolean = false,

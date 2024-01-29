@@ -1,5 +1,8 @@
 package com.arshapshap.versati.feature.auth.impl.presentation.register.contract
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 internal data class RegisterState(
     val email: String = "",
     val password: String = "",
