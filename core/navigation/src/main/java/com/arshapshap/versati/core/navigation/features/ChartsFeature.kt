@@ -2,20 +2,15 @@ package com.arshapshap.versati.core.navigation.features
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.arshapshap.versati.core.navigation.base.BaseFeature
 
-sealed interface ChartsFeature {
+sealed class ChartsFeature(screenName: String) : BaseFeature(featureRoute, screenName) {
 
-    companion object {
+    companion object : BaseFeature.Companion("charts_feature")
 
-        const val featureRoute = "charts_feature"
-    }
+    data object ChartGeneration : ChartsFeature("chart_generation") {
 
-    data object ChartGeneration : ChartsFeature {
-
-        private const val screen = "chart_generation"
         const val idArgument = "id"
-        const val route = "$featureRoute/$screen?$idArgument={$idArgument}"
-
         val arguments = listOf(
             navArgument(idArgument) {
                 type = NavType.LongType
@@ -23,13 +18,9 @@ sealed interface ChartsFeature {
             }
         )
 
-        fun destination(id: Long = 0L) = "$featureRoute/$screen?$idArgument=$id"
+        fun destination(id: Long = 0L) = destination(mapOf(arguments[0] to id))
+        override val route get() = route(arguments)
     }
 
-    data object ChartsHistory : ChartsFeature {
-
-        const val route = "$featureRoute/history"
-
-        fun destination() = route
-    }
+    data object ChartsHistory : ChartsFeature("history")
 }

@@ -2,20 +2,15 @@ package com.arshapshap.versati.core.navigation.features
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.arshapshap.versati.core.navigation.base.BaseFeature
 
-sealed interface ImageParsingFeature {
+sealed class ImageParsingFeature(screenName: String) : BaseFeature(featureRoute, screenName) {
 
-    companion object {
+    companion object : BaseFeature.Companion("imageparsing_feature")
 
-        const val featureRoute = "imageparsing_feature"
-    }
+    data object Parsing : ImageParsingFeature("parsing") {
 
-    data object Parsing : ImageParsingFeature {
-
-        private const val screen = "parsing"
         const val idArgument = "id"
-        const val route = "$featureRoute/$screen?$idArgument={$idArgument}"
-
         val arguments = listOf(
             navArgument(idArgument) {
                 type = NavType.LongType
@@ -23,13 +18,9 @@ sealed interface ImageParsingFeature {
             }
         )
 
-        fun destination(id: Long = 0L) = "$featureRoute/$screen?$idArgument=$id"
+        fun destination(id: Long = 0L) = destination(mapOf(arguments[0] to id))
+        override val route get() = route(arguments)
     }
 
-    data object ParsingHistory : ImageParsingFeature {
-
-        const val route = "$featureRoute/history"
-
-        fun destination() = route
-    }
+    data object ParsingHistory : ImageParsingFeature("history")
 }

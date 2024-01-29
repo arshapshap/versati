@@ -1,17 +1,10 @@
 package com.arshapshap.versati.core.navigation.features
 
-sealed interface SettingsFeature {
+import com.arshapshap.versati.core.navigation.base.BaseFeature
 
-    companion object {
+sealed class SettingsFeature(screenName: String) : BaseFeature(featureRoute, screenName) {
 
-        const val featureRoute = "settings_feature"
-    }
+    companion object : BaseFeature.Companion("settings_feature")
 
-
-    data object Settings : SettingsFeature {
-
-        const val route = "$featureRoute/settings"
-
-        fun destination() = route
-    }
+    data object Settings : SettingsFeature("settings")
 }

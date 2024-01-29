@@ -1,23 +1,12 @@
 package com.arshapshap.versati.core.navigation.features
 
-sealed interface AuthFeature {
+import com.arshapshap.versati.core.navigation.base.BaseFeature
 
-    companion object {
+sealed class AuthFeature(screenName: String) : BaseFeature(featureRoute, screenName) {
 
-        const val featureRoute = "auth_feature"
-    }
+    companion object : BaseFeature.Companion("auth_feature")
 
-    data object Register : AuthFeature {
+    data object Register : AuthFeature("register")
 
-        const val route = "$featureRoute/register"
-
-        fun destination() = route
-    }
-
-    data object SignIn : AuthFeature {
-
-        const val route = "$featureRoute/sign_in"
-
-        fun destination() = route
-    }
+    data object SignIn : AuthFeature("sign_in")
 }

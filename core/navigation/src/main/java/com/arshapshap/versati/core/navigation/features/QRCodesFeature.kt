@@ -2,20 +2,15 @@ package com.arshapshap.versati.core.navigation.features
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.arshapshap.versati.core.navigation.base.BaseFeature
 
-sealed interface QRCodesFeature {
+sealed class QRCodesFeature(screenName: String) : BaseFeature(featureRoute, screenName) {
 
-    companion object {
+    companion object : BaseFeature.Companion("qrcodes_feature")
 
-        const val featureRoute = "qrcodes_feature"
-    }
+    data object QRCodeGeneration : QRCodesFeature("qrcode_generation") {
 
-    data object QRCodeGeneration : QRCodesFeature {
-
-        private const val screen = "qrcode_generation"
         const val idArgument = "id"
-        const val route = "$featureRoute/$screen?$idArgument={$idArgument}"
-
         val arguments = listOf(
             navArgument(idArgument) {
                 type = NavType.LongType
@@ -23,13 +18,9 @@ sealed interface QRCodesFeature {
             }
         )
 
-        fun destination(id: Long = 0L) = "$featureRoute/$screen?$idArgument=$id"
+        fun destination(id: Long = 0L) = destination(mapOf(arguments[0] to id))
+        override val route get() = route(arguments)
     }
 
-    data object QRCodesHistory : QRCodesFeature {
-
-        const val route = "$featureRoute/history"
-
-        fun destination() = route
-    }
+    data object QRCodesHistory : QRCodesFeature("history")
 }

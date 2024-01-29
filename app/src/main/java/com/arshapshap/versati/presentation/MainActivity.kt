@@ -21,6 +21,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.arshapshap.versati.core.designsystem.theme.VersatiTheme
+import com.arshapshap.versati.core.navigation.base.getFeatureRoute
 import com.arshapshap.versati.core.navigation.features.ChartsFeature
 import com.arshapshap.versati.core.navigation.features.ImageParsingFeature
 import com.arshapshap.versati.core.navigation.features.QRCodesFeature
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 destination.route?.let { route ->
                     if (isSaveableFeatureRoute(route))
-                        repository.setLastOpenedFeature(route.takeWhile { it != '/' })
+                        repository.setLastOpenedFeature(route.getFeatureRoute())
                 }
             }
 
