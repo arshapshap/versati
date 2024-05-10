@@ -1,4 +1,4 @@
-# Versati
+# <image src='https://github.com/arshapshap/versati/assets/48681339/684c2581-02f6-4ba1-aa6d-bec77da5f6b3' width=50 /> Versati
 
   Мобильное приложение со следующим функционалом:
 * **Авторизация** и **регистрация** с использованием почты;
